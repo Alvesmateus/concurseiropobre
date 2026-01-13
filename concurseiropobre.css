@@ -2535,3 +2535,164 @@ body, html {
     position: relative;
     width: 100%;
 }
+
+ body#layout .hidden,
+      body#layout .invisible {
+        display: inherit;
+      }
+      body#layout .navigation {
+        display: none;
+      }
+      body#layout .page,
+      body#layout .sidebar_top,
+      body#layout .sidebar_bottom {
+        display: inline-block;
+        left: inherit;
+        position: relative;
+        vertical-align: top;
+      }
+      body#layout .page {
+        float: right;
+        margin-left: 20px;
+        width: 55%;
+      }
+      body#layout .sidebar-container {
+        float: right;
+        width: 40%;
+      }
+      body#layout .hamburger-menu {
+        display: none;
+      }
+
+
+/* ========== ESTILO NOTEBOOK LM CARDS ========== */
+
+/* Container do Post na Home/Arquivo */
+.view-index .post-outer, .view-archive .post-outer {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.view-index .post-outer:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: #c3e7ff; /* Tom sutil de azul NotebookLM */
+}
+
+/* Título do Card */
+.post-title {
+    margin: 0 0 12px 0;
+    font-family: 'Google Sans', Roboto, Arial, sans-serif;
+    font-weight: 500;
+}
+
+.post-title a {
+    color: #1f1f1f !important;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* Snippet (Resumo) limitado a 3 linhas */
+.post-body, .snippet-container {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a 3 linhas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #474747;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    height: auto; /* Ajusta para não quebrar se tiver menos de 3 */
+}
+
+/* Botão Acessar Estilo NotebookLM */
+.jump-link a {
+    display: inline-block;
+    background-color: #c3e7ff !important; /* Azul claro característico */
+    color: #001d35 !important; /* Texto azul escuro */
+    padding: 8px 20px;
+    border-radius: 20px; /* Botão pílula */
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: none; /* Mantém naturalidade */
+    transition: background 0.2s ease;
+}
+
+.jump-link a:hover {
+    background-color: #b3d7ef !important;
+    text-decoration: none;
+}
+
+/* Esconder metadados desnecessários na visualização de cards */
+.view-index .post-footer, .view-index .post-bottom {
+    border: none;
+    margin-top: 10px;
+}
+
+/* Ajuste para imagens dentro do snippet não quebrarem o layout */
+.view-index .post-body img {
+    display: none; /* Esconde imagens na preview para parecer um "Source Card" puro */
+}
+/* Remove qualquer limite de altura dentro da página da postagem */
+.post-body, .post-outer, .entry-content, .post {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/* Corrige containers específicos do tema Essential que podem travar o conteúdo */
+.overflowable-container, .snippet-container {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+/* Remove o botão 'Show More' que pode estar travando a expansão */
+.extendable .show-more, .extendable .show-less {
+    display: none !important;
+}
+
+/* Força o container de itens restantes a ficar visível */
+.extendable .remaining-items {
+    height: auto !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    display: block !important;
+}
+
+/* Garante que o corpo do post não tenha limite de linha */
+.post-body {
+    -webkit-line-clamp: initial !important;
+    display: block !important;
+}
+
+.post-snippet {
+    font-size: 17px !important;
+}
+
+/* Forçar 2 linhas em qualquer situação de preview */
+.snippet-item, 
+.r-snippetized, 
+.post-snippet, 
+.snippet-container {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important; /* Limita a 2 linhas */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-break: break-word !important;
+    
+    /* Altura de segurança baseada em um line-height comum */
+    line-height: 1.4em !important;
+    max-height: 2.8em !important; 
+}
+
+/* Remove elementos extras que o Blogger coloca e que podem bagunçar o visual */
+.snippet-fade {
+    display: none !important;
+}
