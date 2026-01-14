@@ -1,88 +1,64 @@
 (function() {
-    // 1. INJEÇÃO DE CSS
+    // 1. INJETAR O CSS
     const style = document.createElement('style');
     style.innerHTML = `
-        #g-filter-widget, #g-filter-widget * { box-sizing: border-box; font-family: sans-serif; }
-        #g-filter-widget { background: #fff; border: 1px solid #c4c7c5; width: 100%; max-width: 100vw; position: relative; z-index: 1000; border-radius: 8px; margin: 10px 0; overflow: hidden; }
-        .g-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; cursor: pointer; background: #fff; }
+        #g-filter-widget, #g-filter-widget * { box-sizing: border-box; font-family: 'Google Sans', sans-serif; }
+        #g-filter-widget { background: #ffffff; border: 1px solid #c4c7c5; width: 100%; border-radius: 8px; overflow: hidden; margin: 10px 0; }
+        .g-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; cursor: pointer; }
         .filtro-titulo { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-        .seta-icone { width: 8px; height: 8px; border-right: 2px solid #5f6368; border-bottom: 2px solid #5f6368; transform: rotate(45deg); transition: transform 0.4s; }
-        .g-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-        #g-filter-widget.open .g-panel { max-height: 80vh; overflow-y: auto; border-top: 1px solid #eee; }
+        .seta-icone { width: 8px; height: 8px; border-right: 2px solid #5f6368; border-bottom: 2px solid #5f6368; transform: rotate(45deg); transition: 0.4s; }
+        .g-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #fff; }
+        #g-filter-widget.open .g-panel { max-height: 500px; border-top: 1px solid #e3e3e3; }
         #g-filter-widget.open .seta-icone { transform: rotate(-135deg); }
-        .g-tabs-container { display: flex; border-bottom: 1px solid #eee; }
-        .g-tab { flex: 1; text-align: center; padding: 10px; cursor: pointer; font-size: 13px; }
-        .g-tab.active { color: #0b57d0; border-bottom: 2px solid #0b57d0; font-weight: bold; }
-        .g-content-area { padding: 15px; }
+        .g-tabs-container { display: flex; border-bottom: 1px solid #e3e3e3; }
+        .g-tab { flex: 1; text-align: center; padding: 12px; cursor: pointer; font-size: 13px; }
+        .g-tab.active { color: #0b57d0; border-bottom: 3px solid #0b57d0; font-weight: bold; }
+        .g-content-area { padding: 16px; }
         .g-col { display: none; }
         .g-col.active-tab { display: block; }
         .g-bubble-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .g-bubble { border: 1px solid #747775; padding: 5px 12px; border-radius: 15px; font-size: 12px; cursor: pointer; }
-        .g-bubble.selected { background: #0b57d0; color: #fff; border-color: #0b57d0; }
-        .g-btn-full { width: 100%; background: #0b57d0; color: #fff; border: none; padding: 12px; cursor: pointer; font-weight: bold; border-radius: 0 0 8px 8px; }
-        .g-search-input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .g-bubble { border: 1px solid #747775; padding: 6px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; }
+        .g-btn-full { width: 100%; background: #0b57d0; color: #fff; border: none; padding: 12px; font-weight: bold; cursor: pointer; }
     `;
     document.head.appendChild(style);
 
-    // 2. ESTRUTURA HTML
+    // 2. INJETAR O HTML
     const container = document.getElementById('import-filter-widget');
     if (!container) return;
 
     container.innerHTML = `
         <div id='g-filter-widget'>
             <div class='g-header' onclick="document.getElementById('g-filter-widget').classList.toggle('open')">
-                <span class='filtro-titulo'>🔍 FILTRAR QUESTÕES</span>
+                <span class='filtro-titulo'>FILTRAR QUESTÕES</span>
                 <span class='seta-icone'></span>
             </div>
             <div class='g-panel'>
                 <div class='g-tabs-container'>
-                    <div class='g-tab active' onclick="window.switchTab(0)">Matérias</div>
-                    <div class='g-tab' onclick="window.switchTab(1)">Assuntos</div>
-                    <div class='g-tab' onclick="window.switchTab(2)">Banca</div>
+                    <div class='g-tab active' onclick="tabQuest(0)">Matérias</div>
+                    <div class='g-tab' onclick="tabQuest(1)">Assuntos</div>
                 </div>
                 <div class='g-content-area'>
-                    <div class='g-col active-tab' id='col-0'>
-                        <input type='text' class='g-search-input' placeholder='Buscar...' onkeyup="window.filterItems(this)">
-                        <div class='g-bubble-container' id='list-materias'></div>
+                    <div class='g-col active-tab' id='q-col-0'>
+                        <div class='g-bubble-container'>
+                            <div class='g-bubble'>Português</div>
+                            <div class='g-bubble'>Matemática</div>
+                        </div>
                     </div>
-                    <div class='g-col' id='col-1'>
-                        <div class='g-bubble-container' id='list-assuntos'></div>
-                    </div>
-                    <div class='g-col' id='col-2'>
-                        <div class='g-bubble-container' id='list-banca'></div>
+                    <div class='g-col' id='q-col-1'>
+                        <div class='g-bubble-container'>
+                            <div class='g-bubble'>Crase</div>
+                            <div class='g-bubble'>Sintaxe</div>
+                        </div>
                     </div>
                 </div>
-                <button class='g-btn-full' onclick="window.executeSearch()">APLICAR FILTRO</button>
+                <button class='g-btn-full'>FILTRAR AGORA</button>
             </div>
         </div>
     `;
 
-    // 3. LÓGICA (Simplificada para teste)
-    const config = {
-        materias: ["Português", "Matemática", "Direito"],
-        banca: ["FGV", "Cebraspe"]
-    };
-
-    window.switchTab = function(idx) {
+    // 3. FUNÇÕES GLOBAIS
+    window.tabQuest = function(idx) {
         document.querySelectorAll('.g-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
         document.querySelectorAll('.g-col').forEach((c, i) => c.classList.toggle('active-tab', i === idx));
-    };
-
-    function render() {
-        const matCont = document.getElementById('list-materias');
-        config.materias.forEach(m => {
-            let b = document.createElement('div'); b.className = 'g-bubble'; b.innerText = m;
-            matCont.appendChild(b);
-        });
-        const banCont = document.getElementById('list-banca');
-        config.banca.forEach(b => {
-            let bu = document.createElement('div'); bu.className = 'g-bubble'; bu.innerText = b;
-            banCont.appendChild(bu);
-        });
-    }
-    render();
-
-    window.executeSearch = function() {
-        alert('Filtro aplicado! (Configure a URL final aqui)');
     };
 })();
