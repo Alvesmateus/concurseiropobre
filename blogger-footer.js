@@ -7,7 +7,7 @@
 
   /* ================= CONFIGURAÇÃO ================= */
   const FooterConfig = {
-    siteName: "Concurseiro Pobre",
+    siteName: "Concurseiros Pobre",
     description: "Conteúdo focado em concursos, estudos e programação.",
     year: new Date().getFullYear(),
 
