@@ -148,3 +148,213 @@ body {
 #gemini-results-pane::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
 
 
+:root {
+  --nb-bg: #f8fafd;
+  --nb-search-bg: #edf2fa;
+  --google-gray: #444746;
+  --google-blue: #1a73e8; /* Cor principal de destaque (azul) */
+  --google-blue-light: #e8f0fe; /* Fundo item principal ativo/hover */
+  --google-blue-lighter: #f5f8ff; /* Fundo item submenu ativo/hover (mais claro/sutil) */
+  --nb-section-color: #70757a;
+  --nb-border-radius: 24px;
+  --nb-margin-right: 8px;
+}
+
+/* Painel Lateral (Drawer) */
+.gemini-sidebar-panel {
+  position: fixed !important;
+  top: 0;
+  right: -350px;
+  width: 320px;
+  height: 100%;
+  background-color: #ffffff !important;
+  z-index: 999999 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  font-family: &#39;Google Sans&#39;, Roboto, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabeçalho do Menu */
+.panel-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Área de Rolagem do Conteúdo */
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 0;
+}
+
+/* ======================================================= */
+/* ESTILOS DOS ITENS PRINCIPAIS (NAVEGAÇÃO PAI) */
+/* ======================================================= */
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  color: var(--google-gray) !important;
+  text-decoration: none !important;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  position: relative;
+  /* Garante o arredondamento mesmo sem borda lateral */
+  border-radius: 0 var(--nb-border-radius) var(--nb-border-radius) 0; 
+  margin-right: var(--nb-margin-right); 
+}
+
+/* Hover ITENS PRINCIPAIS */
+.nav-item:hover {
+  background-color: var(--google-blue-light); 
+  color: var(--google-blue) !important;
+}
+
+/* Item ATIVO PRINCIPAL (com Borda Lateral) */
+.nav-item.active {
+  background-color: var(--google-blue-light);
+  color: var(--google-blue) !important;
+  font-weight: 600;
+  /* A borda agora está presente, mas o item não está expandido */
+  border-left: 4px solid var(--google-blue); 
+  padding-left: 20px; 
+}
+
+/* Ícone de Seta (Para itens que possuem submenu) */
+.nav-item[data-has-submenu=&quot;true&quot;]::after {
+  content: &#39;\25B8&#39;;
+  font-size: 10px;
+  margin-left: auto;
+  padding-left: 10px;
+  transition: transform 0.3s;
+  color: var(--nb-section-color);
+  line-height: 1;
+}
+
+.nav-item[data-has-submenu=&quot;true&quot;].expanded::after {
+  transform: rotate(90deg);
+}
+
+/* Contêiner do Submenu */
+.submenu-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* ======================================================= */
+/* ESTILOS DOS ITENS DO SUBMENU */
+/* ======================================================= */
+.submenu-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 24px 8px 48px;
+  color: var(--google-gray) !important;
+  text-decoration: none !important;
+  font-size: 13px;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  /* Aplica border-radius e margin-right iguais aos do nav-item */
+  border-radius: 0 var(--nb-border-radius) var(--nb-border-radius) 0;
+  margin-right: var(--nb-margin-right);
+}
+
+/* Hover ITENS SUBMENU (Cor mais clara para distinção) */
+.submenu-item:hover {
+  background-color: var(--google-blue-lighter); /* Fundo muito sutil */
+  color: var(--google-blue) !important; /* Cor de texto azul */
+}
+
+/* Item ATIVO SUBMENU (Destaque sutil) */
+.submenu-item.active {
+  background-color: var(--google-blue-lighter); 
+  color: var(--google-blue) !important; 
+  font-weight: 500;
+  /* Sem borda lateral para manter a hierarquia, mas com destaque no fundo/texto */
+}
+
+
+/* --- ESTILOS RESTANTES (MANTIDOS) --- */
+
+/* Botão de Destaque (Ações Principais) */
+.btn-main-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 16px 20px 16px;
+  padding: 16px 24px;
+  background: #ffffff;
+  color: #3c4043 !important;
+  border-radius: 16px;
+  text-decoration: none !important;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: box-shadow 0.2s;
+}
+
+.btn-main-action:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.16);
+  background-color: #f8f9fa;
+}
+
+/* Rótulos de Seção (Navegação, Jurídico...) */
+.section-label {
+  padding: 16px 24px 8px 24px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--nb-section-color);
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+/* Cards de Fontes Recentes */
+.source-mini-card {
+  margin: 8px 16px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.source-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3c4043;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.source-info {
+  font-size: 11px;
+  color: #70757a;
+  margin-top: 4px;
+}
+
+/* Divisores */
+hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 10px 0;
+}
+
+/* Overlay (Fundo escuro) */
+.drawer-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999998 !important;
+}
+
