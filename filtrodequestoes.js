@@ -7,7 +7,7 @@
     assuntos: {
       "Português": ["Crase", "Sintaxe", "Pontuação", "Concordância Verbal", "Colocação Pronominal"],
       "Matemática": ["MMC e MDC", "Números Inteiros", "Razão e Proporção"],
-      "Informática": ["Windows", "Word"],
+      "Informática": ["Windows", "Word", "Correio Eletrônico"],
       "Direito Constitucional": ["Direitos e Garantias Fundamentais", "Organização do Estado", "Segurança Pública"]
     },
     banca: ["FGV", "Cebraspe", "Vunesp", "FCC", "EAGS"]
