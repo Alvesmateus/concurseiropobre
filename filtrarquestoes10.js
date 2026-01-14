@@ -13,7 +13,7 @@
             .filtro-titulo { font-size: 15px; font-weight: 600; color: #202124; display: flex; align-items: center; gap: 10px; }
             .seta-icone { width: 8px; height: 8px; border-right: 2px solid #5f6368; border-bottom: 2px solid #5f6368; transform: rotate(45deg); transition: transform 0.4s ease; }
             
-            .g-filter-widget-instance { font-family: 'Google Sans', Roboto, Arial, sans-serif; background: #ffffff; border: 1px solid #c4c7c5; width: 100%; position: relative; z-index: 1000; box-shadow: 0 1px 2px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; margin: 10px 0; }
+            .g-filter-widget-instance { font-family: 'Google Sans', Roboto, Arial, sans-serif; background: #ffffff; border: 1px solid #c4c7c5; width: 100%; position: relative; z-index: 1000; box-shadow: 0 1px 2px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; margin-top:-20px; }
             .g-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; cursor: pointer; }
             .g-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #fff; }
             .g-filter-widget-instance.open .g-panel { max-height: 75vh; border-top: 1px solid #e3e3e3; overflow-y: auto; }
