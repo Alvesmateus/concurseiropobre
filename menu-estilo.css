@@ -1,0 +1,80 @@
+/* navbar-base.css - Estilos base para o navbar */
+:root {
+    --nb-bg: #f8fafd;
+    --nb-search-bg: #edf2fa;
+    --google-gray: #444746;
+    --google-blue: #1a73e8;
+    --google-blue-light: #e8f0fe;
+    --google-blue-lighter: #f5f8ff;
+    --nb-section-color: #70757a;
+    --nb-border-radius: 24px;
+    --nb-margin-right: 8px;
+}
+
+/* Navbar Container */
+.nb-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+    background-color: var(--nb-bg);
+    font-family: 'Google Sans', Roboto, sans-serif;
+    border-bottom: 1px solid #dee2e6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 9999;
+}
+
+/* Layout das colunas */
+.nb-nav-left, .nb-nav-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nb-nav-right {
+    justify-content: flex-end;
+}
+
+.nb-nav-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botões gerais */
+.nb-icon-btn {
+    background: transparent;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    color: #444746;
+}
+
+.nb-icon-btn:hover {
+    background-color: rgba(0,0,0,0.06);
+}
+
+/* Compensação para menu fixo */
+body {
+    margin-top: 60px !important;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .nb-navbar {
+        padding: 8px 10px;
+    }
+    
+    .nb-nav-center {
+        flex: 1;
+    }
+}
