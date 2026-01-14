@@ -31,7 +31,9 @@
   <div class="g-header">
     <div class="g-header-main">
       <span class="filtro-titulo">
-        <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/></svg>
+        <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18">
+          <line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/>
+        </svg>
         FILTRAR QUESTÕES
       </span>
     </div>
@@ -82,51 +84,65 @@
     </div>
   </div>
 </div>`;
+
   /* =============================
-     CSS (ISOLADO DO TEMA)
+      CSS INTEGRADO
   ============================== */
   const css = `
-#g-filter-widget, #g-filter-widget * { box-sizing: border-box; font-family: Arial, sans-serif; }
-#g-filter-widget { border:1px solid #ccc; margin:20px 0; background:#fff }
-.g-header{display:flex;justify-content:space-between;padding:12px;cursor:pointer}
-.seta-icone{width:8px;height:8px;border-right:2px solid #555;border-bottom:2px solid #555;transform:rotate(45deg);transition:.3s}
-#g-filter-widget.open .seta-icone{transform:rotate(-135deg)}
-.g-panel{max-height:0;overflow:hidden;transition:.4s}
-#g-filter-widget.open .g-panel{max-height:90vh}
-.g-mode-selector{display:flex}
-.g-mode-option{flex:1;text-align:center;padding:10px;cursor:pointer;border:1px solid #ccc}
-.g-mode-option.active{background:#0b57d0;color:#fff}
-.g-tabs-container{display:flex;border-bottom:1px solid #ccc}
-.g-tab{flex:1;text-align:center;padding:10px;cursor:pointer}
-.g-tab.active{border-bottom:3px solid #0b57d0;color:#0b57d0}
-.g-col{display:none;padding:12px}
-.g-col.active-tab{display:block}
-.g-bubble-container{display:flex;flex-wrap:wrap;gap:8px}
-.g-bubble{padding:6px 12px;border:1px solid #777;border-radius:8px;cursor:pointer}
-.g-bubble.selected{display:none}
-.g-footer{padding:12px}
-.g-btn{width:100%;padding:12px;background:#0b57d0;color:#fff;border:none;border-radius:8px}
-.g-btn.disabled{opacity:.4;pointer-events:none}
-.g-tag{background:#e3e3e3;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer}
-`;
-
-  /* =============================
-     INJETAR
-  ============================== */
-const style = document.createElement('style');
-  style.textContent = `...seu-css-aqui...`; // Omitido aqui para brevidade, use o CSS do seu segundo código.
-
-  /* =============================
-      LÓGICA DE FUNCIONAMENTO
-  ============================== */
-
-  function init() {
-    document.body.insertAdjacentHTML("beforeend", html);
+    #g-filter-widget, #g-filter-widget * { box-sizing: border-box; font-family: 'Google Sans', Roboto, Arial, sans-serif; }
+    #g-filter-widget { background: #fff; border: 1px solid #c4c7c5; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; z-index: 1000; box-shadow: 0 1px 2px rgba(0,0,0,0.05); overflow: hidden; margin-top: 10px; margin-bottom: 10px; }
     
-    // Abrir/Fechar
+    .g-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 5%; cursor: pointer; }
+    .filtro-titulo { font-size: 15px; font-weight: 600; color: #202124; display: flex; align-items: center; gap: 10px; }
+    .seta-icone { width: 8px; height: 8px; border-right: 2px solid #5f6368; border-bottom: 2px solid #5f6368; transform: rotate(45deg); transition: transform 0.4s ease; }
+    #g-filter-widget.open .seta-icone { transform: rotate(-135deg); }
+
+    .g-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #fff; }
+    #g-filter-widget.open .g-panel { max-height: 90vh; border-top: 1px solid #e3e3e3; overflow-y: auto; }
+
+    .g-mode-selector { display: flex; padding: 12px 5%; background: #f8fafd; border-bottom: 1px solid #e3e3e3; gap: 8px; }
+    .g-mode-option { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; color: #444746; cursor: pointer; padding: 10px; border-radius: 8px; border: 1px solid #c4c7c5; background: #fff; }
+    .g-mode-option input { display: none; }
+    .g-mode-option:has(input:checked) { background: #0b57d0; color: #fff; border-color: #0b57d0; font-weight: 600; }
+
+    .g-selection-bar { padding: 10px 5%; background: #f8fafd; border-bottom: 1px solid #e3e3e3; min-height: 48px; }
+    .g-tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .g-empty-text { font-size: 12px; color: #747775; }
+    .g-tag { font-size: 11px; padding: 4px 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; background: #e3e3e3; color: #1f1f1f; font-weight: 500; }
+    .g-tag-clear { font-size: 11px; padding: 4px 12px; border-radius: 8px; cursor: pointer; border: 1px solid #c4c7c5; background: #fff; color: #0b57d0; font-weight: 600; }
+
+    .g-tabs-container { display: flex; border-bottom: 1px solid #e3e3e3; position: sticky; top: 0; z-index: 10; background: #fff; padding: 0 5%; }
+    .g-tab { flex: 1; text-align: center; padding: 12px 4px; font-size: 13px; font-weight: 500; cursor: pointer; border-bottom: 3px solid transparent; color: #444746; }
+    .g-tab.active { color: #0b57d0; border-bottom-color: #0b57d0; }
+
+    .g-content-area { padding: 16px 5%; min-height: 200px; }
+    .g-col { display: none; }
+    .g-col.active-tab { display: block; }
+    
+    .g-search-input { width: 100%; border: 1px solid #747775; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; outline: none; font-size: 14px; }
+    .g-bubble-container { display: flex; flex-wrap: wrap; gap: 8px; max-height: 250px; overflow-y: auto; }
+    .g-bubble { background: #fff; border: 1px solid #747775; padding: 6px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: 0.2s; }
+    .g-bubble.selected { display: none; }
+
+    .g-footer { padding: 12px 5%; border-top: 1px solid #e3e3e3; background: #fff; }
+    .g-btn-full { width: 100%; background: #0b57d0; color: #fff; border: none; padding: 14px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+    .g-btn-full.disabled { opacity: 0.4; cursor: not-allowed; }
+  `;
+
+  /* =============================
+      LÓGICA PRINCIPAL
+  ============================== */
+  function init() {
+    // Injetar CSS e HTML
+    const styleTag = document.createElement("style");
+    styleTag.textContent = css;
+    document.head.appendChild(styleTag);
+    document.body.insertAdjacentHTML("beforeend", html);
+
+    // Eventos de Header
     qs(".g-header").onclick = () => qs("#g-filter-widget").classList.toggle("open");
 
-    // Troca de Abas
+    // Eventos de Abas
     qsa(".g-tab").forEach(tab => {
       tab.onclick = () => {
         const idx = tab.getAttribute("data-idx");
@@ -135,27 +151,27 @@ const style = document.createElement('style');
       };
     });
 
-    // Filtro de Input (Busca textual)
+    // Filtro de Input
     qsa(".g-search-input").forEach(input => {
       input.onkeyup = () => {
         const term = input.value.toLowerCase();
         const targetId = input.getAttribute("data-target");
         qsa(`#${targetId} .g-bubble`).forEach(b => {
-          const text = b.textContent.toLowerCase();
-          b.style.display = text.includes(term) ? "" : "none";
+          b.style.display = b.textContent.toLowerCase().includes(term) ? "" : "none";
         });
       };
     });
 
-    // Troca de Modo (Preciso/Amplo)
-    qsa('input[name="search-mode"]').forEach(input => {
-        input.onchange = (e) => { 
-            searchMode = e.target.value; 
-            resetFilters(); 
-        };
+    // Troca de Modo de Busca
+    qsa('input[name="search-mode"]').forEach(radio => {
+      radio.onchange = (e) => {
+        searchMode = e.target.value;
+        activeFilters.clear();
+        updateAssuntos();
+        updateUI();
+      };
     });
 
-    // Botão Executar
     qs("#btn-executar").onclick = executeSearch;
 
     renderBubbles("list-materias", config.materias, "m");
@@ -167,10 +183,9 @@ const style = document.createElement('style');
     const container = document.getElementById(id);
     if (!container) return;
     container.innerHTML = "";
-    list.sort().forEach(item => {
+    [...list].sort().forEach(item => {
       const div = document.createElement("div");
       div.className = "g-bubble";
-      if (activeFilters.has(item)) div.classList.add("selected");
       div.textContent = item;
       div.onclick = () => toggleTag(item, type);
       container.appendChild(div);
@@ -179,7 +194,7 @@ const style = document.createElement('style');
 
   function toggleTag(item, type) {
     if (searchMode === "preciso") {
-      // No modo preciso, permite apenas uma tag por categoria
+      // No modo preciso, remove outros da mesma categoria (materia ou banca)
       activeFilters.forEach((val, key) => {
         if (val === type && key !== item) activeFilters.delete(key);
       });
@@ -203,7 +218,7 @@ const style = document.createElement('style');
   }
 
   function updateUI() {
-    // Atualiza estado visual das bolhas
+    // Sincroniza bolhas (esconde as selecionadas)
     qsa(".g-bubble").forEach(b => {
       b.classList.toggle("selected", activeFilters.has(b.textContent));
     });
@@ -218,8 +233,8 @@ const style = document.createElement('style');
     } else {
       btn.disabled = false;
       btn.classList.remove("disabled");
-      cloud.innerHTML = '<div class="g-tag-clear active">Limpar</div>';
-      qs(".g-tag-clear").onclick = resetFilters;
+      cloud.innerHTML = '<div class="g-tag-clear">Limpar</div>';
+      qs(".g-tag-clear").onclick = () => { activeFilters.clear(); updateAssuntos(); updateUI(); };
 
       activeFilters.forEach((type, name) => {
         const tag = document.createElement("div");
@@ -233,12 +248,6 @@ const style = document.createElement('style');
         cloud.appendChild(tag);
       });
     }
-  }
-
-  function resetFilters() {
-    activeFilters.clear();
-    updateAssuntos();
-    updateUI();
   }
 
   function executeSearch() {
@@ -257,4 +266,3 @@ const style = document.createElement('style');
 
   init();
 })();
-
