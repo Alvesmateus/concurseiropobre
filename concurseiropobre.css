@@ -2293,7 +2293,7 @@ margin-left:40px
 
 .pill-button, .jump-link, .flat-button {
   border-radius: 100px !important; /* Formato de pílula */
-  background-color: #0b57d0 !important; /* Azul Google */
+
   color: #ffffff !important;
   padding: 10px 24px !important;
   font-weight: 500;
@@ -2696,3 +2696,4 @@ body, html {
 .snippet-fade {
     display: none !important;
 }
+
