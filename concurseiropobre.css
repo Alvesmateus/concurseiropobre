@@ -9,6 +9,8 @@ word-break:break-word;
 word-wrap:break-word;
 
 }
+
+
 .hidden{
 display:none
 }
@@ -2697,3 +2699,108 @@ body, html {
     display: none !important;
 }
 
+/*************************************************
+ * Blogger Template Style - Concurseiro Pobre
+ * Adaptado para Hospedagem Externa (GitHub)
+ **************************************************/
+
+/* Reset e Correções Globais */
+body {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    word-wrap: break-word;
+    background-color: #f4f4f4; /* Cor de fundo padrão */
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* --- FIX DE BOTÕES (O que estava bugado) --- */
+/* Adicionei 'body' na frente para garantir que o Blogger não sobrescreva */
+body .pill-button, 
+body .jump-link, 
+body .flat-button,
+body .jump-link a {
+    display: inline-block !important;
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+    background-color: #ff9800 !important; /* Cor Laranja padrão */
+    color: #ffffff !important;
+    padding: 8px 20px !important;
+    border-radius: 20px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+body .pill-button:hover, 
+body .jump-link:hover, 
+body .flat-button:hover {
+    background-color: #e68a00 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
+
+/* Utilitários */
+.hidden { display: none !important; }
+.invisible { visibility: hidden !important; }
+
+/* Limpeza de containers */
+.container:after, .float-container:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+/* Links Globais */
+a {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Ajustes de Imagens e Iframe */
+.post-body iframe, .post-body img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Estilo de Comentários e Widgets (Removido variáveis $ do Blogger) */
+#comments .comment .comment-actions,
+.subscribe-popup .FollowByEmail .follow-by-email-submit,
+.widget.Profile .profile-link {
+    background: transparent;
+    border: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* Spinner de Carregamento */
+.loading-spinner-large {
+    -webkit-animation: mspin-rotate 1568.63ms linear infinite;
+    animation: mspin-rotate 1568.63ms linear infinite;
+    height: 48px;
+    width: 48px;
+}
+
+@keyframes mspin-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Barra de Pesquisa */
+.search-input input {
+    border: 0;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+}
+
+/* Rodapé e Atribuição */
+.Attribution {
+    margin-top: 2em;
+    text-align: center;
+    font-size: 0.9em;
+}
