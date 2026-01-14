@@ -134,7 +134,7 @@ function executeSearch() {
   window.location.href = finalUrl;
 }
 
-window.onload = function() { console.log("Filtro pronto!"); };
+
 //]]>
 
 
