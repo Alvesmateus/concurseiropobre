@@ -2970,14 +2970,15 @@ a {
 }
 
 
-        .titulo-custom {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-family: sans-serif;
-          font-size: 15px !important;
-          color: #333;
-          text-align: center;
-          height: 100%;
 
-        }
+/* No seu arquivo CSS externo */
+#header-custom .titulo-custom {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-family: sans-serif !important;
+    font-size: 15px !important;
+    color: #333 !important;
+    text-align: center !important;
+    height: 100% !important;
+}
