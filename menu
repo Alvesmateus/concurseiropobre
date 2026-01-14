@@ -1,0 +1,49 @@
+
+:root {
+  --nb-bg: #f8fafd;
+  --nb-search-bg: #edf2fa;
+}
+
+/* Força o menu a ocupar a largura total da tela */
+.nb-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  background-color: var(--nb-bg);
+  font-family: &#39;Google Sans&#39;, Roboto, sans-serif;
+  border-bottom: 1px solid #dee2e6;
+  position: fixed; /* Fixa no topo ignorando containers do Blogger */
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100% !important;
+  box-sizing: border-box;
+  z-index: 9999;
+}
+
+/* Compensa o menu fixo para o conteúdo não subir */
+body {
+  margin-top: 30px !important;
+}
+
+.nb-nav-left, .nb-nav-right { flex: 1; display: flex; align-items: center; gap: 8px; }
+.nb-nav-right { justify-content: flex-end; }
+.nb-logo { font-size: 22px; color: #444746; font-weight: 500; }
+
+
+.nb-icon-btn, .nb-search-submit-btn {
+  background: transparent;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  color: #444746;
+}
+.nb-icon-btn:hover { background-color: rgba(0,0,0,0.06); }
+
+@media (max-width: 600px) {
+  .nb-logo { display: none; }
+  .nb-navbar { padding: 8px 10px; }
+}
