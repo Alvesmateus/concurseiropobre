@@ -148,32 +148,3 @@ body {
 #gemini-results-pane::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
 
 
-  #bizu-widget-container {
-    font-family: &#39;Google Sans&#39;, Roboto, sans-serif;
-    background-color: #f0f4f9;
-    border-radius: 24px;
-    padding: 20px;
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: background-color 0.5s ease;
-    border: 1px solid rgba(0,0,0,0.05);
-  	margin-bottom: 2rem;
-  
-
-  }
-  
-    #bizu-widget-container a{
-  	color: black;
-  }
-  
-  .bizu-header { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
-  .bizu-icon { background: #fff; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-  .bizu-label { font-weight: 600; font-size: 13px; color: #444746; }
-  .bizu-card { background: rgba(255,255,255,0.8); padding: 15px; border-radius: 18px; animation: b-fade 0.4s; }
-  .bizu-title { font-size: 17px; font-weight: 600; color: #1f1f1f; text-decoration: none; display: block; margin-bottom: 5px; }
-  .bizu-summary { font-size: 13px; color: #474747; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
-  .bizu-controls { display: flex; justify-content: flex-end; gap: 8px; margin-top: 15px; }
-  .bizu-nav { background: #fff; border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 16px; }
-  @keyframes b-fade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
