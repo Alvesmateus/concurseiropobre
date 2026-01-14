@@ -1,0 +1,216 @@
+(function() {
+    // 1. CONFIGURAÇÃO DE DADOS
+    const config = {
+        materias: ["Português", "Matemática", "Direito Constitucional", "Informática", "História"],
+        assuntos: {
+            "Português": ["Crase", "Sintaxe", "Pontuação", "Concordância Verbal", "Colocação Pronominal"],
+            "Matemática": ["mmc e mdc", "Números Inteiros", "Razão e Proporção"],
+            "Informática": ["Windows", "Word"],
+            "Direito Constitucional": ["Direitos e Garantias Fundamentais", "Organização do Estado", "Segurança Pública"]
+        },
+        banca: ["FGV", "Cebraspe", "Vunesp", "FCC", "eags"]
+    };
+
+    let activeFilters = new Map();
+    let searchMode = 'preciso';
+    const tagFixa = "questão";
+
+    // 2. INJEÇÃO DE CSS
+    const style = document.createElement('style');
+    style.innerHTML = `
+        #g-filter-widget, #g-filter-widget * { box-sizing: border-box; font-family: 'Google Sans', Roboto, Arial, sans-serif; }
+        #g-filter-widget { background: #ffffff; border-bottom: 1px solid #c4c7c5; border-top: 1px solid #c4c7c5; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; z-index: 1000; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin: 10px 0; }
+        .g-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 5%; cursor: pointer; }
+        .filtro-titulo { font-size: 15px; font-weight: 600; color: #202124; display: flex; align-items: center; gap: 10px; }
+        .seta-icone { width: 8px; height: 8px; border-right: 2px solid #5f6368; border-bottom: 2px solid #5f6368; transform: rotate(45deg); transition: transform 0.4s ease; }
+        .g-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #fff; }
+        #g-filter-widget.open .g-panel { max-height: 85vh; border-top: 1px solid #e3e3e3; overflow-y: auto; }
+        #g-filter-widget.open .seta-icone { transform: rotate(-135deg); }
+        .g-mode-selector { display: flex; padding: 12px 5%; background: #f8fafd; border-bottom: 1px solid #e3e3e3; gap: 8px; }
+        .g-mode-option { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; color: #444746; cursor: pointer; padding: 10px; border-radius: 8px; border: 1px solid #c4c7c5; background: #fff; }
+        .g-mode-option input { display: none; }
+        .g-mode-option.active-mode { background: #0b57d0; color: #fff; border-color: #0b57d0; font-weight: 600; }
+        .g-selection-bar { padding: 10px 5%; background: #f8fafd; border-bottom: 1px solid #e3e3e3; min-height: 48px; }
+        .g-tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .g-tag { font-size: 11px; padding: 2px 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; background: #e3e3e3; color: #1f1f1f; height: 26px; }
+        .g-tag-clear { font-size: 11px; padding: 2px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .g-tag-clear.inactive { opacity: 0.3; pointer-events: none; }
+        .g-tabs-container { display: flex; border-bottom: 1px solid #e3e3e3; position: sticky; top: 0; background: #fff; z-index: 10; }
+        .g-tab { flex: 1; text-align: center; padding: 12px 4px; font-size: 13px; cursor: pointer; border-bottom: 3px solid transparent; }
+        .g-tab.active { color: #0b57d0; border-bottom-color: #0b57d0; font-weight: bold; }
+        .g-content-area { padding: 16px 5%; min-height: 200px; }
+        .g-col { display: none; }
+        .g-col.active-tab { display: block; }
+        .g-search-input { width: 100%; border: 1px solid #747775; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; outline: none; }
+        .g-bubble-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .g-bubble { background: #ffffff; border: 1px solid #747775; padding: 6px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; }
+        .g-bubble.selected { display: none; }
+        .g-footer { padding: 12px 5%; border-top: 1px solid #e3e3e3; background: #fff; }
+        .g-btn-full { width: 100%; background: #0b57d0; color: #fff; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .g-btn-full.disabled { opacity: 0.4; cursor: not-allowed; }
+    `;
+    document.head.appendChild(style);
+
+    // 3. INJEÇÃO DE HTML
+    const container = document.createElement('div');
+    container.innerHTML = `
+        <div id='g-filter-widget'>
+            <div class='g-header' id='g-header-trigger'>
+                <div class='g-header-main'>
+                    <span class='filtro-titulo'>
+                        <svg fill='none' height='18' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='18'><line x1='4' x2='4' y1='21' y2='14'/><line x1='4' x2='4' y1='10' y2='3'/><line x1='12' x2='12' y1='21' y2='12'/><line x1='12' x2='12' y1='8' y2='3'/><line x1='20' x2='20' y1='21' y2='16'/><line x1='20' x2='20' y1='12' y2='3'/><line x1='1' x2='7' y1='14' y2='14'/><line x1='9' x2='15' y1='8' y2='8'/><line x1='17' x2='23' y1='16' y2='16'/></svg>
+                        FILTRAR QUESTÕES
+                    </span>
+                </div>
+                <span id='g-arrow'><div class='seta-icone'></div></span>
+            </div>
+            <div class='g-panel' id='g-panel'>
+                <div class='g-mode-selector'>
+                    <label class='g-mode-option active-mode' id='mode-preciso'>
+                        <input type='radio' name='sm' value='preciso' checked> BUSCA PRECISA
+                    </label>
+                    <label class='g-mode-option' id='mode-amplo'>
+                        <input type='radio' name='sm' value='amplo'> BUSCA AMPLA
+                    </label>
+                </div>
+                <div class='g-selection-bar'>
+                    <div class='g-tag-cloud' id='g-tag-cloud'></div>
+                </div>
+                <div class='g-tabs-container'>
+                    <div class='g-tab active' data-idx='0'>Matérias</div>
+                    <div class='g-tab' data-idx='1'>Assuntos</div>
+                    <div class='g-tab' data-idx='2'>Banca</div>
+                </div>
+                <div class='g-content-area'>
+                    <div class='g-col active-tab' id='col-0'>
+                        <input class='g-search-input' placeholder='Buscar matéria...' type='text'>
+                        <div class='g-bubble-container' id='list-materias'></div>
+                    </div>
+                    <div class='g-col' id='col-1'>
+                        <input class='g-search-input' placeholder='Buscar assunto...' type='text'>
+                        <div class='g-bubble-container' id='list-assuntos'></div>
+                    </div>
+                    <div class='g-col' id='col-2'>
+                        <input class='g-search-input' placeholder='Buscar banca...' type='text'>
+                        <div class='g-bubble-container' id='list-banca'></div>
+                    </div>
+                </div>
+                <div class='g-footer'>
+                    <button class='g-btn-full disabled' id='btn-executar' disabled> FILTRAR </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Procura o local para injetar (pode ser um ID específico ou no topo do body)
+    const target = document.getElementById('import-filter-widget') || document.body.firstChild;
+    document.body.insertBefore(container, target);
+
+    // 4. LÓGICA DO SISTEMA
+    const widget = document.getElementById('g-filter-widget');
+    const panel = document.getElementById('g-panel');
+    const header = document.getElementById('g-header-trigger');
+
+    header.onclick = () => {
+        widget.classList.toggle('open');
+        if(widget.classList.contains('open')) init();
+    };
+
+    function init() {
+        renderBubbles('list-materias', config.materias, 'm');
+        renderBubbles('list-banca', config.banca, 'b');
+        updateAssuntos();
+        updateUI();
+    }
+
+    function renderBubbles(id, list, type) {
+        const cont = document.getElementById(id);
+        cont.innerHTML = '';
+        list.sort().forEach(item => {
+            const b = document.createElement('div');
+            b.className = 'g-bubble' + (activeFilters.has(item) ? ' selected' : '');
+            b.innerText = item;
+            b.onclick = () => {
+                if(searchMode === 'preciso') {
+                    activeFilters.forEach((v, k) => { if(v === type && k !== item) activeFilters.delete(k); });
+                }
+                activeFilters.has(item) ? activeFilters.delete(item) : activeFilters.set(item, type);
+                if(type === 'm') updateAssuntos();
+                updateUI();
+            };
+            cont.appendChild(b);
+        });
+    }
+
+    function updateAssuntos() {
+        let list = [];
+        activeFilters.forEach((t, n) => { if(t === 'm' && config.assuntos[n]) list = list.concat(config.assuntos[n]); });
+        renderBubbles('list-assuntos', Array.from(new Set(list)), 'a');
+    }
+
+    function updateUI() {
+        document.querySelectorAll('.g-bubble').forEach(b => b.classList.toggle('selected', activeFilters.has(b.innerText)));
+        const cloud = document.getElementById('g-tag-cloud');
+        const btn = document.getElementById('btn-executar');
+        
+        cloud.innerHTML = '';
+        const clearBtn = document.createElement('div');
+        clearBtn.className = 'g-tag-clear ' + (activeFilters.size > 0 ? 'active' : 'inactive');
+        clearBtn.innerText = 'Limpar';
+        clearBtn.onclick = () => { activeFilters.clear(); updateAssuntos(); updateUI(); };
+        cloud.appendChild(clearBtn);
+
+        activeFilters.forEach((t, f) => {
+            const tag = document.createElement('div');
+            tag.className = 'g-tag';
+            tag.innerHTML = `${f} ✕`;
+            tag.onclick = () => { activeFilters.delete(f); if(t === 'm') updateAssuntos(); updateUI(); };
+            cloud.appendChild(tag);
+        });
+
+        btn.disabled = activeFilters.size === 0;
+        btn.classList.toggle('disabled', activeFilters.size === 0);
+    }
+
+    // Tabs e Busca
+    document.querySelectorAll('.g-tab').forEach(tab => {
+        tab.onclick = () => {
+            document.querySelectorAll('.g-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.g-col').forEach(c => c.classList.remove('active-tab'));
+            tab.classList.add('active');
+            document.getElementById('col-' + tab.dataset.idx).classList.add('active-tab');
+        };
+    });
+
+    document.querySelectorAll('.g-search-input').forEach(input => {
+        input.onkeyup = () => {
+            const val = input.value.toLowerCase();
+            input.nextElementSibling.querySelectorAll('.g-bubble').forEach(b => {
+                b.style.display = b.innerText.toLowerCase().includes(val) ? '' : 'none';
+            });
+        };
+    });
+
+    // Modos de Busca
+    document.querySelectorAll('.g-mode-option').forEach(opt => {
+        opt.onclick = () => {
+            document.querySelectorAll('.g-mode-option').forEach(o => o.classList.remove('active-mode'));
+            opt.classList.add('active-mode');
+            searchMode = opt.querySelector('input').value;
+            activeFilters.clear();
+            updateUI();
+        };
+    });
+
+    document.getElementById('btn-executar').onclick = () => {
+        const tags = Array.from(activeFilters.keys());
+        tags.push(tagFixa);
+        let url = "";
+        if(searchMode === 'preciso') {
+            url = window.location.origin + "/search/label/" + tags.map(t => encodeURIComponent(t.toLowerCase())).join('+');
+        } else {
+            url = window.location.origin + "/search?q=" + encodeURIComponent(tags.map(t => 'label:"'+t.toLowerCase()+'"').join(' | '));
+        }
+        window.location.href = url;
+    };
+})();
