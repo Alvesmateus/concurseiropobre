@@ -215,7 +215,7 @@
             .gemini-search-bar {
                 position: absolute;
                 top: 0; right: 0;
-                width: 100%; height: 40px;
+                width: ; height: 40px;
                 background: #f0f4f9;
                 border-radius: 20px;
                 border: 0px solid #d1d1d1;
