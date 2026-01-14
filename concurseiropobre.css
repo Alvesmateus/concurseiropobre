@@ -2972,7 +2972,7 @@ a {
 
 
 /* Use o ID do widget pai para garantir que o estilo seja aplicado */
-.nb-nav-center .titulo-custom {
+ .titulo-custom {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -2983,4 +2983,5 @@ a {
     height: 100% !important;
     margin: 0 !important; /* Adicionado para evitar quebras de linha */
 }
+
 
