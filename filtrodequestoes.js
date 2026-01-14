@@ -1,6 +1,6 @@
 (function () {
   /* =========================
-     1. HTML DO WIDGET
+     1. HTML DO WIDGETs
   ========================== */
   const html = `
 <div class="filtrar-questoes">
