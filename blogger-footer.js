@@ -117,7 +117,7 @@
     </div>
 
     <div class="footer-bottom">
-      © ${FooterConfig.year} — ${FooterConfig.siteName}. Todos os direitos reservados.
+      © ${FooterConfig.year} — ${FooterConfig.siteName}. Todos os direitos reservado.
     </div>
   </footer>
   `;
