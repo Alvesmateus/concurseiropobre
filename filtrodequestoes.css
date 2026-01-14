@@ -73,3 +73,113 @@
   padding-left: 5%;
   padding-right: 5%;
 }
+
+
+/* WIDGET MENU LATERAL WIDGET MENU LATERAL WIDGET MENU LATERAL ESQUERDO */
+
+/*<![CDATA[*/
+:root {
+  --left-blue: #1a73e8;
+  --left-bg-hover: #e8f0fe;
+  --left-text: #444746;
+}
+
+.gemini-sidebar-panel-left {
+  position: fixed !important;
+  top: 0;
+  left: -330px; 
+  width: 320px;
+  height: 100%;
+  background-color: #ffffff !important;
+  z-index: 999999 !important;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+  font-family: 'Google Sans', Roboto, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.gemini-sidebar-panel-left.active {
+  left: 0 !important;
+}
+
+.panel-header-left {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.panel-content-left {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+
+.btn-main-action {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  color: var(--left-text) !important;
+  text-decoration: none !important;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-main-action:hover {
+  background-color: var(--left-bg-hover);
+  color: var(--left-blue) !important;
+}
+
+#notebook-labels-container {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  margin: 15px;
+  padding: 15px;
+}
+
+.notebook-header {
+  font-size: 12px;
+  font-weight: 700;
+  color: #70757a;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.notebook-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.notebook-tag-cloud a {
+  background-color: #ffffff;
+  color: #1a73e8 !important;
+  border: 1px solid #dadce0;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  text-decoration: none !important;
+}
+
+.drawer-overlay-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999998 !important;
+}
+/*]]>*/
+
+
+
+/* WIDGET MENU LATERAL WIDGET MENU LATERAL WIDGET MENU LATERAL ESQUERDO */
+
+/* WIDGET BIZU *//* WIDGET BIZU *//* WIDGET BIZU *//* WIDGET BIZU *//* WIDGET BIZU */
+
+
+
+/* WIDGET BIZU *//* WIDGET BIZU *//* WIDGET BIZU *//* WIDGET BIZU *//* WIDGET BIZU */
