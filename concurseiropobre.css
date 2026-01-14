@@ -2293,7 +2293,7 @@ margin-left:40px
 
 .pill-button, .jump-link, .flat-button {
   border-radius: 100px !important; /* Formato de pílula */
-
+  background-color: black !important;
   color: #ffffff !important;
   padding: 10px 24px !important;
   font-weight: 500;
