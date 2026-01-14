@@ -147,3 +147,16 @@ body {
 #gemini-results-pane::-webkit-scrollbar { width: 6px; }
 #gemini-results-pane::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
 
+/* Use o ID do widget pai para garantir que o estilo seja aplicado */
+#HTML99 .titulo-custom, 
+.nb-nav-center .titulo-custom {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-family: sans-serif !important;
+    font-size: 15px !important;
+    color: #333 !important;
+    text-align: center !important;
+    height: 100% !important;
+    margin: 0 !important; /* Adicionado para evitar quebras de linha */
+}
