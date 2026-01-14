@@ -1,5 +1,3 @@
-<script type='text/javascript'>
-//<![CDATA[
 const config = {
   materias: ["Português", "Matemática", "Direito Constitucional", "Informática", "História"],
   assuntos: {
@@ -15,22 +13,44 @@ let activeFilters = new Map();
 let searchMode = 'preciso';
 const tagFixa = "questão";
 
-function toggleFilter() {
+// Funções globais para o Blogger encontrar
+window.toggleFilter = function() {
   const w = document.getElementById('g-filter-widget');
+  if(!w) return;
   w.classList.toggle('open');
-  if (w.classList.contains('open')) { init(); switchTab(0); }
-}
+  if (w.classList.contains('open')) { 
+    init(); 
+    window.switchTab(0); 
+  }
+};
 
-function changeMode(mode) {
+window.changeMode = function(mode) {
   searchMode = mode;
   resetFilters();
-}
+};
 
-function switchTab(idx) {
+window.switchTab = function(idx) {
   document.querySelectorAll('.g-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
   document.querySelectorAll('.g-col').forEach((c, i) => c.classList.toggle('active-tab', i === idx));
-}
+};
 
+window.executeSearch = function() {
+  if (activeFilters.size === 0) return;
+  const tags = Array.from(activeFilters.keys());
+  tags.push(tagFixa);
+  
+  let finalUrl = "";
+  if (searchMode === 'preciso') {
+    const query = tags.map(t => encodeURIComponent(t.toLowerCase())).join('+');
+    finalUrl = window.location.origin + "/search/label/" + query;
+  } else {
+    const query = tags.map(t => 'label:"' + t.toLowerCase() + '"').join(' | ');
+    finalUrl = window.location.origin + "/search?q=" + encodeURIComponent(query);
+  }
+  window.location.href = finalUrl;
+};
+
+// Funções de suporte
 function init() {
   renderBubbles('list-materias', config.materias, 'm');
   renderBubbles('list-banca', config.banca, 'b');
@@ -70,12 +90,11 @@ function updateAssuntos() {
 }
 
 function updateUI() {
-  // Sincroniza visualmente as bolhas
   document.querySelectorAll('.g-bubble').forEach(b => b.classList.toggle('selected', activeFilters.has(b.innerText)));
-  
   const cloud = document.getElementById('g-tag-cloud');
   const btnFiltrar = document.getElementById('btn-executar');
-  
+  if(!cloud || !btnFiltrar) return;
+
   if (activeFilters.size === 0) {
     cloud.innerHTML = '<div class="g-tag-clear inactive">Limpar</div> <span class="g-empty-text">Nenhum selecionado</span>';
     btnFiltrar.classList.add('disabled');
@@ -84,7 +103,6 @@ function updateUI() {
     cloud.innerHTML = '<div class="g-tag-clear active" onclick="resetFilters()">Limpar</div>';
     btnFiltrar.classList.remove('disabled');
     btnFiltrar.disabled = false;
-    
     activeFilters.forEach((type, f) => {
       const tag = document.createElement('div');
       tag.className = 'g-tag';
@@ -95,6 +113,12 @@ function updateUI() {
   }
 }
 
+window.resetFilters = function() {
+  activeFilters.clear();
+  updateAssuntos();
+  updateUI();
+};
+
 function removeSingleTag(val) {
   const type = activeFilters.get(val);
   activeFilters.delete(val);
@@ -102,40 +126,11 @@ function removeSingleTag(val) {
   updateUI();
 }
 
-function filterItems(input) {
+window.filterItems = function(input) {
   const val = input.value.toLowerCase();
   const container = input.nextElementSibling;
   container.querySelectorAll('.g-bubble').forEach(b => {
-    // Mantém o filtro de busca mas respeita se está selecionado ou não
     const matchesSearch = b.getAttribute('data-name').includes(val);
     b.style.display = matchesSearch ? '' : 'none';
   });
-}
-
-function resetFilters() {
-  activeFilters.clear();
-  updateAssuntos();
-  updateUI();
-}
-
-function executeSearch() {
-  if (activeFilters.size === 0) return;
-  const tags = Array.from(activeFilters.keys());
-  tags.push(tagFixa);
-  
-  let finalUrl = "";
-  if (searchMode === 'preciso') {
-    const query = tags.map(t => encodeURIComponent(t.toLowerCase())).join('+');
-    finalUrl = window.location.origin + "/search/label/" + query;
-  } else {
-    const query = tags.map(t => 'label:"' + t.toLowerCase() + '"').join(' | ');
-    finalUrl = window.location.origin + "/search?q=" + encodeURIComponent(query);
-  }
-  window.location.href = finalUrl;
-}
-
-
-//]]>
-
-
-</script>
+};
