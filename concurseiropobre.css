@@ -2972,7 +2972,6 @@ a {
 
 
 /* Use o ID do widget pai para garantir que o estilo seja aplicado */
-#HTML99 .titulo-custom, 
 .nb-nav-center .titulo-custom {
     display: flex !important;
     justify-content: center !important;
