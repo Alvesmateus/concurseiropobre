@@ -1,31 +1,46 @@
-// right-nav.js - Menu Estilo NotebookLM/Gemini com Fix de Ícones
+// right-nav.js - Menu estilo NotebookLM / Gemini
 (function() {
     'use strict';
     
     if (window.rightNavInitialized) return;
     window.rightNavInitialized = true;
-
-    // Garante que a biblioteca de ícones esteja carregada
-    if (!document.getElementById('lucide-script')) {
-        const script = document.createElement('script');
-        script.id = 'lucide-script';
-        script.src = 'https://unpkg.com/lucide@latest';
-        script.onload = () => initRightNav(); // Inicia apenas após carregar a lib
-        document.head.appendChild(script);
-    } else {
-        initRightNav();
-    }
     
     const RIGHT_MENU_JSON = {
         "menuItems": [
-            { "title": "Língua Portuguesa", "icon": "languages", "color": "blue", 
-              "submenu": [{"label": "Interpretação de Textos", "href": "#"}, {"label": "Gramática", "href": "#"}] },
-            { "title": "Matemática", "icon": "function", "color": "green", 
-              "submenu": [{"label": "Cálculo", "href": "#"}, {"label": "Geometria", "href": "#"}] },
-            { "title": "História", "icon": "landmark", "color": "purple", 
-              "submenu": [{"label": "Brasil Colônia", "href": "#"}] },
-            { "title": "Geografia", "icon": "map", "color": "orange", 
-              "submenu": [{"label": "Climatologia", "href": "#"}] }
+            {
+                "title": "Português",
+                "icon": "languages",
+                "color": "blue",
+                "submenu": [
+                    {"label": "Interpretação de Textos", "href": "/search/label/interpretação%20de%20textos"},
+                    {"label": "Pontuação", "href": "/search/label/pontuação"}
+                ]
+            },
+            {
+                "title": "Matemática",
+                "icon": "function",
+                "color": "green",
+                "submenu": [
+                    {"label": "Números Inteiros", "href": "/search/label/números%20inteiros"},
+                    {"label": "Porcentagem", "href": "/search/label/porcentagem"}
+                ]
+            },
+            {
+                "title": "História",
+                "icon": "landmark",
+                "color": "purple",
+                "submenu": [
+                    {"label": "História do Brasil", "href": "/search/label/história%20do%20brasil"}
+                ]
+            },
+            {
+                "title": "Geografia",
+                "icon": "map",
+                "color": "orange",
+                "submenu": [
+                    {"label": "Geografia do Brasil", "href": "/search/label/geografia%20do%20brasil"}
+                ]
+            }
         ]
     };
     
@@ -50,22 +65,16 @@
             <div class='drawer-overlay' id='overlay'></div>
             <div class='gemini-sidebar-panel' id='sidePanel'>
                 <div class='panel-header'>
-                    <span style="font-weight:600">Guia de Estudos</span>
-                    <button id='close-right-panel' style="cursor:pointer; background:none; border:none; font-size:24px">&times;</button>
+                    <span>Guia de Estudos</span>
+                    <button id='close-right-panel'>&times;</button>
                 </div>
                 <div class='panel-content'>
                     ${generateRightMenuHTML()}
                 </div>
             </div>`;
         document.body.insertAdjacentHTML('beforeend', panelHTML);
-        
-        // --- O PULO DO GATO ---
-        // Força o Lucide a procurar os ícones no HTML que acabamos de injetar
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
-        
         initializeAccordions();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     
     function generateRightMenuHTML() {
@@ -128,33 +137,61 @@
         style.textContent = `
             .gemini-sidebar-panel {
                 position: fixed !important; top: 0; right: -350px;
-                width: 320px; height: 100%; background: #ffffff !important;
+                width: 320px; height: 100%; background: #fff;
                 z-index: 999999; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                font-family: 'Google Sans', 'Inter', sans-serif; display: flex; flex-direction: column;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                font-family: 'Google Sans', sans-serif; display: flex; flex-direction: column;
             }
-            .panel-header { padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f1f3f4; }
-            .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 999998; display: none; }
+            .panel-header {
+                padding: 18px 20px; display: flex; align-items: center; justify-content: space-between;
+                font-size: 18px; font-weight: 500; border-bottom: 1px solid #f1f3f4;
+            }
+            .drawer-overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.2); z-index: 999998; display: none;
+            }
             .sidebar-custom-container { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-            .accordion-item { border-radius: 16px; transition: 0.2s; border: 1px solid transparent; overflow: hidden; }
-            .accordion-item.active { border-color: #e0e0e0; background: #f8f9fa; }
-            .trigger-btn { width: 100%; padding: 14px 16px; border: none; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; font-weight: 500; font-size: 14px; cursor: pointer; transition: 0.2s; }
             
+            .accordion-item { border-radius: 16px; transition: 0.2s; border: 1px solid transparent; }
+            .accordion-item.active { border-color: #e0e0e0; background: #f8f9fa; padding-bottom: 8px; }
+            
+            .trigger-btn {
+                width: 100%; padding: 14px 16px; border: none; border-radius: 16px;
+                display: flex; align-items: center; justify-content: space-between;
+                font-weight: 500; font-size: 14px; cursor: pointer; transition: 0.2s;
+            }
+
+            /* Cores dos Botões Principais (NotebookLM Style) */
             .btn-blue { background: #e8f0fe; color: #1967d2; }
             .btn-green { background: #e6f4ea; color: #137333; }
             .btn-purple { background: #f3e8fd; color: #9334e6; }
             .btn-orange { background: #feefe3; color: #b06000; }
             
+            .trigger-btn:hover { filter: brightness(0.95); }
             .btn-label { display: flex; align-items: center; gap: 12px; }
-            .btn-label .lucide { width: 20px !important; height: 20px !important; }
+            .btn-label .lucide { width: 20px; height: 20px; }
+            
             .menu-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-            .menu-list { padding: 4px 8px 12px 12px; display: flex; flex-direction: column; gap: 4px; }
-            .menu-link { padding: 10px 14px; text-decoration: none; color: #444746; font-size: 13px; border-radius: 12px; display: flex; align-items: center; gap: 12px; transition: 0.2s; }
+            .menu-list { padding: 8px 12px 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+            
+            .menu-link {
+                padding: 10px 14px; text-decoration: none; color: #444746; font-size: 13px;
+                border-radius: 12px; display: flex; align-items: center; gap: 12px; transition: 0.2s;
+            }
             .menu-link:hover { background: #fff; color: #1a73e8; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transform: translateX(4px); }
-            .menu-link .lucide { width: 14px !important; height: 14px !important; color: #5f6368; }
+            
+            /* Ícone de Escrita no Submenu */
+            .menu-link .lucide { width: 14px; height: 14px; color: #5f6368; }
             .chevron { width: 16px; opacity: 0.6; transition: 0.3s; }
             .active .chevron { transform: rotate(180deg); }
         `;
         document.head.appendChild(style);
     }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initRightNav);
+    } else {
+        initRightNav();
+    }
+    
+    window.toggleMenu = toggleRightPanel;
 })();
