@@ -1,49 +1,53 @@
-// left-nav.js - Menu esquerdo para Blogger com JSON
+// left-nav.js - Menu esquerdo para Blogger com JSON Estilo Gemini/NotebookLM
 (function() {
     'use strict';
     
     if (window.leftNavInitialized) return;
     window.leftNavInitialized = true;
     
-    // CONFIGURAÇÃO DO MENU VIA JSON
+    // CONFIGURAÇÃO DO MENU VIA JSON (Agora com cores e ícones de submenu editáveis)
     const LEFT_MENU_JSON = {
         "menuItems": [
             {
                 "title": "Provas",
                 "icon": "📝",
+                "color": "#1a73e8", // Azul Gemini
                 "submenu": [
-                    {"label": "Baixar Provas", "href": "#"},
-                    {"label": "Provas Anteriores", "href": "/search/label/provas"},
-                    {"label": "Gabaritos", "href": "/search/label/gabaritos"}
+                    {"label": "Baixar Provas", "href": "#", "icon": "📓"},
+                    {"label": "Provas Anteriores", "href": "/search/label/provas", "icon": "📓"},
+                    {"label": "Gabaritos", "href": "/search/label/gabaritos", "icon": "📓"}
                 ]
             },
             {
                 "title": "Simulados",
                 "icon": "✏️",
+                "color": "#1e8e3e", // Verde
                 "submenu": [
-                    {"label": "Português", "href": "/search/label/português+simulado"},
-                    {"label": "Matemática", "href": "/search/label/matemática+simulado"},
-                    {"label": "História", "href": "#"},
-                    {"label": "Geografia", "href": "#"},
-                    {"label": "Direito Constitucional", "href": "/search/label/direito+constitucional+simulado"}
+                    {"label": "Português", "href": "/search/label/português+simulado", "icon": "📓"},
+                    {"label": "Matemática", "href": "/search/label/matemática+simulado", "icon": "📓"},
+                    {"label": "História", "href": "#", "icon": "📓"},
+                    {"label": "Geografia", "href": "#", "icon": "📓"},
+                    {"label": "Direito Constitucional", "href": "/search/label/direito+constitucional+simulado", "icon": "📓"}
                 ]
             },
             {
                 "title": "Editais",
                 "icon": "📄",
+                "color": "#f9ab00", // Amarelo/Laranja
                 "submenu": [
-                    {"label": "Editais Recentes", "href": "/search/label/editais"},
-                    {"label": "Análise de Edital", "href": "#"},
-                    {"label": "Retificações", "href": "#"}
+                    {"label": "Editais Recentes", "href": "/search/label/editais", "icon": "📓"},
+                    {"label": "Análise de Edital", "href": "#", "icon": "📓"},
+                    {"label": "Retificações", "href": "#", "icon": "📓"}
                 ]
             },
             {
                 "title": "Mapas Mentais",
                 "icon": "🗺️",
+                "color": "#9334e6", // Roxo
                 "submenu": [
-                    {"label": "Ver Mapas", "href": "#"},
-                    {"label": "Baixar em PDF", "href": "#"},
-                    {"label": "Por Matéria", "href": "#"}
+                    {"label": "Ver Mapas", "href": "#", "icon": "📓"},
+                    {"label": "Baixar em PDF", "href": "#", "icon": "📓"},
+                    {"label": "Por Matéria", "href": "#", "icon": "📓"}
                 ]
             }
         ]
@@ -83,6 +87,9 @@
             <div class='drawer-overlay-left' id='overlayLeft' style='display:none;'></div>
             <div class='gemini-sidebar-panel-left' id='leftSidePanel' style='display: none;'>
                 <div class='panel-header-left'>
+                    <div style="margin-right: auto; font-weight: 600; color: #1a73e8; display: flex; align-items: center; gap: 8px;">
+                         <span style="font-size: 20px;">✨</span> Notebook Menu
+                    </div>
                     <button id='close-left-panel' style='background:none; border:none; font-size:25px; cursor:pointer; color:#555;'>&times;</button>
                 </div>
                 <div class='panel-content-left'>
@@ -90,8 +97,8 @@
                         ${generateLeftMenuHTML()}
                     </div>
                     
-                    <div id='notebook-labels-container' style='margin: 15px; padding: 15px; background: #f8f9fa; border-radius: 12px;'>
-                        <div class='notebook-header' style='font-size: 12px; font-weight: 700; color: #70757a; margin-bottom: 10px;'>Tags Populares</div>
+                    <div id='notebook-labels-container' style='margin: 15px; padding: 15px; background: #f8f9fa; border-radius: 12px; border: 1px solid #e0e0e0;'>
+                        <div class='notebook-header' style='font-size: 11px; font-weight: 700; text-transform: uppercase; color: #70757a; margin-bottom: 10px; letter-spacing: 0.5px;'>Explorar Tags</div>
                         <div class='notebook-tag-cloud' id='notebook-tag-cloud'>
                             Carregando tags...
                         </div>
@@ -106,11 +113,10 @@
     function generateLeftMenuHTML() {
         let html = '';
         LEFT_MENU_JSON.menuItems.forEach((item, index) => {
-            const colorClass = getColorClass(index);
             html += `
-                <button class='sb-btn ${colorClass}' onclick='window.toggleLeftMenuDrop && window.toggleLeftMenuDrop("left-drop-${index}")'>
-                    <span>${item.icon}</span>
-                    <span>${item.title}</span>
+                <button class='sb-btn' style="--btn-color: ${item.color}" onclick='window.toggleLeftMenuDrop && window.toggleLeftMenuDrop("left-drop-${index}")'>
+                    <span class="sb-btn-icon">${item.icon}</span>
+                    <span class="sb-btn-title">${item.title}</span>
                 </button>
                 
                 <div class='sb-drop' id='left-drop-${index}'>
@@ -118,7 +124,7 @@
                         <div class='sb-list'>
                             ${item.submenu.map(subItem => `
                                 <a class='sb-link' href='${subItem.href}'>
-                                    <span>${subItem.icon || '→'}</span>
+                                    <span class="sb-sub-icon">${subItem.icon}</span>
                                     <span>${subItem.label}</span>
                                 </a>
                             `).join('')}
@@ -128,11 +134,6 @@
             `;
         });
         return html;
-    }
-    
-    function getColorClass(index) {
-        const colors = ['sb-blue', 'sb-green', 'sb-purple', 'sb-orange', 'sb-cyan', 'sb-pink'];
-        return colors[index % colors.length];
     }
     
     function addLeftNavStyles() {
@@ -148,9 +149,7 @@
                 color: #444746;
             }
             
-            .nb-icon-btn:hover {
-                background-color: rgba(0,0,0,0.06);
-            }
+            .nb-icon-btn:hover { background-color: rgba(0,0,0,0.06); }
             
             .gemini-sidebar-panel-left {
                 position: fixed !important;
@@ -161,22 +160,19 @@
                 background-color: #ffffff !important;
                 z-index: 999999 !important;
                 transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+                box-shadow: 5px 0 25px rgba(0,0,0,0.08);
                 font-family: 'Google Sans', Roboto, Arial, sans-serif;
                 display: flex;
                 flex-direction: column;
             }
             
-            .gemini-sidebar-panel-left.active {
-                left: 0 !important;
-            }
+            .gemini-sidebar-panel-left.active { left: 0 !important; }
             
             .panel-header-left {
-                padding: 16px 20px;
+                padding: 12px 20px;
                 display: flex;
                 align-items: center;
-                justify-content: flex-end;
-                border-bottom: 1px solid #e0e0e0;
+                border-bottom: 1px solid #f1f3f4;
             }
             
             .panel-content-left {
@@ -191,7 +187,8 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0,0,0,0.4);
+                background: rgba(32, 33, 36, 0.6);
+                backdrop-filter: blur(2px);
                 z-index: 999998 !important;
                 display: none;
             }
@@ -199,68 +196,69 @@
             .sb-grid-container {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 6px;
-                padding: 10px;
+                gap: 10px;
+                padding: 15px;
             }
             
             .sb-btn {
                 width: 100%;
-                padding: 12px 6px;
-                border-radius: 12px;
-                border: none;
+                padding: 16px 8px;
+                border-radius: 16px;
+                border: 1px solid #e0e0e0;
+                background: #ffffff;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 4px;
+                gap: 8px;
                 cursor: pointer;
-                font-size: 11px;
-                font-weight: 600;
+                transition: all 0.2s ease;
+                color: #3c4043;
             }
-            
-            .sb-blue { background: #e8f0fe; color: #1967d2; }
-            .sb-green { background: #e6f4ea; color: #137333; }
-            .sb-purple { background: #f3e8fd; color: #9334e6; }
-            .sb-orange { background: #feefe3; color: #b06000; }
-            .sb-cyan { background: #e4f7fb; color: #007b83; }
-            .sb-pink { background: #fce8f3; color: #a91063; }
+
+            .sb-btn:hover {
+                background: #f8f9fa;
+                border-color: var(--btn-color);
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+
+            .sb-btn-icon { font-size: 22px; }
+            .sb-btn-title { font-size: 12px; font-weight: 500; }
             
             .sb-drop {
                 grid-column: span 2;
                 max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.3s ease;
-                background: #ffffff;
-                border-radius: 10px;
+                transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                background: #f1f3f4;
+                border-radius: 12px;
             }
             
             .sb-drop.open {
-                max-height: 300px;
-                border: 1px solid #eeeeee;
-                margin: 2px 0 6px 0;
+                max-height: 500px;
+                margin-bottom: 10px;
             }
             
             .sb-list {
-                padding: 6px;
+                padding: 8px;
                 display: flex;
                 flex-direction: column;
-                gap: 2px;
+                gap: 4px;
             }
             
             .sb-link {
-                padding: 8px 10px;
+                padding: 10px 14px;
                 text-decoration: none !important;
                 color: #444 !important;
-                background: #ffffff !important;
-                font-size: 11.5px;
-                border-radius: 8px;
+                font-size: 13px;
+                border-radius: 10px;
                 display: flex;
                 align-items: center;
-                gap: 8px;
+                gap: 12px;
+                transition: background 0.2s;
             }
             
-            .sb-link:hover {
-                background: #f1f3f4 !important;
-            }
+            .sb-link:hover { background: rgba(0,0,0,0.05) !important; }
+            .sb-sub-icon { font-size: 16px; opacity: 0.8; }
         `;
         document.head.appendChild(style);
     }
@@ -275,7 +273,6 @@
         if (leftOverlay) leftOverlay.addEventListener('click', () => toggleLeftPanel(false));
         if (closeLeftBtn) closeLeftBtn.addEventListener('click', () => toggleLeftPanel(false));
         
-        // Função global para toggle dos dropdowns
         window.toggleLeftMenuDrop = function(id) {
             const target = document.getElementById(id);
             if (!target) return;
@@ -329,7 +326,7 @@
                     labels.slice(0, 15).forEach(label => {
                         const labelName = label.term;
                         const labelUrl = `/search/label/${encodeURIComponent(labelName)}`;
-                        html += `<a href="${labelUrl}" style="background: #fff; color: #1a73e8; border: 1px solid #dadce0; padding: 5px 12px; border-radius: 20px; font-size: 12px; text-decoration: none; margin: 2px; display: inline-block;">${labelName}</a>`;
+                        html += `<a href="${labelUrl}" style="background: #fff; color: #444; border: 1px solid #dadce0; padding: 6px 12px; border-radius: 8px; font-size: 12px; text-decoration: none; margin: 3px; display: inline-block; transition: 0.2s;"># ${labelName}</a>`;
                     });
                     container.innerHTML = html;
                 } else {
@@ -341,14 +338,12 @@
             });
     }
     
-    // Inicializar
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initLeftNav);
     } else {
         initLeftNav();
     }
     
-    // Exportar funções globais
     window.toggleLeftMenu = toggleLeftPanel;
     
 })();
