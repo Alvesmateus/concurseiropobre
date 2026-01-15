@@ -65,7 +65,7 @@
             { "label": "Direitos Políticos", "href": "/direito/fundamentais" },
             { "label": "Administração Pública", "href": "/direito/estado" },
             { "label": "Disposições Gerais", "href": "/direito/adm" },
-            { "label": "Dos Militares dos Estados, do Distrito Federal e dos Territórios", "href": "/direito/poderes" },
+            { "label": "Militares", "href": "/direito/poderes" },
             { "label": "Segurança Pública", "href": "/direito/seguranca" }
           ]
         },
