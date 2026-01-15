@@ -1,7 +1,10 @@
 {
     "materias": [
         "Direito Administrativo",
-        "Direito Constitucional"
+        "Direito Constitucional",
+        "Matemática",
+        "Português",
+        "Informática"
     ],
     "banca": [
         "CESPE",
