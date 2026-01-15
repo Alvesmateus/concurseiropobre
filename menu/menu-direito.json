@@ -1,0 +1,38 @@
+{
+  "menuItems": [
+    {
+      "title": "Português",
+      "icon": "languages",
+      "color": "blue",
+      "submenu": [
+        { "label": "Interpretação de Textos", "href": "/search/label/interpretação%20de%20textos" },
+        { "label": "Pontuação", "href": "/search/label/pontuação" }
+      ]
+    },
+    {
+      "title": "Matemática",
+      "icon": "square-sigma",
+      "color": "green",
+      "submenu": [
+        { "label": "Números Inteiros", "href": "/search/label/números%20inteiros" },
+        { "label": "Porcentagem", "href": "/search/label/porcentagem" }
+      ]
+    },
+    {
+      "title": "História",
+      "icon": "landmark",
+      "color": "purple",
+      "submenu": [
+        { "label": "História do Brasil", "href": "/search/label/história%20do%20brasil" }
+      ]
+    },
+    {
+      "title": "Geografia",
+      "icon": "map",
+      "color": "orange",
+      "submenu": [
+        { "label": "Geografia do Brasil", "href": "/search/label/geografia%20do%20brasil" }
+      ]
+    }
+  ]
+}
