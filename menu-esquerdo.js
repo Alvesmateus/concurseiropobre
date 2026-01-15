@@ -155,7 +155,7 @@
             .ai-spark-wrapper { background: #1a73e8; padding: 6px; border-radius: 8px; color: white; display: flex; }
             .panel-title { font-size: 18px; font-weight: 500; color: #1f1f1f; margin-left: 12px; }
 
-            .sb-grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 20px; }
+            .sb-grid-container { display: grid; grid-template-columns: repeat(1fr); gap: 16px; padding: 20px; }
             
             .menu-card-wrapper { display: flex; flex-direction: column; }
             
