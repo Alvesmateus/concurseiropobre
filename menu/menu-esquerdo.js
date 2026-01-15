@@ -15,16 +15,29 @@
     };
 
     // Função para buscar o JSON
+// Função para buscar o JSON do GitHub
     async function loadMenuData() {
+        // COLE O SEU LINK RAW AQUI ENTRE AS ASPAS
+        const URL_JSON = 'https://raw.githubusercontent.com/seu-usuario/seu-repositorio/main/menu.json';
+
         try {
-            const response = await fetch('./menu.json'); // Caminho do seu arquivo
-            if (!response.ok) throw new Error('Erro ao carregar menu.json');
+            const response = await fetch(URL_JSON);
+            
+            if (!response.ok) {
+                throw new Error(`Erro HTTP: ${response.status}`);
+            }
+            
             menuData = await response.json();
+            
+            // Após carregar os dados, inicia a construção do menu
             initLeftNav();
+            
         } catch (error) {
-            console.error("Falha ao carregar o menu:", error);
+            console.error("Falha ao carregar o menu do GitHub:", error);
+            // Opcional: Você pode definir um menu padrão aqui caso o link falhe
         }
     }
+    
 
     function initLeftNav() {
         const navLeft = document.querySelector('.nb-nav-left');
