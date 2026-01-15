@@ -7,7 +7,7 @@
 
     // --- CONFIGURAÇÃO ---
     // Substitua pela sua URL real do GitHub (Link RAW)
-    const JSON_URL = 'https://sua-url-do-github-raw.json';
+    const JSON_URL = 'https://alvesmateus.github.io/concurseiropobre/menu/menu-direito.json';
     let RIGHT_MENU_DATA = null;
 
     async function initRightNav() {
