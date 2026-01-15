@@ -1,21 +1,36 @@
 {
-  "materias": [
-    "Direito Administrativo",
-    "Direito Constitucional"
-  ],
-  "banca": [
-    "CESPE",
-    "FGV",
-    "VUNESP"
-  ],
-  "assuntos": {
-    "Direito Administrativo": [
-      "Atos Administrativos",
-      "Agentes Públicos"
+    "materias": [
+        "Direito Administrativo",
+        "Direito Constitucional"
     ],
-    "Direito Constitucional": [
-      "Direitos Fundamentais",
-      "Poder Judiciário"
-    ]
-  }
+    "banca": [
+        "CESPE",
+        "FGV",
+        "VUNESP",
+        "AOCP",
+        "IDCAP"
+    ],
+    "assuntos": {
+        "Direito Constitucional": [
+            "direitos e garantias fundamentais",
+            "direitos sociais",
+            "organização do estado",
+            "nacionalidade"
+        ],
+        "Português": [
+            "Crase",
+            "colocação pronominal",
+            "concordância verbal"
+        ],
+        "Matemática": [
+            "raciocínio lógico",
+            "razão e proporção",
+            "mmc e mdc",
+            "segurança pública"
+        ],
+        "Informática": [
+            "word",
+            "windows"
+        ]
+    }
 }
