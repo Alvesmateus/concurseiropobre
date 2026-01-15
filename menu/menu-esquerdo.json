@@ -13,8 +13,10 @@
             { "label": "Sentido Próprio e Figurado", "href": "/portugues/estilistica" },
             { "label": "Classes de Palavras", "href": "/portugues/morfologia" },
             { "label": "Pontuação", "href": "/portugues/pontuacao" },
-            { "label": "Concordância Verbal e Nominal", "href": "/portugues/concordancia" },
-            { "label": "Regência Verbal e Nominal", "href": "/portugues/regencia" },
+            { "label": "Concordância Nominal", "href": "/portugues/concordancia" },
+            { "label": "Concordância Verbal", "href": "/portugues/concordancia" },
+            { "label": "Regência Nominal", "href": "/portugues/regencia" },  
+            { "label": "Regência Verbal", "href": "/portugues/regencia" },
             { "label": "Crase e Colocação", "href": "/portugues/sintaxe" }
           ]
         },
@@ -29,7 +31,8 @@
             { "label": "Porcentagem e Regra de 3", "href": "/matematica/aritmetica" },
             { "label": "Equações e Sistemas", "href": "/matematica/algebra" },
             { "label": "Medidas e Grandezas", "href": "/matematica/medidas" },
-            { "label": "Geometria (Área e Volume)", "href": "/matematica/geometria" },
+            { "label": "Geometria Plana", "href": "/matematica/geometria" },
+            { "label": "Geometria Espacial", "href": "/matematica/geometria" },
             { "label": "Raciocínio Lógico", "href": "/matematica/logica" }
           ]
         },
