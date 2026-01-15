@@ -1,1 +1,10 @@
-
+{
+  "materias": ["Português", "Matemática", "Direito Constitucional", "Informática", "História"],
+  "assuntos": {
+    "Português": ["Crase", "Sintaxe", "Pontuação", "Concordância Verbal", "Colocação Pronominal"],
+    "Matemática": ["mmc e mdc", "Números Inteiros", "Razão e Proporção"],
+    "Informática": ["Windows", "Word"],
+    "Direito Constitucional": ["Direitos e Garantias Fundamentais", "Organização do Estado", "Segurança Pública"]
+  },
+  "banca": ["FGV", "Cebraspe", "Vunesp", "FCC", "eags"]
+}
