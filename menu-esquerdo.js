@@ -185,6 +185,7 @@
             .sb-drop { 
                 grid-column: span 2; max-height: 0; overflow: hidden; 
                 transition: max-height 0.3s ease; margin: 0 4px;
+                width: 200%;
             }
             .sb-drop.open { max-height: 200px; margin-top: 8px; }
             
