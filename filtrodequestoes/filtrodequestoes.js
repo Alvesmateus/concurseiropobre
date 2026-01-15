@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    // link RAW do seu GitHub aqui
-    const JSON_URL = 'https://raw.githubusercontent.com/Alvesmateus/concurseiropobre/refs/heads/main/filtrodequestoes/filtrodequestoes.json';
+    // URL DO SEU ARQUIVO JSON NO GITHUB (USE O LINK RAW)
+    const URL_GITHUB = 'https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/config-questoes.json';
 
     const cssId = 'filter-questoes-css';
     if (!document.getElementById(cssId)) {
@@ -41,16 +41,19 @@
             .g-footer { padding: 12px 16px; border-top: 1px solid #e3e3e3; position: sticky; bottom: 0; background: #fff; }
             .g-btn-full { width: 100%; background: #0b57d0; color: #fff; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
             .g-btn-full.disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+            .g-filter-widget-instance.full-width { border-bottom: 1px solid #c4c7c5; border-top: 1px solid #c4c7c5; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; border-radius: 0; }
+            .g-filter-widget-instance.full-width .g-header { padding: 12px 5%; }
+            .g-filter-widget-instance.full-width .g-mode-selector, .g-filter-widget-instance.full-width .g-selection-bar, .g-filter-widget-instance.full-width .g-content-area, .g-filter-widget-instance.full-width .g-footer { padding-left: 5%; padding-right: 5%; }
         `;
         document.head.appendChild(style);
     }
 
     class FilterQuestoesWidget {
-        constructor(container, options = {}) {
+        constructor(container, config, options = {}) {
             this.container = container;
             this.options = Object.assign({
                 fullWidth: false,
-                config: null, // Será carregado via fetch
+                config: config, // Recebe o JSON carregado do GitHub
                 tagFixa: "questão"
             }, options);
 
@@ -61,22 +64,13 @@
             this.init();
         }
 
-        async init() {
-            try {
-                // Busca o JSON no GitHub
-                const response = await fetch(JSON_URL);
-                this.options.config = await response.json();
-                
-                this.renderHTML();
-                this.bindEvents();
-                this.renderBubbles('materias', this.options.config.materias, 'm');
-                this.renderBubbles('banca', this.options.config.banca, 'b');
-                this.updateAssuntos();
-                this.updateUI();
-            } catch (error) {
-                console.error("Erro ao carregar filtros:", error);
-                this.container.innerHTML = "<p style='color:red; padding:10px;'>Erro ao carregar configurações do filtro.</p>";
-            }
+        init() {
+            this.renderHTML();
+            this.bindEvents();
+            this.renderBubbles('materias', this.options.config.materias, 'm');
+            this.renderBubbles('banca', this.options.config.banca, 'b');
+            this.updateAssuntos();
+            this.updateUI();
         }
 
         renderHTML() {
@@ -112,24 +106,20 @@
                         </div>
                         <div class="g-content-area">
                             <div class="g-col active-tab" id="${this.widgetId}-col-0">
-                                <input class="g-search-input" type="text" placeholder="Buscar matéria...">
-                                <div class="g-bubble-container" id="${this.widgetId}-list-materias"></div>
+                                <input class="g-search-input" type="text" placeholder="Buscar matéria..."><div class="g-bubble-container" id="${this.widgetId}-list-materias"></div>
                             </div>
                             <div class="g-col" id="${this.widgetId}-col-1">
-                                <input class="g-search-input" type="text" placeholder="Buscar assunto...">
-                                <div class="g-bubble-container" id="${this.widgetId}-list-assuntos"></div>
+                                <input class="g-search-input" type="text" placeholder="Buscar assunto..."><div class="g-bubble-container" id="${this.widgetId}-list-assuntos"></div>
                             </div>
                             <div class="g-col" id="${this.widgetId}-col-2">
-                                <input class="g-search-input" type="text" placeholder="Buscar banca...">
-                                <div class="g-bubble-container" id="${this.widgetId}-list-banca"></div>
+                                <input class="g-search-input" type="text" placeholder="Buscar banca..."><div class="g-bubble-container" id="${this.widgetId}-list-banca"></div>
                             </div>
                         </div>
                         <div class="g-footer">
                             <button class="g-btn-full bold disabled" id="${this.widgetId}-btn-executar" type="button">FILTRAR</button>
                         </div>
                     </div>
-                </div>
-            `;
+                </div>`;
         }
 
         bindEvents() {
@@ -170,6 +160,7 @@
         toggleFilter() {
             const widget = this.container.querySelector(`#${this.widgetId}`);
             widget.classList.toggle('open');
+            if (widget.classList.contains('open')) this.switchTab(0);
         }
 
         changeMode(mode) {
@@ -186,7 +177,7 @@
             const container = this.container.querySelector(`#${this.widgetId}-list-${listType}`);
             if (!container || !items) return;
             container.innerHTML = '';
-            [...items].sort().forEach(item => {
+            items.sort().forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'g-bubble' + (this.activeFilters.has(item) ? ' selected' : '');
                 div.textContent = item;
@@ -203,7 +194,6 @@
             }
             if (this.activeFilters.has(item)) this.activeFilters.delete(item);
             else this.activeFilters.set(item, type);
-            
             if (type === 'm') this.updateAssuntos();
             this.updateUI();
         }
@@ -250,7 +240,8 @@
 
         filterItems(input) {
             const value = input.value.toLowerCase();
-            input.nextElementSibling.querySelectorAll('.g-bubble').forEach(bubble => {
+            const container = input.nextElementSibling;
+            container.querySelectorAll('.g-bubble').forEach(bubble => {
                 bubble.style.display = bubble.dataset.name.includes(value) ? '' : 'none';
             });
         }
@@ -277,13 +268,22 @@
         }
     }
 
-    function initWidgets() {
-        document.querySelectorAll('.filtrar-questoes').forEach(container => {
-            if (!container.dataset.widgetInitialized) {
-                new FilterQuestoesWidget(container);
-                container.dataset.widgetInitialized = 'true';
-            }
-        });
+    // Função para carregar o JSON e iniciar o widget
+    async function initWidgets() {
+        try {
+            const response = await fetch(URL_GITHUB);
+            if (!response.ok) throw new Error('Erro ao carregar JSON');
+            const configData = await response.json();
+
+            document.querySelectorAll('.filtrar-questoes').forEach(container => {
+                if (!container.dataset.widgetInitialized) {
+                    new FilterQuestoesWidget(container, configData);
+                    container.dataset.widgetInitialized = 'true';
+                }
+            });
+        } catch (err) {
+            console.error('Falha ao iniciar widget de questões:', err);
+        }
     }
 
     if (document.readyState === 'loading') {
