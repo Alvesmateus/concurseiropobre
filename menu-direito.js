@@ -18,7 +18,7 @@
             },
             {
                 "title": "Matemática",
-                "icon": "function",
+                "icon": "square-sigma",
                 "color": "green",
                 "submenu": [
                     {"label": "Números Inteiros", "href": "/search/label/números%20inteiros"},
