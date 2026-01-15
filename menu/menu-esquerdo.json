@@ -61,15 +61,31 @@
           "icon": "gavel",
           "color": "#7c3aed",
           "submenu": [
-            { "label": "Princípios Fundamentais", "href": "/direito/principios" },
-            { "label": "Direitos e Garantias", "href": "/direito/fundamentais" },
-            { "label": "Organização do Estado", "href": "/direito/estado" },
-            { "label": "Administração Pública", "href": "/direito/adm" },
-            { "label": "Organização dos Poderes", "href": "/direito/poderes" },
-            { "label": "Defesa do Estado e Segurança", "href": "/direito/seguranca" },
-            { "label": "Ordem Social", "href": "/direito/ordem-social" }
+            { "label": "Direitos e Deveres Individuais e Coletivoss", "href": "/direito/principios" },
+            { "label": "Direitos Políticos", "href": "/direito/fundamentais" },
+            { "label": "Administração Pública", "href": "/direito/estado" },
+            { "label": "Disposições Gerais", "href": "/direito/adm" },
+            { "label": "Dos Militares dos Estados, do Distrito Federal e dos Territórios", "href": "/direito/poderes" },
+            { "label": "Segurança Pública", "href": "/direito/seguranca" }
           ]
         },
+
+        {
+          "title": "Informática",
+          "icon": "monitor",
+          "color": "#4b5563",
+          "submenu": [
+            { "label": "Windows 10", "href": "/info/windows" },
+            { "label": "Word", "href": "/info/word" },
+            { "label": "Excel", "href": "/info/excel" },
+            { "label": "PowerPoint", "href": "/info/powerpoint" },
+            { "label": "Correio Eletrônico", "href": "/info/web" },            
+            { "label": "Internet", "href": "/info/web" },
+            { "label": "MS Teams", "href": "/info/web" },
+            { "label": "Google Workspace", "href": "/info/colaboracao" }
+          ]
+        },
+        
         {
           "title": "Atualidades",
           "icon": "newspaper",
