@@ -14,7 +14,7 @@
       overflow-x: auto !important;
       overflow-y: hidden !important;
       white-space: nowrap !important;
-      padding: 20px 10px !important;
+      padding: 2px 10px !important;
       gap: 15px;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
@@ -35,8 +35,8 @@
     }
 
     .gemini-border {
-      width: 85px;
-      height: 85px;
+      width: 65px;
+      height: 65px;
       margin: 0 auto;
       border-radius: 50%;
       padding: 6px; 
