@@ -1,9 +1,11 @@
-
 (function() {
     'use strict';
     
     if (window.leftNavInitialized) return;
     window.leftNavInitialized = true;
+
+    // Variável global interna para armazenar os dados carregados
+    let menuData = null;
 
     const loadLucide = () => {
         const script = document.createElement('script');
@@ -11,71 +13,19 @@
         script.onload = () => { if(window.lucide) lucide.createIcons(); };
         document.head.appendChild(script);
     };
-    loadLucide();
-    
-    const LEFT_MENU_JSON = {
-        "menuSections": [
-            {
-                "title": "Materiais de Estudo",
-                "items": [
-                    {
-                        "title": "Provas",
-                        "icon": "file-check-2", 
-                        "color": "#1a73e8",
-                        "submenu": [
-                            {"label": "Baixar Provas", "href": "#"},
-                            {"label": "Anteriores", "href": "/search/label/provas"},
-                            {"label": "Gabaritos", "href": "/search/label/gabaritos"}
-                        ]
-                    },
-                    {
-                        "title": "Simulados",
-                        "icon": "pencil-line",
-                        "color": "#1e8e3e",
-                        "submenu": [
-                            {"label": "Português", "href": "/search/label/português+simulado"},
-                            {"label": "Matemática", "href": "/search/label/matemática+simulado"},
-                            {"label": "Direito", "href": "#"}
-                        ]
-                    },
-                    {
-                        "title": "Editais",
-                        "icon": "scroll-text",
-                        "color": "#f9ab00",
-                        "submenu": [
-                            {"label": "Recentes", "href": "/search/label/editais"},
-                            {"label": "Análise", "href": "#"}
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Recursos Visuais",
-                "items": [
-                    {
-                        "title": "Mapas Mentais",
-                        "icon": "brain-circuit",
-                        "color": "#9334e6",
-                        "submenu": [
-                            {"label": "Visualizar", "href": "#"},
-                            {"label": "Baixar PDF", "href": "#"}
-                        ]
-                    },
-                    {
-                        "title": "Resumos",
-                        "icon": "file-text",
-                        "color": "#ea4335",
-                        "submenu": [
-                            {"label": "Direito", "href": "#"},
-                            {"label": "Português", "href": "#"},
-                            {"label": "Todos", "href": "/search/label/resumos"}
-                        ]
-                    }
-                ]
-            }
-        ]
-    };
-    
+
+    // Função para buscar o JSON
+    async function loadMenuData() {
+        try {
+            const response = await fetch('./menu.json'); // Caminho do seu arquivo
+            if (!response.ok) throw new Error('Erro ao carregar menu.json');
+            menuData = await response.json();
+            initLeftNav();
+        } catch (error) {
+            console.error("Falha ao carregar o menu:", error);
+        }
+    }
+
     function initLeftNav() {
         const navLeft = document.querySelector('.nb-nav-left');
         if (!navLeft) return;
@@ -116,7 +66,8 @@
     }
     
     function generateLeftMenuHTML() {
-        return LEFT_MENU_JSON.menuSections.map((section, sectionIndex) => `
+        if (!menuData) return '';
+        return menuData.menuSections.map((section, sectionIndex) => `
             <div class="menu-section">
                 <div class="section-title">${section.title}</div>
                 <div class="section-list">
@@ -221,14 +172,15 @@
                 el.classList.remove('open');
                 button.classList.remove('active');
             }
-            // Recria ícones se necessário após abrir o menu
             if(window.lucide) lucide.createIcons();
         };
     }
 
+    // Inicialização
+    loadLucide();
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initLeftNav);
+        document.addEventListener('DOMContentLoaded', loadMenuData);
     } else {
-        initLeftNav();
+        loadMenuData();
     }
 })();
