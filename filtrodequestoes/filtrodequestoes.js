@@ -1,7 +1,6 @@
 (function() {
     'use strict';
 
-    // 1. SUBSTITUA PELO SEU LINK RAW DO GITHUB
     const URL_GITHUB = 'https://raw.githubusercontent.com/Alvesmateus/concurseiropobre/refs/heads/main/filtrodequestoes/filtrodequestoes.json';
 
     // Injetar CSS
@@ -10,12 +9,11 @@
         const style = document.createElement('style');
         style.id = cssId;
         style.textContent = `
-            .filtrar-questoes { min-height: 50px; width: 100%; }
+            .filtrar-questoes { min-height: 50px; width: 100%; margin: 10px 0; }
             .filtrar-questoes * { box-sizing: border-box; }
-            .bold { font-weight: bold; }
             .filtro-titulo { font-size: 15px; font-weight: 600; color: #202124; display: flex; align-items: center; gap: 10px; }
             .seta-icone { width: 8px; height: 8px; border-right: 2px solid #5f6368; border-bottom: 2px solid #5f6368; transform: rotate(45deg); transition: transform 0.4s ease; }
-            .g-filter-widget-instance { font-family: 'Google Sans', Roboto, Arial, sans-serif; background: #ffffff; border: 1px solid #c4c7c5; width: 100%; position: relative; z-index: 1000; box-shadow: 0 1px 2px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+            .g-filter-widget-instance { font-family: 'Google Sans', Roboto, Arial, sans-serif; background: #ffffff; border: 1px solid #c4c7c5; width: 100%; position: relative; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
             .g-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; cursor: pointer; }
             .g-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #fff; }
             .g-filter-widget-instance.open .g-panel { max-height: 75vh; border-top: 1px solid #e3e3e3; overflow-y: auto; }
@@ -23,7 +21,7 @@
             .g-mode-selector { display: flex; padding: 12px 16px; background: #f8fafd; border-bottom: 1px solid #e3e3e3; gap: 8px; }
             .g-mode-option { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; color: #444746; cursor: pointer; padding: 10px; border-radius: 8px; border: 1px solid #c4c7c5; background: #fff; }
             .g-mode-option input[type="radio"] { display: none; }
-            .g-mode-option:has(input:checked) { background: #0b57d0 !important; color: #fff !important; border-color: #0b57d0 !important; }
+            .g-mode-option:has(input:checked) { background: #0b57d0 !important; color: #fff !important; }
             .g-selection-bar { padding: 10px 16px; background: #f8fafd; border-bottom: 1px solid #e3e3e3; min-height: 48px; }
             .g-tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
             .g-tag { font-size: 11px; padding: 2px 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; background: #e3e3e3; color: #1f1f1f; }
@@ -39,7 +37,6 @@
             .g-bubble.selected { display: none; }
             .g-footer { padding: 12px; border-top: 1px solid #e3e3e3; }
             .g-btn-full { width: 100%; background: #0b57d0; color: #fff; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-            .g-btn-full.disabled { opacity: 0.4; cursor: not-allowed; }
         `;
         document.head.appendChild(style);
     }
@@ -66,10 +63,7 @@
         renderHTML() {
             this.container.innerHTML = `
                 <div class="g-filter-widget-instance" id="${this.widgetId}">
-                    <div class="g-header">
-                        <span class="filtro-titulo">FILTRAR QUESTÕES</span>
-                        <div class="seta-icone"></div>
-                    </div>
+                    <div class="g-header"><span class="filtro-titulo">FILTRAR QUESTÕES</span><div class="seta-icone"></div></div>
                     <div class="g-panel">
                         <div class="g-mode-selector">
                             <label class="g-mode-option"><input type="radio" name="${this.widgetId}-mode" value="preciso" checked><span>PRECISA</span></label>
@@ -107,7 +101,7 @@
             
             root.onclick = (e) => {
                 if (e.target.classList.contains('g-bubble')) {
-                    const type = e.target.parentElement.id.slice(-1); // m, a ou b
+                    const type = e.target.parentElement.id.slice(-1);
                     this.toggleTag(e.target.textContent, type);
                 }
                 if (e.target.classList.contains('g-tag')) this.removeSingleTag(e.target.textContent.replace('✕', '').trim());
@@ -146,9 +140,8 @@
         updateUI() {
             this.container.querySelectorAll('.g-bubble').forEach(b => b.classList.toggle('selected', this.activeFilters.has(b.textContent)));
             const cloud = this.container.querySelector(`#${this.widgetId}-cloud`);
-            if (this.activeFilters.size === 0) {
-                cloud.innerHTML = '<span>Nenhum selecionado</span>';
-            } else {
+            if (this.activeFilters.size === 0) { cloud.innerHTML = '<span>Nenhum selecionado</span>'; }
+            else {
                 cloud.innerHTML = '';
                 this.activeFilters.forEach((t, f) => {
                     const tag = document.createElement('div');
@@ -176,11 +169,11 @@
         executeSearch() {
             const tags = Array.from(this.activeFilters.keys());
             tags.push("questão");
-            let url = '';
+            let url = window.location.origin;
             if (this.searchMode === 'preciso') {
-                url = window.location.origin + '/search/label/' + tags.map(t => encodeURIComponent(t.toLowerCase())).join('+');
+                url += '/search/label/' + tags.map(t => encodeURIComponent(t.toLowerCase())).join('+');
             } else {
-                url = window.location.origin + '/search?q=' + encodeURIComponent(tags.map(t => 'label:"' + t + '"').join(' | '));
+                url += '/search?q=' + encodeURIComponent(tags.map(t => 'label:"' + t + '"').join(' | '));
             }
             window.location.href = url;
         }
@@ -192,14 +185,17 @@
 
         try {
             const res = await fetch(URL_GITHUB);
-            if (!res.ok) throw new Error();
+            if (!res.ok) throw new Error("HTTP error " + res.status);
             const data = await res.json();
             containers.forEach(c => new FilterQuestoesWidget(c, data));
         } catch (e) {
-            console.error("Erro ao carregar JSON do GitHub. Verifique o link RAW.");
+            console.error("Filtro Erro:", e);
         }
     }
 
-    if (document.readyState === 'complete') loader();
-    else window.addEventListener('load', loader);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loader);
+    } else {
+        loader();
+    }
 })();
