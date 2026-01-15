@@ -20,7 +20,8 @@
                     {
                         "title": "Provas",
                         "icon": "file-check-2", 
-                        "color": "#1a73e8",
+                        "color": "#e8f0fe", // Fundo colorido
+                        "iconColor": "#1a73e8",
                         "submenu": [
                             {"label": "📥 Baixar Provas", "href": "#"},
                             {"label": "📚 Anteriores", "href": "/search/label/provas"},
@@ -30,21 +31,27 @@
                     {
                         "title": "Simulados",
                         "icon": "pencil-line",
-                        "color": "#1e8e3e",
+                        "color": "#e6f4ea",
+                        "iconColor": "#1e8e3e",
                         "submenu": [
                             {"label": "📖 Português", "href": "/search/label/português+simulado"},
-                            {"label": "🧮 Matemática", "href": "/search/label/matemática+simulado"},
-                            {"label": "⚖️ Direito", "href": "#"}
+                            {"label": "🧮 Matemática", "href": "/search/label/matemática+simulado"}
                         ]
                     },
+                    // BOTÕES NOVOS SEM SUBMENU
                     {
-                        "title": "Editais",
-                        "icon": "scroll-text",
-                        "color": "#f9ab00",
-                        "submenu": [
-                            {"label": "🆕 Recentes", "href": "/search/label/editais"},
-                            {"label": "🔍 Análise", "href": "#"}
-                        ]
+                        "title": "Cronograma",
+                        "icon": "calendar",
+                        "color": "#fef7e0",
+                        "iconColor": "#f9ab00",
+                        "href": "/p/cronograma.html"
+                    },
+                    {
+                        "title": "Desafios",
+                        "icon": "trophy",
+                        "color": "#fce8e6",
+                        "iconColor": "#ea4335",
+                        "href": "/p/desafios.html"
                     }
                 ]
             },
@@ -54,20 +61,11 @@
                     {
                         "title": "Mapas Mentais",
                         "icon": "brain-circuit",
-                        "color": "#9334e6",
+                        "color": "#f3e8fd",
+                        "iconColor": "#9334e6",
                         "submenu": [
                             {"label": "🗺️ Visualizar", "href": "#"},
-                            {"label": "📄 Baixar PDF", "href": "#"}
-                        ]
-                    },
-                    {
-                        "title": "Resumos",
-                        "icon": "file-text",
-                        "color": "#ea4335",
-                        "submenu": [
-                            {"label": "⚖️ Direito", "href": "#"},
-                            {"label": "📚 Português", "href": "#"},
-                            {"label": "📝 Todos", "href": "/search/label/resumos"}
+                            {"label": "📄 PDF", "href": "#"}
                         ]
                     }
                 ]
@@ -97,10 +95,8 @@
             <div class='drawer-overlay-left' id='overlayLeft' style='display:none;'></div>
             <div class='gemini-sidebar-panel-left' id='leftSidePanel' style='display: none;'>
                 <div class='panel-header-left'>
-                    <span class="panel-logo">Menu</span>
-                    <button id='close-left-panel' class="close-btn">
-                        <i data-lucide="x"></i>
-                    </button>
+                    <span class="panel-logo">Notebook LM</span>
+                    <button id='close-left-panel' class="close-btn"><i data-lucide="x"></i></button>
                 </div>
                 <div class='panel-content-left'>
                     <div class='sb-grid-container'>
@@ -113,30 +109,35 @@
     }
     
     function generateLeftMenuHTML() {
-        return LEFT_MENU_JSON.menuSections.map((section, sectionIndex) => `
+        return LEFT_MENU_JSON.menuSections.map((section, sIdx) => `
             <div class="menu-section">
                 <div class="section-title">${section.title}</div>
                 <div class="section-list">
-                    ${section.items.map((item, itemIndex) => `
+                    ${section.items.map((item, iIdx) => {
+                        const hasSub = item.submenu && item.submenu.length > 0;
+                        const action = hasSub 
+                            ? `onclick='window.toggleLeftMenuDrop("drop-${sIdx}-${iIdx}")'` 
+                            : `onclick='window.location.href="${item.href}"'`;
+                        
+                        return `
                         <div class="menu-item-wrapper">
-                            <button class='sb-item-btn' 
-                                    style="--accent-color: ${item.color}" 
-                                    onclick='window.toggleLeftMenuDrop("left-drop-${sectionIndex}-${itemIndex}")'>
-                                <i data-lucide="${item.icon}" class="main-icon"></i>
+                            <button class='sb-item-btn ${hasSub ? 'has-sub' : ''}' 
+                                    style="background-color: ${item.color}; --hover-color: ${item.iconColor}22" 
+                                    ${action}>
+                                <i data-lucide="${item.icon}" style="color: ${item.iconColor}" class="main-icon"></i>
                                 <span class="item-label">${item.title}</span>
-                                <i data-lucide="chevron-down" class="chevron-icon"></i>
+                                ${hasSub ? `<i data-lucide="chevron-down" class="chevron-icon"></i>` : ''}
                             </button>
-                            <div class='sb-drop' id='left-drop-${sectionIndex}-${itemIndex}'>
+                            ${hasSub ? `
+                            <div class='sb-drop' id='drop-${sIdx}-${iIdx}'>
                                 <div class='sb-drop-content'>
                                     ${item.submenu.map(sub => `
-                                        <a class='sb-link' href='${sub.href}'>
-                                            <span>${sub.label}</span>
-                                        </a>
+                                        <a class='sb-link' href='${sub.href}'>${sub.label}</a>
                                     `).join('')}
                                 </div>
-                            </div>
-                        </div>
-                    `).join('')}
+                            </div>` : ''}
+                        </div>`;
+                    }).join('')}
                 </div>
             </div>
         `).join('');
@@ -146,122 +147,83 @@
         const style = document.createElement('style');
         style.textContent = `
             .gemini-sidebar-panel-left { 
-                position: fixed !important; top: 0; left: -320px; 
-                width: 300px; height: 100%; background: #f9f9fb; 
-                z-index: 10000; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 1px 0 0 rgba(0,0,0,0.05); display: flex; flex-direction: column;
-                font-family: 'Google Sans', Roboto, Arial, sans-serif;
+                position: fixed !important; top: 0; left: -300px; 
+                width: 280px; height: 100%; background: #ffffff; 
+                z-index: 10000; transition: all 0.25s ease;
+                box-shadow: 2px 0 12px rgba(0,0,0,0.05); display: flex; flex-direction: column;
+                font-family: 'Google Sans', Roboto, Arial;
             }
             .gemini-sidebar-panel-left.active { left: 0 !important; }
-            
-            .panel-header-left { 
-                padding: 12px 16px; display: flex; align-items: center; 
-                justify-content: space-between; background: #f9f9fb;
-            }
-            .panel-logo { font-size: 14px; font-weight: 500; color: #1f1f1f; }
-            .close-btn { background: none; border: none; padding: 6px; border-radius: 8px; cursor: pointer; color: #444746; display: flex; }
-            .close-btn:hover { background: #e9eaeb; }
-            .close-btn svg { width: 18px; height: 18px; }
+            .panel-header-left { padding: 16px; display: flex; align-items: center; justify-content: space-between; }
+            .panel-logo { font-size: 14px; font-weight: 600; color: #444746; }
+            .close-btn { background: none; border: none; cursor: pointer; color: #5f6368; display: flex; padding: 4px; border-radius: 50%; }
+            .close-btn:hover { background: #f1f3f4; }
 
-            .sb-grid-container { padding: 8px; display: flex; flex-direction: column; gap: 16px; }
+            .sb-grid-container { padding: 12px; display: flex; flex-direction: column; gap: 20px; }
+            .section-title { font-size: 10px; font-weight: 700; color: #70757a; text-transform: uppercase; letter-spacing: 0.5px; padding: 0 8px 8px; }
+            .section-list { display: flex; flex-direction: column; gap: 6px; }
             
-            .menu-section { display: flex; flex-direction: column; }
-            .section-title { 
-                font-size: 11px; font-weight: 700; color: #70757a; 
-                text-transform: uppercase; letter-spacing: 0.8px;
-                padding: 8px 12px; margin-bottom: 4px;
-            }
-
-            .section-list { display: flex; flex-direction: column; gap: 2px; }
-            
+            /* Botão Principal Estilo Notebook */
             .sb-item-btn {
-                width: 100%; display: flex; align-items: center; gap: 12px;
-                padding: 10px 12px; border: none; background: transparent;
-                border-radius: 12px; cursor: pointer; transition: all 0.2s;
-                position: relative;
+                width: 100%; display: flex; align-items: center; gap: 10px;
+                padding: 8px 12px; border: none; border-radius: 100px; /* Bem arredondado estilo chip */
+                cursor: pointer; transition: transform 0.1s, background-color 0.2s;
             }
-            .sb-item-btn:hover { background: #eff0f1; }
-            .sb-item-btn.active { background: #e8f0fe; }
-            .sb-item-btn.active .item-label { color: #1a73e8; }
-            .sb-item-btn.active .main-icon { color: #1a73e8; }
-
-            .main-icon { width: 18px; height: 18px; color: #444746; transition: color 0.2s; }
-            .item-label { font-size: 13.5px; font-weight: 500; color: #3c4043; flex: 1; text-align: left; }
+            .sb-item-btn:hover { filter: brightness(0.95); transform: scale(0.98); }
+            .main-icon { width: 16px; height: 16px; }
+            .item-label { font-size: 13px; font-weight: 500; color: #1f1f1f; flex: 1; text-align: left; }
             .chevron-icon { width: 14px; height: 14px; color: #70757a; transition: transform 0.2s; }
-            .sb-item-btn.active .chevron-icon { transform: rotate(180deg); color: #1a73e8; }
+            .sb-item-btn.active .chevron-icon { transform: rotate(180deg); }
 
+            /* Submenu Compacto e Arredondado */
             .sb-drop { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-            .sb-drop.open { max-height: 300px; }
-            .sb-drop-content { padding: 4px 0 4px 42px; display: flex; flex-direction: column; gap: 2px; }
-
+            .sb-drop.open { max-height: 200px; }
+            .sb-drop-content { 
+                padding: 6px 0 6px 12px; /* Margem esquerda reduzida */
+                display: flex; flex-direction: column; gap: 4px; 
+            }
             .sb-link {
-                padding: 8px 12px; text-decoration: none; color: #5f6368;
-                font-size: 13px; border-radius: 8px; transition: all 0.2s;
+                padding: 6px 12px; text-decoration: none; color: #444746;
+                font-size: 12px; border-radius: 12px; /* Estilo arredondado */
+                background: #f8f9fa; border: 1px solid #f1f3f4;
+                transition: all 0.2s; display: inline-block;
             }
-            .sb-link:hover { background: #eff0f1; color: #1f1f1f; }
+            .sb-link:hover { background: #ffffff; border-color: #dadce0; color: #1a73e8; }
 
-            .drawer-overlay-left { 
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.1); backdrop-filter: blur(1px); z-index: 9999; 
-            }
-
-            /* Estilo dos ícones fixos da barra */
-            .nb-icon-btn { 
-                background: transparent; border: none; padding: 8px; 
-                border-radius: 10px; cursor: pointer; color: #444746; 
-                display: flex; align-items: center; justify-content: center;
-                transition: background 0.2s;
-            }
-            .nb-icon-btn:hover { background: #eff0f1; }
-            .nb-icon-btn svg { width: 20px; height: 20px; }
+            .drawer-overlay-left { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 9999; }
+            .nb-icon-btn { background: #f1f3f4; border: none; padding: 8px; border-radius: 10px; cursor: pointer; color: #444746; display: flex; margin: 4px; }
         `;
         document.head.appendChild(style);
     }
     
     function initializeLeftPanel() {
-        const leftBtn = document.getElementById('nb-left-menu-btn');
-        const leftOverlay = document.getElementById('overlayLeft');
-        const closeLeftBtn = document.getElementById('close-left-panel');
-        
         const toggle = (val) => {
             const panel = document.getElementById('leftSidePanel');
+            const overlay = document.getElementById('overlayLeft');
             if(val) {
                 panel.style.display = "flex";
-                setTimeout(() => { 
-                    panel.classList.add('active'); 
-                    leftOverlay.style.display = "block";
-                    document.body.style.overflow = "hidden";
-                }, 10);
+                setTimeout(() => { panel.classList.add('active'); overlay.style.display = "block"; }, 10);
             } else {
                 panel.classList.remove('active');
-                leftOverlay.style.display = "none";
-                document.body.style.overflow = "";
+                overlay.style.display = "none";
                 setTimeout(() => panel.style.display = "none", 250);
             }
         };
 
-        if(leftBtn) leftBtn.onclick = () => toggle(true);
-        if(leftOverlay) leftOverlay.onclick = () => toggle(false);
-        if(closeLeftBtn) closeLeftBtn.onclick = () => toggle(false);
+        document.getElementById('nb-left-menu-btn').onclick = () => toggle(true);
+        document.getElementById('overlayLeft').onclick = () => toggle(false);
+        document.getElementById('close-left-panel').onclick = () => toggle(false);
 
         window.toggleLeftMenuDrop = function(id) {
             const el = document.getElementById(id);
-            const button = el.previousElementSibling;
+            const btn = el.previousElementSibling;
             const isOpen = el.classList.contains('open');
-            
-            document.querySelectorAll('.sb-drop.open').forEach(drop => {
-                if (drop.id !== id) {
-                    drop.classList.remove('open');
-                    drop.previousElementSibling.classList.remove('active');
-                }
-            });
-            
             if (!isOpen) {
                 el.classList.add('open');
-                button.classList.add('active');
+                btn.classList.add('active');
             } else {
                 el.classList.remove('open');
-                button.classList.remove('active');
+                btn.classList.remove('active');
             }
         };
     }
