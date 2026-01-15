@@ -200,7 +200,7 @@
                 transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
             }
             .sb-drop.open { max-height: 500px; }
-            .sb-drop-content { padding: 4px 8px 8px 48px; display: flex; flex-direction: column; gap: 2px; }
+            .sb-drop-content { padding: 4px 8px 8px 20px; display: flex; flex-direction: column; gap: 2px; }
 
             .sb-link {
                 padding: 10px 16px; text-decoration: none; color: #444746;
