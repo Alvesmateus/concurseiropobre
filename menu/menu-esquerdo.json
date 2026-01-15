@@ -123,10 +123,10 @@
           "submenu": []
         },
         {
-          "title": "Atualidades",
+          "title": "Atualidadess",
           "icon": "book-open",
           "color": "#2563eb",
-          "href": "#",
+          "href": "https://www.google.com",
           "submenu": []
         }
       ]
