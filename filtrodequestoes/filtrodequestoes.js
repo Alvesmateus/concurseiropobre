@@ -2,7 +2,7 @@
     'use strict';
 
     // URL DO SEU ARQUIVO JSON NO GITHUB (USE O LINK RAW)
-    const URL_GITHUB = 'https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/config-questoes.json';
+    const URL_GITHUB = 'https://raw.githubusercontent.com/Alvesmateus/concurseiropobre/refs/heads/main/filtrodequestoes/filtrodequestoes.json';
 
     const cssId = 'filter-questoes-css';
     if (!document.getElementById(cssId)) {
