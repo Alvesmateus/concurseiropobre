@@ -2,7 +2,7 @@
     'use strict';
 
     // 1. SUBSTITUA PELO SEU LINK RAW DO GITHUB
-    const URL_GITHUB = 'https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/config-questoes.json';
+    const URL_GITHUB = 'https://raw.githubusercontent.com/Alvesmateus/concurseiropobre/refs/heads/main/filtrodequestoes/filtrodequestoes.json';
 
     // Injetar CSS
     const cssId = 'filter-questoes-css';
