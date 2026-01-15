@@ -2275,8 +2275,13 @@ body.sidebar-visible .bg-photo-container, body.sidebar-visible .page_body {
     }
 }
 
+
+
+	
 /* ========== ESTILOS CORRIGIDOS - SEM DUPLICAÇÕES ========== */
 
+
+	
 /* Container das postagens */
 .blog-posts {
     display: flex;
@@ -2490,7 +2495,9 @@ img, .post-image, .post-thumbnail {
     display: block !important;
 }
 
-	  <![CDATA[
+
+/* C DATA */
+	
       body#layout .hidden,
       body#layout .invisible {
         display: inherit;
@@ -2651,4 +2658,4 @@ img, .post-image, .post-thumbnail {
 .snippet-fade {
     display: none !important;
 }
-      ]]>
+      
