@@ -1,4 +1,4 @@
-// left-nav.js - Menu NotebookLM Corrigido (Grid 2 Colunas)
+// left-nav.js - Menu Estilo NotebookLM (Grid 2 Colunas + Submenu Full)
 (function() {
     'use strict';
     
@@ -51,6 +51,7 @@
                     <div class='sb-grid-container'>
                         ${generateLeftMenuHTML()}
                     </div>
+                    <div id="nb-dynamic-submenu" class="sb-drop"></div>
                 </div>
             </div>`;
         document.body.insertAdjacentHTML('beforeend', panelHTML);
@@ -58,28 +59,16 @@
     }
     
     function generateLeftMenuHTML() {
-        // Agora o item e o submenu estão agrupados para não quebrar o grid pai
         return LEFT_MENU_JSON.menuItems.map((item, index) => `
-            <div class="menu-item-group">
-                <button class='sb-card-btn' 
-                        style="--bg-color: ${item.color}; --accent-color: ${item.iconColor}" 
-                        onclick='window.toggleLeftMenuDrop("left-drop-${index}")'>
-                    <div class="card-content">
-                        <i data-lucide="${item.icon}" class="main-icon"></i>
-                        <span class="icon-label-inner">${item.title}</span>
-                    </div>
-                </button>
-                <div class='sb-drop' id='left-drop-${index}'>
-                    <div class='sb-drop-content'>
-                        ${item.submenu.map(sub => `
-                            <a class='sb-link' href='${sub.href}'>
-                                <i data-lucide="chevron-right"></i>
-                                <span>${sub.label}</span>
-                            </a>
-                        `).join('')}
-                    </div>
+            <button class='sb-card-btn' 
+                    id="card-btn-${index}"
+                    style="--bg-color: ${item.color}; --accent-color: ${item.iconColor}" 
+                    onclick='window.toggleLeftSubmenu(${index})'>
+                <div class="card-content">
+                    <i data-lucide="${item.icon}" class="main-icon"></i>
+                    <span class="icon-label-inner">${item.title}</span>
                 </div>
-            </div>
+            </button>
         `).join('');
     }
     
@@ -88,74 +77,58 @@
         style.textContent = `
             .nb-icon-btn { background: #f1f3f4; border: none; padding: 10px; border-radius: 12px; cursor: pointer; color: #444746; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; margin: 4px; }
             
-            .gemini-sidebar-panel-left { position: fixed !important; top: 0; left: -400px; width: 380px; height: 100%; background: #ffffff; z-index: 10000; transition: all 0.3s ease; box-shadow: 4px 0 20px rgba(0,0,0,0.08); display: flex; flex-direction: column; font-family: 'Google Sans', Roboto, Arial; }
+            .gemini-sidebar-panel-left { position: fixed !important; top: 0; left: -400px; width: 380px; height: 100%; background: #ffffff; z-index: 10000; transition: left 0.3s ease; box-shadow: 4px 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; font-family: 'Google Sans', Roboto, sans-serif; }
             .gemini-sidebar-panel-left.active { left: 0 !important; }
             
             .panel-header-left { padding: 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f1f3f4; }
             .panel-title { font-size: 18px; font-weight: 500; color: #1f1f1f; }
             .close-btn { background: none; border: none; cursor: pointer; color: #5f6368; }
 
-            /* Grid Principal de 2 colunas */
             .sb-grid-container { 
                 display: grid; 
                 grid-template-columns: 1fr 1fr; 
                 gap: 16px; 
-                padding: 16px;
-            }
-
-            /* Container do Grupo: Ocupa 1 célula do grid, mas o submenu "flutua" para fora se necessário */
-            .menu-item-group {
-                position: relative;
-                display: flex;
-                flex-direction: column;
+                padding: 20px;
             }
 
             .sb-card-btn { 
                 width: 100%; height: 95px; border: none; border-radius: 20px; 
                 background: var(--bg-color); cursor: pointer;
-                transition: transform 0.2s;
+                transition: transform 0.2s, box-shadow 0.2s;
                 display: flex; align-items: center; justify-content: center;
             }
-            .sb-card-btn:hover { transform: scale(1.03); }
+            .sb-card-btn:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+            .sb-card-btn.active-card { outline: 2px solid var(--accent-color); }
             
             .card-content { display: flex; flex-direction: column; align-items: center; gap: 6px; }
             .main-icon { width: 26px; height: 26px; color: var(--accent-color); }
             .icon-label-inner { font-size: 13px; font-weight: 600; color: #3c4043; }
 
-            /* SUBMENU: Agora ele sai do fluxo do card para não empurrar o vizinho do lado */
+            /* SUBMENU FULL WIDTH */
             .sb-drop { 
+                margin: 0 20px 20px 20px;
                 max-height: 0; 
                 overflow: hidden; 
-                transition: max-height 0.3s ease;
-                z-index: 5;
+                transition: max-height 0.3s ease-out;
+                background: #f8f9fa;
+                border-radius: 16px;
+                border: 1px solid #e8eaed;
             }
-            
-            /* Quando aberto, ele ocupa a largura total do container pai (grid) */
-            .sb-drop.open { 
-                max-height: 300px; 
-                margin-top: 8px;
-                /* Técnica para expandir sobre as duas colunas mesmo estando dentro de uma */
-                width: calc(200% + 16px); 
-            }
-            
-            /* Se for um item da coluna da DIREITA (par), movemos o submenu para a esquerda */
-            .menu-item-group:nth-child(even) .sb-drop.open {
-                margin-left: calc(-100% - 16px);
-            }
-            
-            .sb-drop-content { 
-                background: #f8f9fa; border-radius: 12px; padding: 8px; 
-                border: 1px solid #e8eaed; display: flex; flex-direction: column;
-            }
+            .sb-drop.open { max-height: 400px; padding: 8px; }
             
             .sb-link { 
-                padding: 12px; text-decoration: none; color: #444746; 
-                font-size: 14px; display: flex; align-items: center; gap: 10px;
-                border-radius: 8px;
+                padding: 12px 16px; text-decoration: none; color: #444746; 
+                font-size: 14px; display: flex; align-items: center; gap: 12px;
+                border-radius: 10px; transition: background 0.2s;
             }
             .sb-link:hover { background: #ffffff; color: #1a73e8; }
+            .sb-link svg { width: 14px; height: 14px; color: #1a73e8; }
 
             .drawer-overlay-left { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 9999; }
+            
+            @media (max-width: 768px) {
+                .gemini-sidebar-panel-left { width: 320px; }
+            }
         `;
         document.head.appendChild(style);
     }
@@ -169,26 +142,52 @@
             const panel = document.getElementById('leftSidePanel');
             if(val) {
                 panel.style.display = "flex";
-                setTimeout(() => { 
-                    panel.classList.add('active'); 
-                    leftOverlay.style.display = "block";
-                }, 10);
+                setTimeout(() => { panel.classList.add('active'); leftOverlay.style.display = "block"; }, 10);
             } else {
                 panel.classList.remove('active');
                 leftOverlay.style.display = "none";
-                setTimeout(() => panel.style.display = "none", 300);
+                setTimeout(() => { panel.style.display = "none"; closeSubmenu(); }, 300);
             }
+        };
+
+        const closeSubmenu = () => {
+            const sub = document.getElementById('nb-dynamic-submenu');
+            sub.classList.remove('open');
+            document.querySelectorAll('.sb-card-btn').forEach(b => b.classList.remove('active-card'));
         };
 
         if(leftBtn) leftBtn.onclick = () => toggle(true);
         if(leftOverlay) leftOverlay.onclick = () => toggle(false);
         if(closeLeftBtn) closeLeftBtn.onclick = () => toggle(false);
 
-        window.toggleLeftMenuDrop = function(id) {
-            const el = document.getElementById(id);
-            const isOpen = el.classList.contains('open');
-            document.querySelectorAll('.sb-drop').forEach(d => d.classList.remove('open'));
-            if(!isOpen) el.classList.add('open');
+        window.toggleLeftSubmenu = function(index) {
+            const subContainer = document.getElementById('nb-dynamic-submenu');
+            const cardBtn = document.getElementById(`card-btn-${index}`);
+            const item = LEFT_MENU_JSON.menuItems[index];
+            
+            // Se já estiver aberto o mesmo, fecha
+            if (cardBtn.classList.contains('active-card')) {
+                closeSubmenu();
+                return;
+            }
+
+            // Limpa estados
+            document.querySelectorAll('.sb-card-btn').forEach(b => b.classList.remove('active-card'));
+            
+            // Preenche o submenu
+            subContainer.innerHTML = `
+                <div style="padding: 10px; font-weight: 600; font-size: 12px; color: ${item.iconColor}; text-transform: uppercase; letter-spacing: 0.5px;">${item.title}</div>
+                ${item.submenu.map(sub => `
+                    <a class='sb-link' href='${sub.href}'>
+                        <i data-lucide="chevron-right"></i>
+                        <span>${sub.label}</span>
+                    </a>
+                `).join('')}
+            `;
+            
+            // Ativa
+            cardBtn.classList.add('active-card');
+            subContainer.classList.add('open');
             if(window.lucide) lucide.createIcons();
         };
     }
