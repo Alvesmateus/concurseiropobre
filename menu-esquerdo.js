@@ -1,150 +1,165 @@
-// right-nav.js - Versão Estável Estilo NotebookLM
+// left-nav.js - Menu Gemini/NotebookLM com Lucide Icons e Grid Duplo
 (function() {
     'use strict';
     
-    if (window.rightNavInitialized) return;
-    window.rightNavInitialized = true;
+    if (window.leftNavInitialized) return;
+    window.leftNavInitialized = true;
 
-    // 1. Carregamento Seguro da Biblioteca de Ícones
-    function loadLucide() {
-        if (window.lucide) {
-            initRightNav();
-            return;
-        }
-        const script = document.createElement('script');
-        script.src = 'https://unpkg.com/lucide@latest';
-        script.onload = () => {
-            initRightNav();
-            lucide.createIcons();
-        };
-        document.head.appendChild(script);
-    }
-
-    const RIGHT_MENU_JSON = {
+    // Carrega a biblioteca Lucide Icons
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/lucide@latest';
+    script.onload = () => lucide.createIcons();
+    document.head.appendChild(script);
+    
+    // CONFIGURAÇÃO DO MENU VIA JSON
+    const LEFT_MENU_JSON = {
         "menuItems": [
-            { "title": "Língua Portuguesa", "icon": "languages", "color": "blue", 
-              "submenu": [{"label": "Interpretação de Textos", "href": "/search/label/interpretação%20de%20textos"}] },
-            { "title": "Matemática", "icon": "function", "color": "green", 
-              "submenu": [{"label": "Números Inteiros", "href": "/search/label/números%20inteiros"}] },
-            { "title": "História", "icon": "landmark", "color": "purple", 
-              "submenu": [{"label": "História do Brasil", "href": "/search/label/história%20do%20brasil"}] },
-            { "title": "Geografia", "icon": "map", "color": "orange", 
-              "submenu": [{"label": "Geografia do Brasil", "href": "/search/label/geografia%20do%20brasil"}] }
+            {
+                "title": "Provas",
+                "icon": "file-text", // Nome do ícone Lucide
+                "color": "#1a73e8",
+                "submenu": [
+                    {"label": "Baixar Provas", "href": "#"},
+                    {"label": "Provas Anteriores", "href": "/search/label/provas"},
+                    {"label": "Gabaritos", "href": "/search/label/gabaritos"}
+                ]
+            },
+            {
+                "title": "Simulados",
+                "icon": "pen-tool",
+                "color": "#1e8e3e",
+                "submenu": [
+                    {"label": "Português", "href": "/search/label/português+simulado"},
+                    {"label": "Matemática", "href": "/search/label/matemática+simulado"},
+                    {"label": "Direito", "href": "/search/label/direito+constitucional+simulado"}
+                ]
+            },
+            {
+                "title": "Editais",
+                "icon": "scroll",
+                "color": "#f9ab00",
+                "submenu": [
+                    {"label": "Editais Recentes", "href": "/search/label/editais"},
+                    {"label": "Retificações", "href": "#"}
+                ]
+            },
+            {
+                "title": "Mapas",
+                "icon": "map",
+                "color": "#d93025",
+                "submenu": [
+                    {"label": "Ver Mapas", "href": "#"},
+                    {"label": "Download PDF", "href": "#"}
+                ]
+            }
         ]
     };
-
-    function initRightNav() {
-        const navRight = document.querySelector('.nb-nav-right');
-        if (!navRight) return;
+    
+    function initLeftNav() {
+        const navLeft = document.querySelector('.nb-nav-left');
+        if (!navLeft) return;
         
-        // Botão de ativação (Grid do Gemini)
-        const rightBtn = document.createElement('button');
-        rightBtn.className = 'nb-icon-btn';
-        rightBtn.id = 'nb-right-menu-btn';
-        rightBtn.innerHTML = `<svg fill='none' height='24px' viewBox='0 0 24 24' width='24px' xmlns='http://www.w3.org/2000/svg'><path d='M3 5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5zm6 0H5v4h4V5zm4 0a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V5zm6 0h-4v4h4V5zM3 15a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4zm6 0H5v4h4v-4zm4 0a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-4zm6 0h-4v4h4v-4z' fill='currentColor'/></svg>`;
+        navLeft.innerHTML = `
+            <button class='nb-icon-btn' id='nb-left-menu-btn' title='Menu'><i data-lucide="menu"></i></button>
+            <a href='https://vousermilico.blogspot.com'>
+                <button class='nb-icon-btn' title='Página Inicial'><i data-lucide="home"></i></button>
+            </a>
+        `;
         
-        navRight.appendChild(rightBtn);
-        createRightPanel();
-        addRightNavStyles();
-        
-        // Eventos
-        rightBtn.onclick = () => toggleRightPanel(true);
-        document.getElementById('overlay').onclick = () => toggleRightPanel(false);
-        document.getElementById('close-right-panel').onclick = () => toggleRightPanel(false);
+        createLeftPanel();
+        addLeftNavStyles();
+        initializeLeftPanel();
     }
-
-    function createRightPanel() {
-        if (document.getElementById('sidePanel')) return;
-        
+    
+    function createLeftPanel() {
+        if (document.getElementById('leftSidePanel')) return;
         const panelHTML = `
-            <div class='drawer-overlay' id='overlay'></div>
-            <div class='gemini-sidebar-panel' id='sidePanel'>
-                <div class='panel-header'>
-                    <span>Guia de Estudos</span>
-                    <button id='close-right-panel'>&times;</button>
+            <div class='drawer-overlay-left' id='overlayLeft' style='display:none;'></div>
+            <div class='gemini-sidebar-panel-left' id='leftSidePanel' style='display: none;'>
+                <div class='panel-header-left'>
+                    <div style="margin-right:auto; display:flex; align-items:center; gap:8px; font-weight:600; color:#1a73e8;">
+                        <i data-lucide="sparkles"></i> Menu Estudo
+                    </div>
+                    <button id='close-left-panel' style='background:none; border:none; font-size:25px; cursor:pointer;'>&times;</button>
                 </div>
-                <div class='panel-content'>
-                    <div class="sidebar-custom-container">
-                        ${RIGHT_MENU_JSON.menuItems.map((item, index) => `
-                            <div class='accordion-item' data-index='${index}'>
-                                <button class='trigger-btn btn-${item.color}'>
-                                    <span class='btn-label'><i data-lucide='${item.icon}'></i> ${item.title}</span>
-                                    <i data-lucide='chevron-down' class='chevron'></i>
-                                </button>
-                                <div class='menu-wrapper'>
-                                    <div class='menu-list'>
-                                        ${item.submenu.map(sub => `
-                                            <a class='menu-link' href='${sub.href}'>
-                                                <i data-lucide='pen-tool'></i>
-                                                <span>${sub.label}</span>
-                                            </a>`).join('')}
-                                    </div>
-                                </div>
-                            </div>`).join('')}
+                <div class='panel-content-left'>
+                    <div class='sb-grid-container'>
+                        ${generateLeftMenuHTML()}
                     </div>
                 </div>
             </div>`;
-        
         document.body.insertAdjacentHTML('beforeend', panelHTML);
-        
-        // Inicializa Acordeões
-        document.querySelectorAll('.accordion-item').forEach(item => {
-            item.querySelector('.trigger-btn').onclick = () => {
-                const isActive = item.classList.contains('active');
-                document.querySelectorAll('.accordion-item').forEach(i => {
-                    i.classList.remove('active');
-                    i.querySelector('.menu-wrapper').style.maxHeight = null;
-                });
-                if (!isActive) {
-                    item.classList.add('active');
-                    const wrapper = item.querySelector('.menu-wrapper');
-                    wrapper.style.maxHeight = wrapper.scrollHeight + "px";
-                }
-            };
-        });
     }
-
-    function toggleRightPanel(show) {
-        const panel = document.getElementById('sidePanel');
-        const overlay = document.getElementById('overlay');
-        panel.style.right = show ? "0" : "-350px";
-        overlay.style.display = show ? "block" : "none";
-        document.body.style.overflow = show ? "hidden" : "auto";
-        if (show && window.lucide) lucide.createIcons();
+    
+    function generateLeftMenuHTML() {
+        return LEFT_MENU_JSON.menuItems.map((item, index) => `
+            <button class='sb-btn' style="background:${item.color}15; border:1px solid ${item.color}; color:${item.color}" onclick='window.toggleLeftMenuDrop("left-drop-${index}")'>
+                <i data-lucide="${item.icon}"></i>
+                <span>${item.title}</span>
+            </button>
+            <div class='sb-drop' id='left-drop-${index}'>
+                <div class='sb-list'>
+                    ${item.submenu.map(sub => `
+                        <a class='sb-link' href='${sub.href}'>
+                            <i data-lucide="notepad-text" style="width:14px; height:14px;"></i>
+                            <span>${sub.label}</span>
+                        </a>
+                    `).join('')}
+                </div>
+            </div>
+        `).join('');
     }
-
-    function addRightNavStyles() {
+    
+    function addLeftNavStyles() {
         const style = document.createElement('style');
         style.textContent = `
-            .gemini-sidebar-panel { position: fixed !important; top: 0; right: -350px; width: 320px; height: 100%; background: #fff !important; z-index: 999999; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-family: 'Google Sans', sans-serif; display: flex; flex-direction: column; box-shadow: -5px 0 20px rgba(0,0,0,0.1); }
-            .panel-header { padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; font-size: 18px; font-weight: 500; border-bottom: 1px solid #f1f3f4; color: #1f1f1f; }
-            #close-right-panel { background: none; border: none; font-size: 28px; cursor: pointer; color: #5f6368; }
-            .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 999998; display: none; }
-            .sidebar-custom-container { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-            .accordion-item { border-radius: 16px; transition: 0.2s; border: 1px solid transparent; overflow: hidden; }
-            .accordion-item.active { border-color: #e0e0e0; background: #f8f9fa; padding-bottom: 8px; }
-            .trigger-btn { width: 100%; padding: 14px 16px; border: none; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; font-weight: 500; font-size: 14px; cursor: pointer; transition: 0.2s; }
-            
-            .btn-blue { background: #e8f0fe; color: #1967d2; }
-            .btn-green { background: #e6f4ea; color: #137333; }
-            .btn-purple { background: #f3e8fd; color: #9334e6; }
-            .btn-orange { background: #feefe3; color: #b06000; }
-            
-            .btn-label { display: flex; align-items: center; gap: 12px; }
-            .btn-label .lucide { width: 20px; height: 20px; }
-            .menu-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-            .menu-list { padding: 4px 8px 8px 12px; display: flex; flex-direction: column; gap: 4px; }
-            .menu-link { padding: 10px 14px; text-decoration: none !important; color: #444746 !important; font-size: 13px; border-radius: 12px; display: flex; align-items: center; gap: 12px; transition: 0.2s; }
-            .menu-link:hover { background: #fff; color: #1a73e8 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transform: translateX(4px); }
-            .menu-link .lucide { width: 14px; height: 14px; color: #5f6368; }
-            .chevron { width: 16px; opacity: 0.5; transition: 0.3s; }
-            .active .chevron { transform: rotate(180deg); }
+            .nb-icon-btn { background:transparent; border:none; padding:10px; border-radius:50%; cursor:pointer; color:#444746; display:flex; align-items:center; }
+            .gemini-sidebar-panel-left { position:fixed!important; top:0; left:-330px; width:320px; height:100%; background:#fff; z-index:999999; transition:left 0.3s ease; box-shadow:5px 0 15px rgba(0,0,0,0.1); display:flex; flex-direction:column; font-family:sans-serif; }
+            .gemini-sidebar-panel-left.active { left:0!important; }
+            .panel-header-left { padding:15px 20px; display:flex; align-items:center; border-bottom:1px solid #eee; }
+            .drawer-overlay-left { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:999998; display:none; }
+            .sb-grid-container { display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:15px; }
+            .sb-btn { padding:15px 5px; border-radius:12px; display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; font-size:12px; font-weight:600; transition:0.2s; }
+            .sb-btn:hover { filter: brightness(0.95); transform: translateY(-2px); }
+            .sb-btn svg { width:24px; height:24px; }
+            .sb-drop { grid-column: span 2; max-height:0; overflow:hidden; transition:max-height 0.3s ease; background:#f8f9fa; border-radius:8px; }
+            .sb-drop.open { max-height:400px; margin: 5px 0; border:1px solid #eee; }
+            .sb-list { padding:10px; display:flex; flex-direction:column; gap:5px; }
+            .sb-link { padding:8px 12px; text-decoration:none; color:#444; font-size:13px; display:flex; align-items:center; gap:10px; border-radius:6px; }
+            .sb-link:hover { background:#e8f0fe; }
         `;
         document.head.appendChild(style);
     }
+    
+    function initializeLeftPanel() {
+        const leftBtn = document.getElementById('nb-left-menu-btn');
+        const leftPanel = document.getElementById('leftSidePanel');
+        const leftOverlay = document.getElementById('overlayLeft');
+        const closeLeftBtn = document.getElementById('close-left-panel');
+        
+        const toggle = (val) => {
+            if(val) {
+                leftPanel.style.display="flex";
+                setTimeout(() => { leftPanel.classList.add('active'); leftOverlay.style.display="block"; }, 10);
+            } else {
+                leftPanel.classList.remove('active');
+                leftOverlay.style.display="none";
+                setTimeout(() => leftPanel.style.display="none", 300);
+            }
+        };
 
-    // Início
-    loadLucide();
-    window.toggleMenu = toggleRightPanel;
+        if(leftBtn) leftBtn.onclick = () => toggle(true);
+        if(leftOverlay) leftOverlay.onclick = () => toggle(false);
+        if(closeLeftBtn) closeLeftBtn.onclick = () => toggle(false);
 
+        window.toggleLeftMenuDrop = function(id) {
+            const el = document.getElementById(id);
+            document.querySelectorAll('.sb-drop').forEach(d => d !== el && d.classList.remove('open'));
+            el.classList.toggle('open');
+            lucide.createIcons(); // Atualiza ícones do submenu ao abrir
+        };
+    }
+    
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initLeftNav);
+    else initLeftNav();
 })();
