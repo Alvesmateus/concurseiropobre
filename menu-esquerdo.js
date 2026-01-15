@@ -22,9 +22,9 @@
                         "icon": "file-check-2", 
                         "color": "#1a73e8",
                         "submenu": [
-                            {"label": "📥 Baixar Provas", "href": "#"},
-                            {"label": "📚 Anteriores", "href": "/search/label/provas"},
-                            {"label": "✅ Gabaritos", "href": "/search/label/gabaritos"}
+                            {"label": "Baixar Provas", "href": "#"},
+                            {"label": "Anteriores", "href": "/search/label/provas"},
+                            {"label": "Gabaritos", "href": "/search/label/gabaritos"}
                         ]
                     },
                     {
@@ -32,9 +32,9 @@
                         "icon": "pencil-line",
                         "color": "#1e8e3e",
                         "submenu": [
-                            {"label": "📖 Português", "href": "/search/label/português+simulado"},
-                            {"label": "🧮 Matemática", "href": "/search/label/matemática+simulado"},
-                            {"label": "⚖️ Direito", "href": "#"}
+                            {"label": "Português", "href": "/search/label/português+simulado"},
+                            {"label": "Matemática", "href": "/search/label/matemática+simulado"},
+                            {"label": "Direito", "href": "#"}
                         ]
                     },
                     {
@@ -42,8 +42,8 @@
                         "icon": "scroll-text",
                         "color": "#f9ab00",
                         "submenu": [
-                            {"label": "🆕 Recentes", "href": "/search/label/editais"},
-                            {"label": "🔍 Análise", "href": "#"}
+                            {"label": "Recentes", "href": "/search/label/editais"},
+                            {"label": "Análise", "href": "#"}
                         ]
                     }
                 ]
@@ -56,8 +56,8 @@
                         "icon": "brain-circuit",
                         "color": "#9334e6",
                         "submenu": [
-                            {"label": "🗺️ Visualizar", "href": "#"},
-                            {"label": "📄 Baixar PDF", "href": "#"}
+                            {"label": "Visualizar", "href": "#"},
+                            {"label": "Baixar PDF", "href": "#"}
                         ]
                     },
                     {
@@ -65,9 +65,9 @@
                         "icon": "file-text",
                         "color": "#ea4335",
                         "submenu": [
-                            {"label": "⚖️ Direito", "href": "#"},
-                            {"label": "📚 Português", "href": "#"},
-                            {"label": "📝 Todos", "href": "/search/label/resumos"}
+                            {"label": "Direito", "href": "#"},
+                            {"label": "Português", "href": "#"},
+                            {"label": "Todos", "href": "/search/label/resumos"}
                         ]
                     }
                 ]
@@ -98,7 +98,6 @@
             <div class='gemini-sidebar-panel-left' id='leftSidePanel' style='display: none;'>
                 <div class='panel-header-left'>
                     <div class="logo-wrapper">
-                        <div class="gemini-sparkle"></div>
                         <span class="panel-logo">Vou Ser Milico</span>
                     </div>
                     <button id='close-left-panel' class="close-btn">
@@ -133,6 +132,7 @@
                                 <div class='sb-drop-content'>
                                     ${item.submenu.map(sub => `
                                         <a class='sb-link' href='${sub.href}'>
+                                            <i data-lucide="notebook-tabs" class="sub-icon" style="color: ${item.color}"></i>
                                             <span>${sub.label}</span>
                                         </a>
                                     `).join('')}
@@ -157,70 +157,27 @@
                 font-family: 'Google Sans', Roboto, Arial, sans-serif;
             }
             .gemini-sidebar-panel-left.active { left: 0 !important; }
-            
-            .panel-header-left { 
-                padding: 20px 16px; display: flex; align-items: center; 
-                justify-content: space-between;
-            }
-            
-            .logo-wrapper { display: flex; align-items: center; gap: 8px; }
-            .panel-logo { font-size: 18px; font-weight: 500; color: #1f1f1f; letter-spacing: -0.5px; }
-            
-            .close-btn { background: none; border: none; padding: 8px; border-radius: 50%; cursor: pointer; color: #444746; display: flex; transition: background 0.2s; }
+            .panel-header-left { padding: 20px 16px; display: flex; align-items: center; justify-content: space-between; }
+            .panel-logo { font-size: 18px; font-weight: 500; color: #1f1f1f; }
+            .close-btn { background: none; border: none; padding: 8px; border-radius: 50%; cursor: pointer; color: #444746; display: flex; }
             .close-btn:hover { background: #f1f3f4; }
-
-            .sb-grid-container { padding: 0 12px; display: flex; flex-direction: column; gap: 24px; }
-            
+            .sb-grid-container { padding: 0 12px; display: flex; flex-direction: column; gap: 20px; }
             .menu-section { display: flex; flex-direction: column; }
-            .section-title { 
-                font-size: 12px; font-weight: 500; color: #70757a; 
-                padding: 0 16px 8px;
-            }
-
-            .section-list { display: flex; flex-direction: column; gap: 4px; }
-            
-            .sb-item-btn {
-                width: 100%; display: flex; align-items: center; gap: 14px;
-                padding: 12px 16px; border: none; background: transparent;
-                border-radius: 28px; cursor: pointer; transition: all 0.2s;
-            }
-            
-            /* Efeito NotebookLM / Gemini */
-            .sb-item-btn:hover { background-color: var(--item-bg); }
-            .sb-item-btn.active { background-color: var(--item-bg); }
-            
+            .section-title { font-size: 11px; font-weight: 700; color: #70757a; text-transform: uppercase; padding: 0 16px 8px; letter-spacing: 0.5px; }
+            .sb-item-btn { width: 100%; display: flex; align-items: center; gap: 14px; padding: 12px 16px; border: none; background: transparent; border-radius: 28px; cursor: pointer; transition: all 0.2s; }
+            .sb-item-btn:hover, .sb-item-btn.active { background-color: var(--item-bg); }
             .main-icon { width: 20px; height: 20px; }
             .item-label { font-size: 14px; font-weight: 500; color: #3c4043; flex: 1; text-align: left; }
             .chevron-icon { width: 16px; height: 16px; color: #70757a; transition: transform 0.3s; }
-            
             .sb-item-btn.active .chevron-icon { transform: rotate(180deg); }
-
-            .sb-drop { 
-                max-height: 0; overflow: hidden; 
-                transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            }
+            .sb-drop { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
             .sb-drop.open { max-height: 500px; }
-            .sb-drop-content { padding: 4px 8px 8px 20px; display: flex; flex-direction: column; gap: 2px; }
-
-            .sb-link {
-                padding: 10px 16px; text-decoration: none; color: #444746;
-                font-size: 14px; border-radius: 20px; transition: all 0.2s;
-            }
+            .sb-drop-content { padding: 4px 8px 8px 32px; display: flex; flex-direction: column; gap: 2px; }
+            .sb-link { display: flex; align-items: center; gap: 10px; padding: 10px 16px; text-decoration: none; color: #444746; font-size: 13.5px; border-radius: 20px; transition: all 0.2s; }
             .sb-link:hover { background: #f1f3f4; color: #1a73e8; }
-
-            .drawer-overlay-left { 
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.3); backdrop-filter: blur(2px); z-index: 9999; 
-                transition: opacity 0.3s;
-            }
-
-            /* Estilo dos ícones fixos da barra */
-            .nb-icon-btn { 
-                background: transparent; border: none; padding: 10px; 
-                border-radius: 50%; cursor: pointer; color: #444746; 
-                display: flex; align-items: center; justify-content: center;
-                transition: background 0.2s;
-            }
+            .sub-icon { width: 16px; height: 16px; opacity: 0.8; }
+            .drawer-overlay-left { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); backdrop-filter: blur(2px); z-index: 9999; }
+            .nb-icon-btn { background: transparent; border: none; padding: 10px; border-radius: 50%; cursor: pointer; color: #444746; display: flex; align-items: center; justify-content: center; }
             .nb-icon-btn:hover { background: #f1f3f4; }
         `;
         document.head.appendChild(style);
@@ -256,7 +213,6 @@
             const el = document.getElementById(id);
             const button = el.previousElementSibling;
             const isOpen = el.classList.contains('open');
-            
             if (!isOpen) {
                 el.classList.add('open');
                 button.classList.add('active');
@@ -264,6 +220,8 @@
                 el.classList.remove('open');
                 button.classList.remove('active');
             }
+            // Recria ícones se necessário após abrir o menu
+            if(window.lucide) lucide.createIcons();
         };
     }
 
