@@ -97,7 +97,10 @@
             <div class='drawer-overlay-left' id='overlayLeft' style='display:none;'></div>
             <div class='gemini-sidebar-panel-left' id='leftSidePanel' style='display: none;'>
                 <div class='panel-header-left'>
-                    <span class="panel-logo">Menu</span>
+                    <div class="logo-wrapper">
+                        <div class="gemini-sparkle"></div>
+                        <span class="panel-logo">Vou Ser Milico</span>
+                    </div>
                     <button id='close-left-panel' class="close-btn">
                         <i data-lucide="x"></i>
                     </button>
@@ -120,9 +123,9 @@
                     ${section.items.map((item, itemIndex) => `
                         <div class="menu-item-wrapper">
                             <button class='sb-item-btn' 
-                                    style="--accent-color: ${item.color}" 
+                                    style="--item-color: ${item.color}; --item-bg: ${item.color}15" 
                                     onclick='window.toggleLeftMenuDrop("left-drop-${sectionIndex}-${itemIndex}")'>
-                                <i data-lucide="${item.icon}" class="main-icon"></i>
+                                <i data-lucide="${item.icon}" class="main-icon" style="color: ${item.color}"></i>
                                 <span class="item-label">${item.title}</span>
                                 <i data-lucide="chevron-down" class="chevron-icon"></i>
                             </button>
@@ -147,73 +150,78 @@
         style.textContent = `
             .gemini-sidebar-panel-left { 
                 position: fixed !important; top: 0; left: -320px; 
-                width: 300px; height: 100%; background: #f9f9fb; 
-                z-index: 10000; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 1px 0 0 rgba(0,0,0,0.05); display: flex; flex-direction: column;
+                width: 280px; height: 100%; background: #ffffff; 
+                z-index: 10000; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; flex-direction: column;
+                border-radius: 0 24px 24px 0;
                 font-family: 'Google Sans', Roboto, Arial, sans-serif;
             }
             .gemini-sidebar-panel-left.active { left: 0 !important; }
             
             .panel-header-left { 
-                padding: 12px 16px; display: flex; align-items: center; 
-                justify-content: space-between; background: #f9f9fb;
+                padding: 20px 16px; display: flex; align-items: center; 
+                justify-content: space-between;
             }
-            .panel-logo { font-size: 14px; font-weight: 500; color: #1f1f1f; }
-            .close-btn { background: none; border: none; padding: 6px; border-radius: 8px; cursor: pointer; color: #444746; display: flex; }
-            .close-btn:hover { background: #e9eaeb; }
-            .close-btn svg { width: 18px; height: 18px; }
+            
+            .logo-wrapper { display: flex; align-items: center; gap: 8px; }
+            .panel-logo { font-size: 18px; font-weight: 500; color: #1f1f1f; letter-spacing: -0.5px; }
+            
+            .close-btn { background: none; border: none; padding: 8px; border-radius: 50%; cursor: pointer; color: #444746; display: flex; transition: background 0.2s; }
+            .close-btn:hover { background: #f1f3f4; }
 
-            .sb-grid-container { padding: 8px; display: flex; flex-direction: column; gap: 16px; }
+            .sb-grid-container { padding: 0 12px; display: flex; flex-direction: column; gap: 24px; }
             
             .menu-section { display: flex; flex-direction: column; }
             .section-title { 
-                font-size: 11px; font-weight: 700; color: #70757a; 
-                text-transform: uppercase; letter-spacing: 0.8px;
-                padding: 8px 12px; margin-bottom: 4px;
+                font-size: 12px; font-weight: 500; color: #70757a; 
+                padding: 0 16px 8px;
             }
 
-            .section-list { display: flex; flex-direction: column; gap: 2px; }
+            .section-list { display: flex; flex-direction: column; gap: 4px; }
             
             .sb-item-btn {
-                width: 100%; display: flex; align-items: center; gap: 12px;
-                padding: 10px 12px; border: none; background: transparent;
-                border-radius: 12px; cursor: pointer; transition: all 0.2s;
-                position: relative;
+                width: 100%; display: flex; align-items: center; gap: 14px;
+                padding: 12px 16px; border: none; background: transparent;
+                border-radius: 28px; cursor: pointer; transition: all 0.2s;
             }
-            .sb-item-btn:hover { background: #eff0f1; }
-            .sb-item-btn.active { background: #e8f0fe; }
-            .sb-item-btn.active .item-label { color: #1a73e8; }
-            .sb-item-btn.active .main-icon { color: #1a73e8; }
+            
+            /* Efeito NotebookLM / Gemini */
+            .sb-item-btn:hover { background-color: var(--item-bg); }
+            .sb-item-btn.active { background-color: var(--item-bg); }
+            
+            .main-icon { width: 20px; height: 20px; }
+            .item-label { font-size: 14px; font-weight: 500; color: #3c4043; flex: 1; text-align: left; }
+            .chevron-icon { width: 16px; height: 16px; color: #70757a; transition: transform 0.3s; }
+            
+            .sb-item-btn.active .chevron-icon { transform: rotate(180deg); }
 
-            .main-icon { width: 18px; height: 18px; color: #444746; transition: color 0.2s; }
-            .item-label { font-size: 13.5px; font-weight: 500; color: #3c4043; flex: 1; text-align: left; }
-            .chevron-icon { width: 14px; height: 14px; color: #70757a; transition: transform 0.2s; }
-            .sb-item-btn.active .chevron-icon { transform: rotate(180deg); color: #1a73e8; }
-
-            .sb-drop { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-            .sb-drop.open { max-height: 300px; }
-            .sb-drop-content { padding: 4px 0 4px 42px; display: flex; flex-direction: column; gap: 2px; }
+            .sb-drop { 
+                max-height: 0; overflow: hidden; 
+                transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            }
+            .sb-drop.open { max-height: 500px; }
+            .sb-drop-content { padding: 4px 8px 8px 48px; display: flex; flex-direction: column; gap: 2px; }
 
             .sb-link {
-                padding: 8px 12px; text-decoration: none; color: #5f6368;
-                font-size: 13px; border-radius: 8px; transition: all 0.2s;
+                padding: 10px 16px; text-decoration: none; color: #444746;
+                font-size: 14px; border-radius: 20px; transition: all 0.2s;
             }
-            .sb-link:hover { background: #eff0f1; color: #1f1f1f; }
+            .sb-link:hover { background: #f1f3f4; color: #1a73e8; }
 
             .drawer-overlay-left { 
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.1); backdrop-filter: blur(1px); z-index: 9999; 
+                background: rgba(0,0,0,0.3); backdrop-filter: blur(2px); z-index: 9999; 
+                transition: opacity 0.3s;
             }
 
             /* Estilo dos ícones fixos da barra */
             .nb-icon-btn { 
-                background: transparent; border: none; padding: 8px; 
-                border-radius: 10px; cursor: pointer; color: #444746; 
+                background: transparent; border: none; padding: 10px; 
+                border-radius: 50%; cursor: pointer; color: #444746; 
                 display: flex; align-items: center; justify-content: center;
                 transition: background 0.2s;
             }
-            .nb-icon-btn:hover { background: #eff0f1; }
-            .nb-icon-btn svg { width: 20px; height: 20px; }
+            .nb-icon-btn:hover { background: #f1f3f4; }
         `;
         document.head.appendChild(style);
     }
@@ -236,7 +244,7 @@
                 panel.classList.remove('active');
                 leftOverlay.style.display = "none";
                 document.body.style.overflow = "";
-                setTimeout(() => panel.style.display = "none", 250);
+                setTimeout(() => panel.style.display = "none", 300);
             }
         };
 
@@ -248,13 +256,6 @@
             const el = document.getElementById(id);
             const button = el.previousElementSibling;
             const isOpen = el.classList.contains('open');
-            
-            document.querySelectorAll('.sb-drop.open').forEach(drop => {
-                if (drop.id !== id) {
-                    drop.classList.remove('open');
-                    drop.previousElementSibling.classList.remove('active');
-                }
-            });
             
             if (!isOpen) {
                 el.classList.add('open');
