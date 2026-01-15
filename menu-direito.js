@@ -1,4 +1,4 @@
-// right-nav.js - Menu estilo NotebookLM / Gemini
+// right-nav.js - Menu Estilo NotebookLM/Gemini com Bordas e Ícones Fixos
 (function() {
     'use strict';
     
@@ -8,17 +8,17 @@
     const RIGHT_MENU_JSON = {
         "menuItems": [
             {
-                "title": "Português",
+                "title": "Língua Portuguesa",
                 "icon": "languages",
                 "color": "blue",
                 "submenu": [
                     {"label": "Interpretação de Textos", "href": "/search/label/interpretação%20de%20textos"},
-                    {"label": "Pontuação", "href": "/search/label/pontuação"}
+                    {"label": "Sinônimos e Antônimos", "href": "/search/label/sinônimos%20e%20antônimos"}
                 ]
             },
             {
                 "title": "Matemática",
-                "icon": "function",
+                "icon": "calculator",
                 "color": "green",
                 "submenu": [
                     {"label": "Números Inteiros", "href": "/search/label/números%20inteiros"},
@@ -35,7 +35,7 @@
             },
             {
                 "title": "Geografia",
-                "icon": "map",
+                "icon": "globe-2",
                 "color": "orange",
                 "submenu": [
                     {"label": "Geografia do Brasil", "href": "/search/label/geografia%20do%20brasil"}
@@ -65,7 +65,7 @@
             <div class='drawer-overlay' id='overlay'></div>
             <div class='gemini-sidebar-panel' id='sidePanel'>
                 <div class='panel-header'>
-                    <span>Guia de Estudos</span>
+                    <span>Conteúdo</span>
                     <button id='close-right-panel'>&times;</button>
                 </div>
                 <div class='panel-content'>
@@ -73,8 +73,13 @@
                 </div>
             </div>`;
         document.body.insertAdjacentHTML('beforeend', panelHTML);
+        
+        // ESSENCIAL: Recriar ícones após inserir no HTML
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+        
         initializeAccordions();
-        if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     
     function generateRightMenuHTML() {
@@ -137,52 +142,65 @@
         style.textContent = `
             .gemini-sidebar-panel {
                 position: fixed !important; top: 0; right: -350px;
-                width: 320px; height: 100%; background: #fff;
+                width: 330px; height: 100%; background: #ffffff;
                 z-index: 999999; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                font-family: 'Google Sans', sans-serif; display: flex; flex-direction: column;
+                font-family: 'Google Sans', 'Inter', sans-serif; display: flex; flex-direction: column;
+                border-left: 1px solid #e0e0e0;
             }
             .panel-header {
-                padding: 18px 20px; display: flex; align-items: center; justify-content: space-between;
-                font-size: 18px; font-weight: 500; border-bottom: 1px solid #f1f3f4;
+                padding: 20px; display: flex; align-items: center; justify-content: space-between;
+                font-size: 16px; font-weight: 500; color: #1f1f1f; border-bottom: 1px solid #f1f3f4;
             }
             .drawer-overlay {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: rgba(0,0,0,0.2); z-index: 999998; display: none;
+                background: rgba(0,0,0,0.1); z-index: 999998; display: none;
             }
-            .sidebar-custom-container { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+            .sidebar-custom-container { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
             
-            .accordion-item { border-radius: 16px; transition: 0.2s; border: 1px solid transparent; }
-            .accordion-item.active { border-color: #e0e0e0; background: #f8f9fa; padding-bottom: 8px; }
+            /* Bordas nos itens conforme solicitado */
+            .accordion-item { 
+                border-radius: 14px; 
+                transition: 0.2s; 
+                border: 1px solid #e0e0e0; 
+                background: #fff;
+            }
+            .accordion-item.active { 
+                border-color: #d1d1d1; 
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            }
             
             .trigger-btn {
-                width: 100%; padding: 14px 16px; border: none; border-radius: 16px;
+                width: 100%; padding: 12px 16px; border: none; border-radius: 12px;
                 display: flex; align-items: center; justify-content: space-between;
-                font-weight: 500; font-size: 14px; cursor: pointer; transition: 0.2s;
+                font-weight: 500; font-size: 14px; cursor: pointer; background: transparent;
             }
 
-            /* Cores dos Botões Principais (NotebookLM Style) */
-            .btn-blue { background: #e8f0fe; color: #1967d2; }
-            .btn-green { background: #e6f4ea; color: #137333; }
-            .btn-purple { background: #f3e8fd; color: #9334e6; }
-            .btn-orange { background: #feefe3; color: #b06000; }
+            .btn-blue { color: #1a73e8; }
+            .btn-green { color: #1e8e3e; }
+            .btn-purple { color: #9334e6; }
+            .btn-orange { color: #e8710a; }
             
-            .trigger-btn:hover { filter: brightness(0.95); }
-            .btn-label { display: flex; align-items: center; gap: 12px; }
-            .btn-label .lucide { width: 20px; height: 20px; }
+            .btn-label { display: flex; align-items: center; gap: 14px; }
+            .btn-label .lucide { width: 20px; height: 20px; stroke-width: 2px; }
             
-            .menu-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-            .menu-list { padding: 8px 12px 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+            .menu-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+            .menu-list { padding: 4px 12px 12px 12px; display: flex; flex-direction: column; gap: 4px; }
             
             .menu-link {
-                padding: 10px 14px; text-decoration: none; color: #444746; font-size: 13px;
-                border-radius: 12px; display: flex; align-items: center; gap: 12px; transition: 0.2s;
+                padding: 10px 12px; text-decoration: none; color: #444746; font-size: 13px;
+                border-radius: 10px; display: flex; align-items: center; gap: 10px; transition: 0.2s;
+                border: 1px solid transparent;
             }
-            .menu-link:hover { background: #fff; color: #1a73e8; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transform: translateX(4px); }
+            .menu-link:hover { 
+                background: #f8fafd; 
+                color: #1a73e8; 
+                border-color: #e8f0fe;
+                transform: translateX(4px); 
+            }
             
-            /* Ícone de Escrita no Submenu */
-            .menu-link .lucide { width: 14px; height: 14px; color: #5f6368; }
-            .chevron { width: 16px; opacity: 0.6; transition: 0.3s; }
-            .active .chevron { transform: rotate(180deg); }
+            .menu-link .lucide { width: 14px; height: 14px; color: #70757a; stroke-width: 2px; }
+            .chevron { width: 16px; opacity: 0.4; transition: 0.3s; }
+            .active .chevron { transform: rotate(180deg); opacity: 1; }
         `;
         document.head.appendChild(style);
     }
