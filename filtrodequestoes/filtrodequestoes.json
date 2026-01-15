@@ -1,40 +1,21 @@
 {
   "materias": [
-    "Português",
-    "Matemática",
-    "Direito Constitucional",
-    "Informática",
-    "História"
+    "Direito Administrativo",
+    "Direito Constitucional"
+  ],
+  "banca": [
+    "CESPE",
+    "FGV",
+    "VUNESP"
   ],
   "assuntos": {
-    "Português": [
-      "Crase",
-      "Sintaxe",
-      "Pontuação",
-      "Concordância Verbal",
-      "Colocação Pronominal"
-    ],
-    "Matemática": [
-      "mmc e mdc",
-      "Números Inteiros",
-      "Razão e Proporção",
-      "Raciocínio Lógico"
-    ],
-    "Informática": [
-      "Windows",
-      "Word"
+    "Direito Administrativo": [
+      "Atos Administrativos",
+      "Agentes Públicos"
     ],
     "Direito Constitucional": [
-      "Direitos e Garantias Fundamentais",
-      "Organização do Estado",
-      "Segurança Pública"
+      "Direitos Fundamentais",
+      "Poder Judiciário"
     ]
-  },
-  "banca": [
-    "FGV",
-    "Cebraspe",
-    "Vunesp",
-    "FCC",
-    "eags"
-  ]
+  }
 }
