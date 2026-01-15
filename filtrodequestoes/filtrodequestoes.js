@@ -9,7 +9,7 @@
         const style = document.createElement('style');
         style.id = cssId;
         style.textContent = `
-            .filtrar-questoes { min-height: 50px; width: 100%; margin: 10px 0; }
+            .filtrar-questoes { min-height: 50px; width: 100%; margin: -20px 0px 10px 0px; }
             .filtrar-questoes * { box-sizing: border-box; }
             .filtro-titulo { font-size: 15px; font-weight: 600; color: #202124; display: flex; align-items: center; gap: 10px; }
             .seta-icone { width: 8px; height: 8px; border-right: 2px solid #5f6368; border-bottom: 2px solid #5f6368; transform: rotate(45deg); transition: transform 0.4s ease; }
