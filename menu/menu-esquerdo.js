@@ -14,8 +14,7 @@
         document.head.appendChild(script);
     };
 
-    // Função para buscar o JSON
-// Função para buscar o JSON do GitHub
+    // Função para buscar o JSON do GitHub
     async function loadMenuData() {
         // COLE O SEU LINK RAW AQUI ENTRE AS ASPAS
         const URL_JSON = 'https://raw.githubusercontent.com/Alvesmateus/concurseiropobre/refs/heads/main/menu/menu-esquerdo.json';
@@ -34,7 +33,6 @@
             
         } catch (error) {
             console.error("Falha ao carregar o menu do GitHub:", error);
-            // Opcional: Você pode definir um menu padrão aqui caso o link falhe
         }
     }
     
@@ -84,15 +82,22 @@
             <div class="menu-section">
                 <div class="section-title">${section.title}</div>
                 <div class="section-list">
-                    ${section.items.map((item, itemIndex) => `
+                    ${section.items.map((item, itemIndex) => {
+                        const hasSubmenu = item.submenu && item.submenu.length > 0;
+                        const clickAction = hasSubmenu 
+                            ? `onclick='window.toggleLeftMenuDrop("left-drop-${sectionIndex}-${itemIndex}")'`
+                            : `onclick='window.location.href="${item.href || "#"}"'`;
+                        
+                        return `
                         <div class="menu-item-wrapper">
                             <button class='sb-item-btn' 
                                     style="--item-color: ${item.color}; --item-bg: ${item.color}15" 
-                                    onclick='window.toggleLeftMenuDrop("left-drop-${sectionIndex}-${itemIndex}")'>
+                                    ${clickAction}>
                                 <i data-lucide="${item.icon}" class="main-icon" style="color: ${item.color}"></i>
                                 <span class="item-label">${item.title}</span>
-                                <i data-lucide="chevron-down" class="chevron-icon"></i>
+                                ${hasSubmenu ? `<i data-lucide="chevron-down" class="chevron-icon"></i>` : ''}
                             </button>
+                            ${hasSubmenu ? `
                             <div class='sb-drop' id='left-drop-${sectionIndex}-${itemIndex}'>
                                 <div class='sb-drop-content'>
                                     ${item.submenu.map(sub => `
@@ -103,8 +108,9 @@
                                     `).join('')}
                                 </div>
                             </div>
+                            ` : ''}
                         </div>
-                    `).join('')}
+                    `}).join('')}
                 </div>
             </div>
         `).join('');
@@ -176,6 +182,7 @@
 
         window.toggleLeftMenuDrop = function(id) {
             const el = document.getElementById(id);
+            if (!el) return;
             const button = el.previousElementSibling;
             const isOpen = el.classList.contains('open');
             if (!isOpen) {
