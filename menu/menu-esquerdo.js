@@ -18,7 +18,7 @@
 // Função para buscar o JSON do GitHub
     async function loadMenuData() {
         // COLE O SEU LINK RAW AQUI ENTRE AS ASPAS
-        const URL_JSON = 'https://raw.githubusercontent.com/seu-usuario/seu-repositorio/main/menu.json';
+        const URL_JSON = 'https://raw.githubusercontent.com/Alvesmateus/concurseiropobre/refs/heads/main/menu/menu-esquerdo.json';
 
         try {
             const response = await fetch(URL_JSON);
