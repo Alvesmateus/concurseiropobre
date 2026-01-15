@@ -1,1 +1,62 @@
-
+{
+  "menuSections": [
+    {
+      "title": "Materiais de Estudo",
+      "items": [
+        {
+          "title": "Provas",
+          "icon": "file-check-2",
+          "color": "#1a73e8",
+          "submenu": [
+            { "label": "Baixar Provas", "href": "#" },
+            { "label": "Anteriores", "href": "/search/label/provas" },
+            { "label": "Gabaritos", "href": "/search/label/gabaritos" }
+          ]
+        },
+        {
+          "title": "Simulados",
+          "icon": "pencil-line",
+          "color": "#1e8e3e",
+          "submenu": [
+            { "label": "Português", "href": "/search/label/português+simulado" },
+            { "label": "Matemática", "href": "/search/label/matemática+simulado" },
+            { "label": "Direito", "href": "#" }
+          ]
+        },
+        {
+          "title": "Editais",
+          "icon": "scroll-text",
+          "color": "#f9ab00",
+          "submenu": [
+            { "label": "Recentes", "href": "/search/label/editais" },
+            { "label": "Análise", "href": "#" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Recursos Visuais",
+      "items": [
+        {
+          "title": "Mapas Mentais",
+          "icon": "brain-circuit",
+          "color": "#9334e6",
+          "submenu": [
+            { "label": "Visualizar", "href": "#" },
+            { "label": "Baixar PDF", "href": "#" }
+          ]
+        },
+        {
+          "title": "Resumos",
+          "icon": "file-text",
+          "color": "#ea4335",
+          "submenu": [
+            { "label": "Direito", "href": "#" },
+            { "label": "Português", "href": "#" },
+            { "label": "Todos", "href": "/search/label/resumos" }
+          ]
+        }
+      ]
+    }
+  ]
+}
