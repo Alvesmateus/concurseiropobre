@@ -1,4 +1,4 @@
-// left-nav.js - Menu Estilo NotebookLM/Gemini com Lucide e Grid Corrigido
+// left-nav.js - Menu Estilo NotebookLM com Design Simplificado
 (function() {
     'use strict';
     
@@ -21,6 +21,7 @@
                 "title": "Provas",
                 "icon": "file-check-2", 
                 "color": "#1a73e8", // Azul
+                "textColor": "#ffffff", // Branco para contraste
                 "submenu": [
                     {"label": "Baixar Provas", "href": "#"},
                     {"label": "Anteriores", "href": "/search/label/provas"},
@@ -31,6 +32,7 @@
                 "title": "Simulados",
                 "icon": "pencil-line",
                 "color": "#1e8e3e", // Verde
+                "textColor": "#ffffff",
                 "submenu": [
                     {"label": "Português", "href": "/search/label/português+simulado"},
                     {"label": "Matemática", "href": "/search/label/matemática+simulado"},
@@ -41,15 +43,17 @@
                 "title": "Editais",
                 "icon": "scroll-text",
                 "color": "#f9ab00", // Amarelo
+                "textColor": "#ffffff",
                 "submenu": [
                     {"label": "Recentes", "href": "/search/label/editais"},
                     {"label": "Análise", "href": "#"}
                 ]
             },
             {
-                "title": "Mapas Mentais",
+                "title": "Mapas",
                 "icon": "brain-circuit",
                 "color": "#9334e6", // Roxo
+                "textColor": "#ffffff",
                 "submenu": [
                     {"label": "Ver Mapas", "href": "#"},
                     {"label": "Baixar PDF", "href": "#"}
@@ -59,6 +63,7 @@
                 "title": "Resumos",
                 "icon": "file-text",
                 "color": "#ea4335", // Vermelho
+                "textColor": "#ffffff",
                 "submenu": [
                     {"label": "Direito", "href": "#"},
                     {"label": "Português", "href": "#"}
@@ -68,6 +73,7 @@
                 "title": "Vídeos",
                 "icon": "play-circle",
                 "color": "#34a853", // Verde
+                "textColor": "#ffffff",
                 "submenu": [
                     {"label": "Aulas", "href": "#"},
                     {"label": "Dicas", "href": "#"}
@@ -112,16 +118,6 @@
                     <div class='sb-grid-container'>
                         ${generateLeftMenuHTML()}
                     </div>
-                    <div class="panel-footer">
-                        <div class="footer-item">
-                            <i data-lucide="settings"></i>
-                            <span>Configurações</span>
-                        </div>
-                        <div class="footer-item">
-                            <i data-lucide="help-circle"></i>
-                            <span>Ajuda</span>
-                        </div>
-                    </div>
                 </div>
             </div>`;
         document.body.insertAdjacentHTML('beforeend', panelHTML);
@@ -133,13 +129,13 @@
         LEFT_MENU_JSON.menuItems.forEach((item, index) => {
             html += `
                 <div class="menu-card">
-                    <button class='sb-card-btn' style="--item-color: ${item.color}" onclick='window.toggleLeftMenuDrop("left-drop-${index}")'>
+                    <button class='sb-card-btn' style="--item-color: ${item.color}; --text-color: ${item.textColor}" onclick='window.toggleLeftMenuDrop("left-drop-${index}")'>
                         <div class="card-icon-wrapper">
-                            <div class="card-icon" style="background: linear-gradient(135deg, ${item.color}40 0%, ${item.color}20 100%); border: 1.5px solid ${item.color}30;">
+                            <div class="card-icon" style="background: ${item.color}">
                                 <i data-lucide="${item.icon}"></i>
                             </div>
+                            <span class="icon-text">${item.title}</span>
                         </div>
-                        <span class="card-title">${item.title}</span>
                     </button>
                     <div class='sb-drop' id='left-drop-${index}'>
                         <div class='sb-drop-content'>
@@ -147,7 +143,7 @@
                                 ${item.submenu.map(sub => `
                                     <a class='sb-link' href='${sub.href}'>
                                         <div class="link-icon">
-                                            <i data-lucide="chevron-right"></i>
+                                            <i data-lucide="notepad-text"></i>
                                         </div>
                                         <span>${sub.label}</span>
                                     </a>
@@ -166,7 +162,7 @@
         style.textContent = `
             .nb-icon-btn { 
                 background: #f1f3f4; 
-                border: 1px solid #dadce0; 
+                border: none; 
                 padding: 10px; 
                 border-radius: 12px; 
                 cursor: pointer; 
@@ -177,12 +173,7 @@
                 width: 42px;
                 height: 42px;
                 margin: 4px;
-                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            .nb-icon-btn:hover { 
-                background: #e8eaed; 
-                transform: translateY(-1px);
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                transition: all 0.2s;
             }
             .nb-icon-btn svg { 
                 width: 20px; 
@@ -196,9 +187,9 @@
                 left: -400px; 
                 width: 380px; 
                 height: 100%; 
-                background: #f8f9fa; 
+                background: #ffffff; 
                 z-index: 10000; 
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+                transition: all 0.3s; 
                 box-shadow: 4px 0 20px rgba(0,0,0,0.12); 
                 display: flex; 
                 flex-direction: column; 
@@ -210,13 +201,12 @@
             
             /* Cabeçalho do Painel */
             .panel-header-left { 
-                padding: 20px 24px; 
+                padding: 16px 20px; 
                 display: flex; 
                 align-items: center; 
                 justify-content: space-between; 
-                background: white; 
+                background: #ffffff; 
                 border-bottom: 1px solid #e8eaed; 
-                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             }
             .header-title-wrapper { 
                 display: flex; 
@@ -224,40 +214,38 @@
                 gap: 12px; 
             }
             .ai-spark-wrapper {
-                background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
-                padding: 8px;
-                border-radius: 12px;
+                background: #1a73e8;
+                padding: 6px;
+                border-radius: 8px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
             .ai-spark { 
-                width: 20px; 
-                height: 20px; 
+                width: 18px; 
+                height: 18px; 
                 color: white; 
             }
             .panel-title {
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: 500;
                 color: #1f1f1f;
-                letter-spacing: -0.2px;
             }
             .close-btn {
-                background: #f1f3f4;
+                background: none;
                 border: none;
-                border-radius: 12px;
-                width: 40px;
-                height: 40px;
+                width: 32px;
+                height: 32px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
                 color: #5f6368;
-                transition: all 0.2s;
+                padding: 0;
             }
-            .close-btn:hover {
-                background: #e8eaed;
-                color: #1f1f1f;
+            .close-btn svg {
+                width: 20px;
+                height: 20px;
             }
             
             /* Conteúdo do Painel */
@@ -265,15 +253,15 @@
                 flex: 1; 
                 overflow-y: auto; 
                 padding: 0; 
-                background: #f8f9fa;
+                background: #ffffff;
             }
             
-            /* Grid de Duas Colunas - Layout NotebookLM */
+            /* Grid de Duas Colunas */
             .sb-grid-container { 
                 display: grid; 
                 grid-template-columns: repeat(2, 1fr); 
-                gap: 16px; 
-                padding: 24px; 
+                gap: 12px; 
+                padding: 16px; 
                 align-items: start; 
             }
             
@@ -285,59 +273,49 @@
             }
             .sb-card-btn { 
                 width: 100%; 
-                padding: 20px 12px; 
-                border-radius: 20px; 
-                border: 1.5px solid #e0e0e0; 
-                background: white; 
+                padding: 0; 
+                border: none; 
+                background: none; 
                 display: flex; 
                 flex-direction: column; 
                 align-items: center; 
-                gap: 12px; 
                 cursor: pointer; 
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 position: relative;
-                overflow: hidden;
-            }
-            .sb-card-btn:hover { 
-                border-color: var(--item-color); 
-                background: white; 
-                transform: translateY(-4px); 
-                box-shadow: 0 8px 24px rgba(0,0,0,0.12); 
-            }
-            .sb-card-btn:active {
-                transform: translateY(-2px);
+                overflow: visible;
             }
             
-            /* Ícone no estilo NotebookLM */
+            /* Ícone com texto embaixo */
             .card-icon-wrapper {
                 position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
             .card-icon { 
                 padding: 16px; 
-                border-radius: 18px; 
+                border-radius: 12px; 
                 display: flex; 
                 align-items: center; 
                 justify-content: center; 
-                width: 56px;
-                height: 56px;
-                transition: all 0.3s;
-            }
-            .sb-card-btn:hover .card-icon {
-                background: linear-gradient(135deg, var(--item-color)20 0%, var(--item-color)40 100%) !important;
-                transform: scale(1.05);
+                width: 64px;
+                height: 64px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             }
             .card-icon svg { 
                 width: 24px; 
                 height: 24px; 
-                color: var(--item-color);
+                color: var(--text-color);
             }
             
-            .card-title { 
-                font-size: 13px; 
+            .icon-text { 
+                font-size: 11px; 
                 font-weight: 600; 
                 color: #3c4043; 
                 text-align: center;
-                letter-spacing: -0.1px;
+                margin-top: 8px;
+                display: block;
+                max-width: 80px;
+                line-height: 1.2;
             }
             
             /* Dropdown */
@@ -345,46 +323,44 @@
                 grid-column: span 2; 
                 max-height: 0; 
                 overflow: hidden; 
-                transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-                margin-top: 0;
+                transition: max-height 0.3s; 
+                margin-top: 8px;
                 margin-bottom: 0;
-                border-radius: 16px;
+                border-radius: 8px;
             }
             .sb-drop.open { 
-                max-height: 500px; 
-                margin-top: 12px;
-                margin-bottom: 8px;
+                max-height: 400px; 
+                margin-top: 8px;
+                margin-bottom: 0;
             }
             .sb-drop-content {
-                background: white;
-                border-radius: 16px;
-                border: 1.5px solid #e8eaed;
+                background: #f8f9fa;
+                border-radius: 8px;
                 overflow: hidden;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                border: 1px solid #e8eaed;
             }
             
             /* Lista do Dropdown */
             .sb-list { 
                 display: flex; 
                 flex-direction: column; 
-                padding: 8px 0;
+                padding: 4px 0;
             }
             .sb-link { 
-                padding: 14px 20px; 
+                padding: 12px 16px; 
                 text-decoration: none; 
                 color: #444 !important; 
                 font-size: 14px; 
                 display: flex; 
                 align-items: center; 
-                gap: 14px; 
-                transition: all 0.2s;
-                border-left: 3px solid transparent;
+                gap: 12px; 
+                border: none;
+                background: none;
+                border-left: none !important;
             }
             .sb-link:hover { 
-                background: #f8f9fa; 
-                color: var(--item-color) !important; 
-                border-left-color: var(--item-color);
-                padding-left: 24px;
+                background: #e8eaed; 
+                color: #1f1f1f !important; 
             }
             .link-icon {
                 width: 20px;
@@ -396,43 +372,10 @@
             .sb-link svg { 
                 width: 16px; 
                 height: 16px; 
-                color: #9aa0a6;
-                transition: all 0.2s;
-            }
-            .sb-link:hover svg {
-                color: var(--item-color);
-                transform: translateX(2px);
-            }
-            
-            /* Rodapé do Painel */
-            .panel-footer {
-                border-top: 1px solid #e8eaed;
-                background: white;
-                padding: 16px 24px;
-                display: flex;
-                gap: 16px;
-            }
-            .footer-item {
-                flex: 1;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                padding: 12px;
-                border-radius: 12px;
-                background: #f8f9fa;
-                cursor: pointer;
-                transition: all 0.2s;
-                font-size: 14px;
                 color: #5f6368;
             }
-            .footer-item:hover {
-                background: #e8eaed;
+            .sb-link:hover svg {
                 color: #1f1f1f;
-            }
-            .footer-item svg {
-                width: 18px;
-                height: 18px;
             }
             
             /* Overlay */
@@ -443,28 +386,21 @@
                 width: 100%; 
                 height: 100%; 
                 background: rgba(32,33,36,0.5); 
-                backdrop-filter: blur(4px); 
+                backdrop-filter: blur(2px); 
                 z-index: 9999; 
                 display: none; 
-                animation: fadeIn 0.2s ease;
-            }
-            
-            /* Animações */
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
             }
             
             /* Scrollbar personalizada */
             .panel-content-left::-webkit-scrollbar {
-                width: 8px;
+                width: 6px;
             }
             .panel-content-left::-webkit-scrollbar-track {
                 background: #f1f3f4;
             }
             .panel-content-left::-webkit-scrollbar-thumb {
                 background: #dadce0;
-                border-radius: 4px;
+                border-radius: 3px;
             }
             .panel-content-left::-webkit-scrollbar-thumb:hover {
                 background: #9aa0a6;
@@ -478,20 +414,25 @@
                 }
                 .sb-grid-container {
                     grid-template-columns: repeat(2, 1fr);
-                    gap: 12px;
-                    padding: 20px;
+                    gap: 10px;
+                    padding: 12px;
                 }
-                .sb-card-btn {
-                    padding: 16px 10px;
+                .card-icon {
+                    width: 56px;
+                    height: 56px;
+                    padding: 14px;
+                }
+                .icon-text {
+                    font-size: 10px;
                 }
             }
             
             @media (max-width: 480px) {
                 .sb-grid-container {
-                    grid-template-columns: 1fr;
+                    grid-template-columns: repeat(2, 1fr);
                 }
                 .sb-drop {
-                    grid-column: span 1;
+                    grid-column: span 2;
                 }
             }
         `;
@@ -543,10 +484,6 @@
             // Abre o dropdown clicado se não estava aberto
             if(!isOpen) {
                 el.classList.add('open');
-                // Scroll suave para o dropdown
-                setTimeout(() => {
-                    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 100);
             }
             
             if(window.lucide) lucide.createIcons(); 
