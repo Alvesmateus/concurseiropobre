@@ -83,6 +83,51 @@
               "href": "#"
             }
           ]
+        },
+        {
+          "title": "Direito Administrativo",
+          "icon": "book-open",
+          "color": "#2563eb",
+          "href": "#",
+          "submenu": []
+        },
+        {
+          "title": "Direito Penal",
+          "icon": "book-open",
+          "color": "#2563eb",
+          "href": "#",
+          "submenu": [
+            {
+              "label": "Sublink",
+              "href": "#"
+            }
+          ]
+        },
+        {
+          "title": "Direito Processual Penal",
+          "icon": "book-open",
+          "color": "#2563eb",
+          "href": "#",
+          "submenu": [
+            {
+              "label": "Sublink",
+              "href": "#"
+            }
+          ]
+        },
+        {
+          "title": "Direitos Humanos",
+          "icon": "book-open",
+          "color": "#2563eb",
+          "href": "#",
+          "submenu": []
+        },
+        {
+          "title": "Atualidades",
+          "icon": "book-open",
+          "color": "#2563eb",
+          "href": "#",
+          "submenu": []
         }
       ]
     },
