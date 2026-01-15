@@ -4,32 +4,84 @@
       "title": "Materiais de Estudo",
       "items": [
         {
-          "title": "Provas",
+          "title": "Português",
           "icon": "file-check-2",
           "color": "#1a73e8",
           "submenu": [
-            { "label": "Baixar Provas", "href": "#" },
-            { "label": "Anteriores", "href": "/search/label/provas" },
-            { "label": "Gabaritos", "href": "/search/label/gabaritos" }
+            {
+              "label": "Baixar Provas",
+              "href": "#"
+            },
+            {
+              "label": "Anteriores",
+              "href": "/search/label/provas"
+            },
+            {
+              "label": "Gabaritos",
+              "href": "/search/label/gabaritos"
+            },
+            {
+              "label": "Sublink",
+              "href": "#"
+            }
           ]
         },
         {
-          "title": "Simulados",
+          "title": "Matemática",
           "icon": "pencil-line",
           "color": "#1e8e3e",
           "submenu": [
-            { "label": "Português", "href": "/search/label/português+simulado" },
-            { "label": "Matemática", "href": "/search/label/matemática+simulado" },
-            { "label": "Direito", "href": "#" }
+            {
+              "label": "Português",
+              "href": "/search/label/português+simulado"
+            },
+            {
+              "label": "Matemática",
+              "href": "/search/label/matemática+simulado"
+            },
+            {
+              "label": "Direito",
+              "href": "#"
+            }
           ]
         },
         {
-          "title": "Editais",
+          "title": "História",
           "icon": "scroll-text",
           "color": "#f9ab00",
           "submenu": [
-            { "label": "Recentes", "href": "/search/label/editais" },
-            { "label": "Análise", "href": "#" }
+            {
+              "label": "Recentes",
+              "href": "/search/label/editais"
+            },
+            {
+              "label": "Análise",
+              "href": "#"
+            }
+          ]
+        },
+        {
+          "title": "Geografia",
+          "icon": "book-open",
+          "color": "#2563eb",
+          "href": "#",
+          "submenu": [
+            {
+              "label": "Sublink",
+              "href": "#"
+            }
+          ]
+        },
+        {
+          "title": "Direito Constitucional",
+          "icon": "book-open",
+          "color": "#2563eb",
+          "href": "#",
+          "submenu": [
+            {
+              "label": "Sublink",
+              "href": "#"
+            }
           ]
         }
       ]
@@ -42,8 +94,14 @@
           "icon": "brain-circuit",
           "color": "#9334e6",
           "submenu": [
-            { "label": "Visualizar", "href": "#" },
-            { "label": "Baixar PDF", "href": "#" }
+            {
+              "label": "Visualizar",
+              "href": "#"
+            },
+            {
+              "label": "Baixar PDF",
+              "href": "#"
+            }
           ]
         },
         {
@@ -51,9 +109,18 @@
           "icon": "file-text",
           "color": "#ea4335",
           "submenu": [
-            { "label": "Direito", "href": "#" },
-            { "label": "Português", "href": "#" },
-            { "label": "Todos", "href": "/search/label/resumos" }
+            {
+              "label": "Direito",
+              "href": "#"
+            },
+            {
+              "label": "Português",
+              "href": "#"
+            },
+            {
+              "label": "Todos",
+              "href": "/search/label/resumos"
+            }
           ]
         }
       ]
