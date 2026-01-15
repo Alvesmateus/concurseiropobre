@@ -5,167 +5,78 @@
       "items": [
         {
           "title": "Português",
-          "icon": "file-check-2",
+          "icon": "languages",
           "color": "#1a73e8",
           "submenu": [
-            {
-              "label": "Baixar Provas",
-              "href": "#"
-            },
-            {
-              "label": "Anteriores",
-              "href": "/search/label/provas"
-            },
-            {
-              "label": "Gabaritos",
-              "href": "/search/label/gabaritos"
-            },
-            {
-              "label": "Sublink",
-              "href": "#"
-            }
+            { "label": "Leitura e Interpretação", "href": "/portugues/leitura" },
+            { "label": "Sinônimos e Antônimos", "href": "/portugues/semantica" },
+            { "label": "Sentido Próprio e Figurado", "href": "/portugues/estilistica" },
+            { "label": "Classes de Palavras", "href": "/portugues/morfologia" },
+            { "label": "Pontuação", "href": "/portugues/pontuacao" },
+            { "label": "Concordância Verbal e Nominal", "href": "/portugues/concordancia" },
+            { "label": "Regência Verbal e Nominal", "href": "/portugues/regencia" },
+            { "label": "Crase e Colocação", "href": "/portugues/sintaxe" }
           ]
         },
         {
           "title": "Matemática",
-          "icon": "pencil-line",
+          "icon": "calculator",
           "color": "#1e8e3e",
           "submenu": [
-            {
-              "label": "Português",
-              "href": "/search/label/português+simulado"
-            },
-            {
-              "label": "Matemática",
-              "href": "/search/label/matemática+simulado"
-            },
-            {
-              "label": "Direito",
-              "href": "#"
-            }
+            { "label": "Inteiros e Racionais", "href": "/matematica/numeros" },
+            { "label": "MMC e MDC", "href": "/matematica/mmc" },
+            { "label": "Razão e Proporção", "href": "/matematica/proporcao" },
+            { "label": "Porcentagem e Regra de 3", "href": "/matematica/aritmetica" },
+            { "label": "Equações e Sistemas", "href": "/matematica/algebra" },
+            { "label": "Medidas e Grandezas", "href": "/matematica/medidas" },
+            { "label": "Geometria (Área e Volume)", "href": "/matematica/geometria" },
+            { "label": "Raciocínio Lógico", "href": "/matematica/logica" }
           ]
         },
         {
           "title": "História",
-          "icon": "scroll-text",
+          "icon": "landmark",
           "color": "#f9ab00",
           "submenu": [
-            {
-              "label": "Recentes",
-              "href": "/search/label/editais"
-            },
-            {
-              "label": "Análise",
-              "href": "#"
-            }
+            { "label": "Guerras e Nazifascismo", "href": "/historia/conflitos" },
+            { "label": "Guerra Fria e Globalização", "href": "/historia/moderna" },
+            { "label": "Era Vargas e Revolução 30", "href": "/historia/vargas" },
+            { "label": "Militares e Redemocratização", "href": "/historia/brasil" }
           ]
         },
         {
           "title": "Geografia",
-          "icon": "book-open",
+          "icon": "globe-2",
           "color": "#2563eb",
-          "href": "#",
           "submenu": [
-            {
-              "label": "Sublink",
-              "href": "#"
-            }
+            { "label": "Globalização e Geopolítica", "href": "/geografia/geopolitica" },
+            { "label": "Natureza e Relevo Brasil", "href": "/geografia/natureza" },
+            { "label": "População e Movimentos", "href": "/geografia/populacao" },
+            { "label": "Economia e Urbanização", "href": "/geografia/economia" },
+            { "label": "Impactos Ambientais", "href": "/geografia/ambiental" }
           ]
         },
         {
           "title": "Direito Constitucional",
-          "icon": "book-open",
-          "color": "#2563eb",
-          "href": "#",
+          "icon": "gavel",
+          "color": "#7c3aed",
           "submenu": [
-            {
-              "label": "Sublink",
-              "href": "#"
-            }
+            { "label": "Princípios Fundamentais", "href": "/direito/principios" },
+            { "label": "Direitos e Garantias", "href": "/direito/fundamentais" },
+            { "label": "Organização do Estado", "href": "/direito/estado" },
+            { "label": "Administração Pública", "href": "/direito/adm" },
+            { "label": "Organização dos Poderes", "href": "/direito/poderes" },
+            { "label": "Defesa do Estado e Segurança", "href": "/direito/seguranca" },
+            { "label": "Ordem Social", "href": "/direito/ordem-social" }
           ]
         },
         {
-          "title": "Direito Administrativo",
-          "icon": "book-open",
-          "color": "#2563eb",
-          "href": "#",
-          "submenu": []
-        },
-        {
-          "title": "Direito Penal",
-          "icon": "book-open",
-          "color": "#2563eb",
-          "href": "#",
+          "title": "Atualidades",
+          "icon": "newspaper",
+          "color": "#dc2626",
           "submenu": [
-            {
-              "label": "Sublink",
-              "href": "#"
-            }
-          ]
-        },
-        {
-          "title": "Direito Processual Penal",
-          "icon": "book-open",
-          "color": "#2563eb",
-          "href": "#",
-          "submenu": [
-            {
-              "label": "Sublink",
-              "href": "#"
-            }
-          ]
-        },
-        {
-          "title": "Direitos Humanos",
-          "icon": "book-open",
-          "color": "#2563eb",
-          "href": "#",
-          "submenu": []
-        },
-        {
-          "title": "Atualidadess",
-          "icon": "book-open",
-          "color": "#2563eb",
-          "href": "https://www.google.com",
-          "submenu": []
-        }
-      ]
-    },
-    {
-      "title": "Recursos Visuais",
-      "items": [
-        {
-          "title": "Mapas Mentais",
-          "icon": "brain-circuit",
-          "color": "#9334e6",
-          "submenu": [
-            {
-              "label": "Visualizar",
-              "href": "#"
-            },
-            {
-              "label": "Baixar PDF",
-              "href": "#"
-            }
-          ]
-        },
-        {
-          "title": "Resumos",
-          "icon": "file-text",
-          "color": "#ea4335",
-          "submenu": [
-            {
-              "label": "Direito",
-              "href": "#"
-            },
-            {
-              "label": "Português",
-              "href": "#"
-            },
-            {
-              "label": "Todos",
-              "href": "/search/label/resumos"
-            }
+            { "label": "Notícias Nacionais", "href": "/atualidades/brasil" },
+            { "label": "Cenário Internacional", "href": "/atualidades/mundo" }
           ]
         }
       ]
