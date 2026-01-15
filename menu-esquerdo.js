@@ -93,38 +93,57 @@
             .panel-title { font-size: 18px; font-weight: 500; color: #1f1f1f; }
             .close-btn { background: none; border: none; cursor: pointer; color: #5f6368; }
 
-            .sb-grid-container { 
-                display: grid; 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 12px; 
-                padding: 16px; 
-            }
-            
-            .sb-card-btn { 
-                width: 100%; height: 90px; border: none; border-radius: 16px; 
-                background: var(--bg-color); cursor: pointer; position: relative;
-                transition: all 0.2s; overflow: hidden;
-                display: flex; align-items: center; justify-content: center;
-            }
-            .sb-card-btn:hover { filter: brightness(0.95); transform: scale(1.02); }
-            
-            .card-content { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-            .main-icon { width: 24px; height: 24px; color: var(--accent-color); }
-            .icon-label-inner { font-size: 13px; font-weight: 600; color: #3c4043; }
+           .sb-grid-container { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 12px; 
+    padding: 16px; 
+}
 
-            /* SUBMENU OCUPANDO A LINHA TODA */
-            .sb-drop { 
-                grid-column: 1 / span 2; 
-                max-height: 0; 
-                overflow: hidden; 
-                transition: max-height 0.3s ease-out; 
-            }
-            .sb-drop.open { max-height: 300px; margin: 8px 0; }
-            
-            .sb-drop-content { 
-                background: #f8f9fa; border-radius: 12px; padding: 8px; 
-                border: 1px solid #f1f3f4; display: flex; flex-direction: column; gap: 4px;
-            }
+.sb-card-btn { 
+    width: 100%; 
+    height: 90px; 
+    border: none; 
+    border-radius: 16px; 
+    background: var(--bg-color); 
+    cursor: pointer; 
+    position: relative;
+    transition: all 0.2s; 
+    overflow: hidden;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    grid-column: span 1; /* CADA CARD OCUPA 1 COLUNA */
+}
+
+.sb-card-btn:hover { 
+    filter: brightness(0.95); 
+    transform: scale(1.02); 
+}
+
+/* SUBMENU - AGRUPA COM O CARD ANTERIOR */
+.sb-drop { 
+    grid-column: 1 / -1; /* OCUPA TODAS AS COLUNAS DISPONÍVEIS (2) */
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.3s ease-out;
+    margin-top: -8px; /* COMPENSA O GAP */
+    margin-bottom: 4px;
+}
+
+.sb-drop.open { 
+    max-height: 300px; 
+}
+
+.sb-drop-content { 
+    background: #f8f9fa; 
+    border-radius: 12px; 
+    padding: 8px; 
+    border: 1px solid #f1f3f4; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 4px;
+}
             
             .sb-link { 
                 padding: 12px 16px; text-decoration: none; color: #444746; 
