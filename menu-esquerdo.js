@@ -102,12 +102,7 @@
             <div class='drawer-overlay-left' id='overlayLeft' style='display:none;'></div>
             <div class='gemini-sidebar-panel-left' id='leftSidePanel' style='display: none;'>
                 <div class='panel-header-left'>
-                    <div class='header-title-wrapper'>
-                        <div class="ai-spark-wrapper">
-                            <i data-lucide="sparkles" class="ai-spark"></i>
-                        </div>
-                        <span class="panel-title">Cadernos de Estudo</span>
-                    </div>
+
                     <button id='close-left-panel' class="close-btn">
                         <i data-lucide="x"></i>
                     </button>
