@@ -1,304 +1,155 @@
 // editais-widget.js
-class EditaisWidget extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
+(function() {
+  // 1. Criar o elemento container
+  const container = document.createElement('div');
+  container.className = 'editais';
+  container.id = 'gemini-scroll-container';
+  container.textContent = 'Carregando editais...';
+  
+  // 2. Adicionar estilos
+  const style = document.createElement('style');
+  style.textContent = `
+    #gemini-scroll-container {
+      display: flex !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      white-space: nowrap !important;
+      padding: 20px 10px !important;
+      gap: 15px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
 
-  connectedCallback() {
-    this.render();
-    this.loadStyles();
-  }
+    /* Scrollbar Minimalista */
+    #gemini-scroll-container::-webkit-scrollbar { height: 4px; }
+    #gemini-scroll-container::-webkit-scrollbar-thumb { background: #d3e3fd; border-radius: 10px; }
 
-  loadStyles() {
-    const styles = `
-      <style>
-        .editais-container {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          max-width: 800px;
-          margin: 20px auto;
-          padding: 20px;
-          border-radius: 12px;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-          color: white;
-        }
+    .gemini-item {
+      display: inline-block !important;
+      text-decoration: none !important;
+      width: 100px;
+      flex: 0 0 auto;
+      text-align: center;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      vertical-align: top;
+    }
+
+    .gemini-border {
+      width: 85px;
+      height: 85px;
+      margin: 0 auto;
+      border-radius: 50%;
+      padding: 6px; 
+      background: linear-gradient(135deg, #4285f4 0%, #9b72cb 50%, #d96570 100%);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gemini-circle-img {
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      border-radius: 50%;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .gemini-circle-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .gemini-title {
+      margin-top: 10px;
+      font-family: "Google Sans", Roboto, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #3c4043;
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.3;
+    }
+
+    .gemini-item:hover { transform: translateY(-5px) scale(1.05); }
+  `;
+  
+  // 3. Função para renderizar os editais
+  window.renderGeminiWidget = function(json) {
+    const container = document.getElementById('gemini-scroll-container');
+    const entries = json.feed.entry;
+    let html = '';
+
+    if (entries) {
+      for (let i = 0; i < entries.length; i++) {
+        const entry = entries[i];
+        const title = entry.title.$t;
+        let postUrl = '';
         
-        .editais-header {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          margin-bottom: 25px;
-        }
-        
-        .editais-icon {
-          width: 40px;
-          height: 40px;
-          background: white;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 24px;
-          color: #667eea;
-        }
-        
-        .editais-title {
-          font-size: 28px;
-          font-weight: 700;
-          margin: 0;
-          text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .editais-list {
-          display: flex;
-          flex-direction: column;
-          gap: 15px;
-        }
-        
-        .edital-item {
-          background: rgba(255, 255, 255, 0.15);
-          backdrop-filter: blur(10px);
-          border-radius: 10px;
-          padding: 20px;
-          transition: transform 0.3s ease, background 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .edital-item:hover {
-          transform: translateY(-5px);
-          background: rgba(255, 255, 255, 0.25);
-        }
-        
-        .edital-titulo {
-          font-size: 18px;
-          font-weight: 600;
-          margin: 0 0 10px 0;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-        
-        .edital-titulo:before {
-          content: "📋";
-          font-size: 20px;
-        }
-        
-        .edital-info {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 15px;
-          margin-bottom: 15px;
-        }
-        
-        .info-item {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 14px;
-          opacity: 0.9;
-        }
-        
-        .info-item:before {
-          font-size: 16px;
-        }
-        
-        .edital-data:before { content: "📅"; }
-        .edital-status:before { content: "⚡"; }
-        .edital-orgao:before { content: "🏛️"; }
-        
-        .edital-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: white;
-          color: #667eea;
-          padding: 10px 20px;
-          border-radius: 6px;
-          text-decoration: none;
-          font-weight: 600;
-          transition: all 0.3s ease;
-          border: none;
-          cursor: pointer;
-        }
-        
-        .edital-link:hover {
-          background: #f8f9fa;
-          transform: translateY(-2px);
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .edital-link:after {
-          content: "→";
-          transition: transform 0.3s ease;
-        }
-        
-        .edital-link:hover:after {
-          transform: translateX(5px);
-        }
-        
-        .loading {
-          text-align: center;
-          padding: 40px;
-          font-size: 18px;
-        }
-        
-        .empty-state {
-          text-align: center;
-          padding: 40px;
-          background: rgba(255,255,255,0.1);
-          border-radius: 10px;
-        }
-        
-        @media (max-width: 768px) {
-          .editais-container {
-            margin: 10px;
-            padding: 15px;
-          }
-          
-          .edital-info {
-            grid-template-columns: 1fr;
+        for (let k = 0; k < entry.link.length; k++) {
+          if (entry.link[k].rel == 'alternate') {
+            postUrl = entry.link[k].href;
+            break;
           }
         }
-      </style>
-    `;
-    
-    const styleSheet = new CSSStyleSheet();
-    styleSheet.replaceSync(styles.replace(/<style>|<\/style>/g, ''));
-    this.shadowRoot.adoptedStyleSheets = [styleSheet];
-  }
 
-  render() {
-    this.shadowRoot.innerHTML = `
-      <div class="editais-container">
-        <div class="editais-header">
-          <div class="editais-icon">📢</div>
-          <h1 class="editais-title">Editais Publicados</h1>
-        </div>
-        <div class="editais-list" id="editais-content">
-          <div class="loading">
-            Carregando editais...
-            <div style="margin-top: 10px; font-size: 14px; opacity: 0.8;">
-              Aguarde enquanto buscamos as informações
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-    
-    setTimeout(() => this.loadEditais(), 1000);
-  }
+        const thumb = entry.media$thumbnail 
+          ? entry.media$thumbnail.url.replace('s72-c', 's200-c') 
+          : 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgf_X_Wd_Z_G-X6_O1T0m_U_7y8_F_E/s200/no-image.png';
 
-  async loadEditais() {
-    try {
-      const editais = [
-        {
-          titulo: "Edital de Licitação 001/2024",
-          data: "15/03/2024",
-          status: "Em aberto",
-          orgao: "Prefeitura Municipal",
-          link: "#"
-        },
-        {
-          titulo: "Chamada Pública para Projetos",
-          data: "10/03/2024",
-          status: "Vigente",
-          orgao: "Secretaria de Educação",
-          link: "#"
-        },
-        {
-          titulo: "Concurso Público nº 045",
-          data: "05/03/2024",
-          status: "Inscrições abertas",
-          orgao: "Câmara Municipal",
-          link: "#"
-        }
-      ];
-
-      const content = this.shadowRoot.getElementById('editais-content');
-      
-      if (editais.length === 0) {
-        content.innerHTML = `
-          <div class="empty-state">
-            <div style="font-size: 48px; margin-bottom: 20px;">📭</div>
-            <h3 style="margin: 0 0 10px 0;">Nenhum edital encontrado</h3>
-            <p style="opacity: 0.8; margin: 0;">
-              Não há editais publicados no momento.
-            </p>
-          </div>
-        `;
-        return;
-      }
-
-      content.innerHTML = editais.map(edital => `
-        <div class="edital-item">
-          <h3 class="edital-titulo">${edital.titulo}</h3>
-          <div class="edital-info">
-            <div class="info-item edital-data">
-              <span>Publicado em: ${edital.data}</span>
+        html += `
+          <a class="gemini-item" href="${postUrl}">
+            <div class="gemini-border">
+              <div class="gemini-circle-img">
+                <img src="${thumb}" alt="${title}"/>
+              </div>
             </div>
-            <div class="info-item edital-status">
-              <span>Status: ${edital.status}</span>
-            </div>
-            <div class="info-item edital-orgao">
-              <span>Órgão: ${edital.orgao}</span>
-            </div>
-          </div>
-          <a href="${edital.link}" class="edital-link" target="_blank">
-            Ver edital completo
+            <div class="gemini-title">${title}</div>
           </a>
-        </div>
-      `).join('');
-      
-    } catch (error) {
-      const content = this.shadowRoot.getElementById('editais-content');
-      content.innerHTML = `
-        <div class="empty-state" style="color: #ff6b6b;">
-          <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
-          <h3 style="margin: 0 0 10px 0;">Erro ao carregar editais</h3>
-          <p style="opacity: 0.8; margin: 0;">
-            Não foi possível carregar os editais no momento.
-          </p>
-          <button onclick="location.reload()" style="
-            margin-top: 20px;
-            background: white;
-            color: #667eea;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-          ">
-            Tentar novamente
-          </button>
-        </div>
-      `;
+        `;
+      }
+      container.innerHTML = html;
+    } else {
+      container.innerHTML = 'Sem editais.';
     }
-  }
-}
-
-customElements.define('elemento-editais', EditaisWidget);
-
-document.addEventListener('DOMContentLoaded', () => {
-  const existingWidget = document.querySelector('.editais');
-  if (existingWidget && !existingWidget.querySelector('elemento-editais')) {
-    const widget = document.createElement('elemento-editais');
-    existingWidget.appendChild(widget);
-  }
-});
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initWidget);
-} else {
-  initWidget();
-}
-
-function initWidget() {
-  const autoElements = document.querySelectorAll('.editais');
-  autoElements.forEach(element => {
-    if (!element.querySelector('elemento-editais')) {
-      const widget = document.createElement('elemento-editais');
-      element.appendChild(widget);
+  };
+  
+  // 4. Adicionar elementos ao DOM quando o documento estiver pronto
+  function init() {
+    // Verificar se já existe um elemento com a classe 'editais'
+    let targetElement = document.querySelector('.editais');
+    
+    if (!targetElement) {
+      // Criar um novo container se não existir
+      targetElement = document.createElement('div');
+      targetElement.className = 'editais-wrapper';
+      document.body.appendChild(targetElement);
     }
-  });
-}
+    
+    // Adicionar estilos e container ao elemento alvo
+    targetElement.appendChild(style);
+    targetElement.appendChild(container);
+    
+    // Carregar os editais do Blogger
+    const script = document.createElement('script');
+    script.src = '/feeds/posts/default/-/edital?alt=json-in-script&callback=renderGeminiWidget&max-results=10';
+    script.type = 'text/javascript';
+    document.head.appendChild(script);
+  }
+  
+  // 5. Inicializar quando o DOM estiver carregado
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
