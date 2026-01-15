@@ -1,14 +1,97 @@
- .simu-wrap { font-family: 'Inter', sans-serif; max-width: 100%; margin: auto; color: #334155; }
-    .simu-q { background: #fff; border-bottom: 2px solid #e2e8f0; border-radius: 12px; padding: 25px 0px; margin-bottom: 25px; }
-    .simu-txt { font-size: 16px !important; font-weight: bold !important; margin: 0 0 20px 0 !important; line-height: 1.6 !important; display: block !important; border: none !important; }
-    .simu-opt-list { list-style: none !important; padding: 0 !important; margin: 0 !important; }
-    .simu-opt-container { margin-bottom: 10px; list-style: none !important; }
-    .simu-opt { display: block; width: 100%; text-align: left; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; background: #f1f5f9; font-size: 16px; transition: 0.2s; font-family: inherit; color: #000; }
-    .simu-opt-obs { display: none; margin-top: 5px; padding: 12px 10px; background: #f8fafc; border-radius: 8px; font-size: 14px; color: #475569; border-left: 4px solid #cbd5e1; font-family: inherit; }
-    /* Classes de Estado */
-    .is-correct { background: #22c55e !important; border-color: #16a34a !important; color: #000 !important; font-weight: bold !important; }
-    .is-wrong { background: #ef4444 !important; border-color: #b91c1c !important; color: #fff !important; }
-    .other-wrong { background: #fee2e2 !important; border-color: #fecaca !important; color: #000 !important; opacity: 0.6; }
-    .correct-info { color: #16a34a; font-weight: bold; margin-bottom: 5px; display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .obs-visible { display: block !important; }
-    .obs-correct { border-color: #16a34a !important; background: #dcfce7 !important; }
+.simu-wrap {
+  font-family: 'Inter', sans-serif;
+  max-width: 100%;
+  margin: auto;
+  color: #e5e7eb;
+}
+
+.simu-q {
+  background: #0f172a;
+  border-bottom: 2px solid #1e293b;
+  border-radius: 12px;
+  padding: 25px 0px;
+  margin-bottom: 25px;
+}
+
+.simu-txt {
+  font-size: 16px !important;
+  font-weight: bold !important;
+  margin: 0 0 20px 0 !important;
+  line-height: 1.6 !important;
+  display: block !important;
+  border: none !important;
+  color: #f1f5f9;
+}
+
+.simu-opt-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.simu-opt-container {
+  margin-bottom: 10px;
+  list-style: none !important;
+}
+
+.simu-opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 15px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #1e293b;
+  font-size: 16px;
+  transition: 0.2s;
+  font-family: inherit;
+  color: #e5e7eb;
+}
+
+.simu-opt-obs {
+  display: none;
+  margin-top: 5px;
+  padding: 12px 10px;
+  background: #020617;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #cbd5f5;
+  border-left: 4px solid #475569;
+  font-family: inherit;
+}
+
+/* Classes de Estado */
+.is-correct {
+  background: #16a34a !important;
+  border-color: #15803d !important;
+  color: #022c22 !important;
+  font-weight: bold !important;
+}
+
+.is-wrong {
+  background: #b91c1c !important;
+  border-color: #7f1d1d !important;
+  color: #fee2e2 !important;
+}
+
+.other-wrong {
+  background: #3f1d1d !important;
+  border-color: #7f1d1d !important;
+  color: #fecaca !important;
+  opacity: 0.6;
+}
+
+.correct-info {
+  color: #22c55e;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.obs-visible {
+  display: block !important;
+}
