@@ -1,19 +1,74 @@
-// right-nav.js
+// right-nav.js - Menu direito para Blogger com JSON
 (function() {
     'use strict';
     
     if (window.rightNavInitialized) return;
     window.rightNavInitialized = true;
     
+    // CONFIGURAÇÃO DO MENU VIA JSON
+    const RIGHT_MENU_JSON = {
+        "menuItems": [
+            {
+                "title": "Português",
+                "icon": "📚",
+                "color": "blue",
+                "submenu": [
+                    {"label": "Interpretação de Textos", "href": "/search/label/interpretação%20de%20textos"},
+                    {"label": "Tipologias Textual", "href": "/search/label/tipologias%20textual"},
+                    {"label": "Sinônimos e Antônimos", "href": "/search/label/sinônimos%20e%20antônimos"},
+                    {"label": "Pontuação", "href": "/search/label/pontuação"},
+                    {"label": "Concordância Verbal", "href": "/search/label/concordância%20verbal"}
+                ]
+            },
+            {
+                "title": "Matemática",
+                "icon": "📐",
+                "color": "green",
+                "submenu": [
+                    {"label": "Números Inteiros", "href": "/search/label/números%20inteiros"},
+                    {"label": "Números Racionais", "href": "/search/label/números%20racionais"},
+                    {"label": "Mínimo Múltiplo Comum", "href": "/search/label/mínimo%20múltiplo%20comum"},
+                    {"label": "Razão e Proporção", "href": "/search/label/razão%20e%20proporção"},
+                    {"label": "Porcentagem", "href": "/search/label/porcentagem"}
+                ]
+            },
+            {
+                "title": "História",
+                "icon": "🏛️",
+                "color": "purple",
+                "submenu": [
+                    {"label": "História do Brasil", "href": "/search/label/história%20do%20brasil"},
+                    {"label": "História Mundial", "href": "/search/label/história%20mundial"},
+                    {"label": "Idade Média", "href": "/search/label/idade%20média"},
+                    {"label": "Idade Contemporânea", "href": "/search/label/idade%20contemporânea"}
+                ]
+            },
+            {
+                "title": "Geografia",
+                "icon": "🗺️",
+                "color": "orange",
+                "submenu": [
+                    {"label": "Geografia do Brasil", "href": "/search/label/geografia%20do%20brasil"},
+                    {"label": "Geografia Mundial", "href": "/search/label/geografia%20mundial"},
+                    {"label": "Cartografia", "href": "/search/label/cartografia"},
+                    {"label": "Climatologia", "href": "/search/label/climatologia"}
+                ]
+            }
+        ]
+    };
+    
     function initRightNav() {
         const navRight = document.querySelector('.nb-nav-right');
-        if (!navRight) return;
+        if (!navRight) {
+            console.warn('Elemento .nb-nav-right não encontrado');
+            return;
+        }
         
         // Adicionar botão direito
         const rightBtn = document.createElement('button');
         rightBtn.className = 'nb-icon-btn';
         rightBtn.id = 'nb-right-menu-btn';
-        rightBtn.title = 'Painel';
+        rightBtn.title = 'Menu de Matérias';
         rightBtn.innerHTML = `
             <svg fill='none' height='24px' viewBox='0 0 24 24' width='24px' xmlns='http://www.w3.org/2000/svg'>
                 <path d='M3 5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5zm6 0H5v4h4V5zm4 0a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V5zm6 0h-4v4h4V5zM3 15a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4zm6 0H5v4h4v-4zm4 0a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-4zm6 0h-4v4h4v-4z' fill='#0D0D0D'/>
@@ -22,102 +77,49 @@
         
         navRight.appendChild(rightBtn);
         
-        // Criar painel direito
         createRightPanel();
+        addRightNavStyles();
         initializeRightPanel();
     }
     
     function createRightPanel() {
-        // Verificar se já existe
         if (document.getElementById('sidePanel')) return;
         
         const panelHTML = `
             <div class='drawer-overlay' id='overlay'></div>
             <div class='gemini-sidebar-panel' id='sidePanel'>
                 <div class='panel-header'>
-                    <span style='font-size: 18px; font-weight: 500;'>Concurseiro Pobre</span>
+                    <span style='font-size: 18px; font-weight: 500;'>Matérias</span>
                     <button id='close-right-panel' style='background:none; border:none; font-size:25px; cursor:pointer; color:#555;'>&times;</button>
                 </div>
                 <div class='panel-content'>
-                    <!-- Conteúdo será injetado dinamicamente -->
+                    ${generateRightMenuHTML()}
                 </div>
             </div>
         `;
         
         document.body.insertAdjacentHTML('beforeend', panelHTML);
-        loadRightPanelContent();
+        initializeAccordions();
     }
     
-    function loadRightPanelContent() {
-        const panelContent = document.querySelector('#sidePanel .panel-content');
-        if (!panelContent) return;
+    function generateRightMenuHTML() {
+        let html = '<div class="sidebar-custom-container">';
         
-        // Conteúdo básico do painel direito (pode ser personalizado)
-        panelContent.innerHTML = `
-            <a class='btn-main-action' href='#'>
-                <span>✨</span> @concurseiropobre
-            </a>
-            <a class='btn-main-action' href='https://www.instagram.com/mateusalvesdzn'>
-                <span>✨</span> @mateusalvesdzn
-            </a>
-            
-            <div class='sidebar-custom-container'>
-                <!-- Accordions serão injetados aqui -->
-            </div>
-            
-            <a class='btn-main-action' href='/search/label/simulado'>
-                <span>🧾</span> Simulados
-            </a>
-            <a class='btn-main-action' href='/search/label/Provas'>
-                <span>📋</span> Provas
-            </a>
-            <a class='btn-main-action' href='/search/label/Editais'>
-                <span>📁</span> Editais
-            </a>
-        `;
-        
-        // Adicionar accordions dinamicamente
-        addAccordions();
-    }
-    
-    function addAccordions() {
-        const container = document.querySelector('.sidebar-custom-container');
-        if (!container) return;
-        
-        const accordions = [
-            {
-                title: 'Português',
-                color: 'blue',
-                items: [
-                    {label: 'Interpretação de Textos', url: '/search/label/interpretação%20de%20textos'},
-                    {label: 'Tipologias Textual', url: '/search/label/tipologias%20textual'},
-                    {label: 'Sinônimos e Antônimos', url: '/search/label/sinônimos%20e%20antônimos'}
-                ]
-            },
-            {
-                title: 'Matemática',
-                color: 'green',
-                items: [
-                    {label: 'Números inteiros', url: '/search/label/números%20inteiros:%20operações%20e%20propriedades'},
-                    {label: 'Números racionais', url: '/search/label/números%20racionais'},
-                    {label: 'Mínimo múltiplo comum', url: '/search/label/mínimo%20múltiplo%20comum'}
-                ]
-            }
-        ];
-        
-        let html = '';
-        accordions.forEach(acc => {
+        RIGHT_MENU_JSON.menuItems.forEach((item, index) => {
             html += `
-                <div class='accordion-item'>
-                    <button class='trigger-btn ${acc.color}'>
-                        <span class='btn-label'>📚 ${acc.title}</span>
+                <div class='accordion-item' data-index='${index}'>
+                    <button class='trigger-btn ${item.color}'>
+                        <span class='btn-label'>${item.icon} ${item.title}</span>
                         <span class='chevron'>▼</span>
                     </button>
                     <div class='menu-wrapper'>
                         <div class='menu-content'>
                             <div class='menu-list'>
-                                ${acc.items.map(item => `
-                                    <a class='menu-link' href='${item.url}'>${item.label}</a>
+                                ${item.submenu.map(subItem => `
+                                    <a class='menu-link' href='${subItem.href}'>
+                                        <span>${subItem.icon || '→'}</span>
+                                        <span>${subItem.label}</span>
+                                    </a>
                                 `).join('')}
                             </div>
                         </div>
@@ -126,8 +128,8 @@
             `;
         });
         
-        container.innerHTML = html;
-        initializeAccordions();
+        html += '</div>';
+        return html;
     }
     
     function initializeAccordions() {
@@ -172,13 +174,9 @@
         const rightOverlay = document.getElementById('overlay');
         const closeRightBtn = document.getElementById('close-right-panel');
         
-        // Event Listeners
         if (rightBtn) rightBtn.addEventListener('click', () => toggleRightPanel(true));
         if (rightOverlay) rightOverlay.addEventListener('click', () => toggleRightPanel(false));
         if (closeRightBtn) closeRightBtn.addEventListener('click', () => toggleRightPanel(false));
-        
-        // Estilos específicos
-        addRightNavStyles();
     }
     
     function toggleRightPanel(show) {
@@ -199,7 +197,6 @@
     function addRightNavStyles() {
         const style = document.createElement('style');
         style.textContent = `
-            /* Estilos do Painel Direito */
             .gemini-sidebar-panel {
                 position: fixed !important;
                 top: 0;
@@ -240,28 +237,6 @@
                 display: none;
             }
             
-            /* Botões de Ação */
-            .btn-main-action {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                margin: 10px 16px 20px 16px;
-                padding: 16px 24px;
-                background: #ffffff;
-                color: #3c4043 !important;
-                border-radius: 16px;
-                text-decoration: none !important;
-                font-weight: 500;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-                transition: box-shadow 0.2s;
-            }
-            
-            .btn-main-action:hover {
-                box-shadow: 0 4px 6px rgba(0,0,0,0.16);
-                background-color: #f8f9fa;
-            }
-            
-            /* Accordion */
             .sidebar-custom-container {
                 width: 100%;
                 box-sizing: border-box;
@@ -269,7 +244,6 @@
                 flex-direction: column;
                 gap: 12px;
                 padding: 15px;
-                background: transparent;
             }
             
             .accordion-item {
@@ -298,6 +272,8 @@
             .blue { background: #e8f0fe; color: #1967d2; }
             .green { background: #e6f4ea; color: #137333; }
             .purple { background: #f3e8fd; color: #9334e6; }
+            .orange { background: #feefe3; color: #b06000; }
+            .cyan { background: #e4f7fb; color: #007b83; }
             
             .menu-wrapper {
                 max-height: 0;
@@ -323,7 +299,6 @@
                 border-radius: 12px;
                 display: flex;
                 align-items: center;
-                gap: 12px;
                 transition: 0.2s;
                 border: 1px solid #eeeeee;
             }
@@ -349,5 +324,8 @@
     } else {
         initRightNav();
     }
+    
+    // Exportar função global
+    window.toggleMenu = toggleRightPanel;
     
 })();
