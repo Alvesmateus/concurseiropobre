@@ -32,7 +32,7 @@ function check(btn, ok) {
                 obs.style.borderColor = "#16a34a";
                 obs.style.background = "#dcfce7";
                 if(!obs.querySelector('.correct-info')) {
-                    obs.insertAdjacentHTML('afterbegin', '<strong class="correct-info">Alternativa Correta: </strong>');
+                    obs.insertAdjacentHTML('afterbegin', '<strong class="correct-info">Resposta Correta! ✔️ </strong>');
                 }
             }
         }
