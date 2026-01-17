@@ -54,7 +54,10 @@ body.dark-mode .lm-link {
         /* border-bottom: none !important; */
         padding-bottom: 10px !important;
     }
-
+.simu-q a {
+        /* border-bottom: none !important; */
+        border-bottom: none !important;
+    }
 /* 1. Remove qualquer linha de borda dos marcadores e seus containers */
     .notebook-lm-labels, 
     .notebook-lm-labels *,
