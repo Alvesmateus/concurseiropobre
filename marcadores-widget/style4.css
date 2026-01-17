@@ -48,3 +48,8 @@ body.dark-mode .lm-prefix {
 body.dark-mode .lm-link {
   color: #8ab4f8;
 }
+
+.simu-q {
+        border-bottom: none !important;
+        padding-bottom: 10px !important;
+    }
