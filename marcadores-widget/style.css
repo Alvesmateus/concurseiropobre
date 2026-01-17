@@ -1,0 +1,20 @@
+#notebook-lm-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+}
+.lm-pill {
+  display: flex;
+  align-items: center;
+  background-color: #f1f3f4;
+  border: 1px solid #dadce0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #3c4043;
+}
+.lm-prefix { font-weight: 600; color: #202124; margin-right: 5px; }
+.lm-link { color: #1a73e8; text-decoration: none; font-weight: 500; }
+.lm-link:hover { text-decoration: underline; }
