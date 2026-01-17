@@ -3,9 +3,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin: 0px 0;
+  margin-bottom: 5px;
   font-family: "Google Sans", Roboto, Arial, sans-serif;
-  text-decoration: none !important; 
+  text-decoration: none !important;
+  border-top: 1px grey solid;
 }
 
 .lm-pill {
