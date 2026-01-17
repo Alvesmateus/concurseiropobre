@@ -8,16 +8,18 @@
           "icon": "languages",
           "color": "#1a73e8",
           "submenu": [
-            { "label": "Leitura e Interpretação", "href": "/portugues/leitura" },
+            { "label": "Interpretação de Textos", "href": "/search/label/colocação%20pronominal" },         
+            { "label": "Colocação Pronominal", "href": "/search/label/colocação%20pronominal" },
+            { "label": "Análise Sintática", "href": "/search/label/análise%20sintática" },
             { "label": "Sinônimos e Antônimos", "href": "/portugues/semantica" },
             { "label": "Sentido Próprio e Figurado", "href": "/portugues/estilistica" },
             { "label": "Classes de Palavras", "href": "/portugues/morfologia" },
             { "label": "Pontuação", "href": "/portugues/pontuacao" },
             { "label": "Concordância Nominal", "href": "/portugues/concordancia" },
-            { "label": "Concordância Verbal", "href": "/portugues/concordancia" },
+            { "label": "Concordância Verbal", "href": "/search/label/concordância%20verbal" },
             { "label": "Regência Nominal", "href": "/portugues/regencia" },  
-            { "label": "Regência Verbal", "href": "/portugues/regencia" },
-            { "label": "Crase e Colocação", "href": "/portugues/sintaxe" }
+            { "label": "Regência Verbal", "href": "/search/label/regência%20verbal" },
+            { "label": "Crase", "href": "/portugues/sintaxe" }
           ]
         },
         {
