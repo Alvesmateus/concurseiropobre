@@ -60,7 +60,6 @@ body.dark-mode .lm-link {
     .notebook-lm-labels *,
     [data-materia], 
     [data-assunto] {
-        border-bottom: none !important;
        /* border: none !important; */
         box-shadow: none !important;
     }
