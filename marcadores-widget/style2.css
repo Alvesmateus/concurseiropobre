@@ -1,0 +1,42 @@
+/* Container principal dos marcadores */
+.marcador-container-widget {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilo base para cada etiqueta */
+.marcador-item-widget {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Cores específicas para cada tipo */
+.materia-widget {
+    background-color: #3b82f6; /* Azul */
+}
+
+.assunto-widget {
+    background-color: #10b981; /* Verde */
+}
+
+.banca-widget {
+    background-color: #f59e0b; /* Laranja */
+}
+
+.cargo-widget {
+    background-color: #6b7280; /* Cinza */
+}
+
+/* Ajuste para modo noturno se necessário */
+body.dark-mode .marcador-item-widget {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
