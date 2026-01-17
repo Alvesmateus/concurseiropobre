@@ -1,0 +1,52 @@
+/* Container que envolve as pills em cada questão */
+.notebook-lm-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+}
+
+.lm-pill {
+  display: flex;
+  align-items: center;
+  background-color: #f1f3f4;
+  border: 1px solid #dadce0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #3c4043;
+  white-space: nowrap;
+}
+
+.lm-prefix { 
+  font-weight: 600; 
+  color: #202124; 
+  margin-right: 5px; 
+  text-transform: capitalize;
+}
+
+.lm-link { 
+  color: #1a73e8; 
+  text-decoration: none; 
+  font-weight: 500; 
+}
+
+.lm-link:hover { 
+  text-decoration: underline; 
+}
+
+/* Ajuste para o Modo Noturno do seu site */
+body.dark-mode .lm-pill {
+  background-color: #303134;
+  border-color: #5f6368;
+  color: #e8eaed;
+}
+
+body.dark-mode .lm-prefix {
+  color: #ffffff;
+}
+
+body.dark-mode .lm-link {
+  color: #8ab4f8;
+}
