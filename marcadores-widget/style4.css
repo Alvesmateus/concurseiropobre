@@ -54,4 +54,7 @@ body.dark-mode .lm-link {
         padding-bottom: 10px !important;
     }
 
-
+.simu-q a{
+        border-bottom: none !important;
+        padding-bottom: 10px !important;
+    }
