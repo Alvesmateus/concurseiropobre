@@ -54,19 +54,4 @@ body.dark-mode .lm-link {
         padding-bottom: 10px !important;
     }
 
-/* 1. Remove qualquer linha de borda dos marcadores e seus containers */
-    .notebook-lm-labels, 
-    .notebook-lm-labels *,
-    [data-materia], 
-    [data-assunto] {
-        border-bottom: none !important;
-        box-shadow: none !important;
-    }
 
-    /* 2. Remove possíveis linhas geradas por "pseudo-elementos" no widget */
-    .notebook-lm-labels::after, 
-    .notebook-lm-labels::before,
-    .simu-q::after {
-        display: none !important;
-        content: none !important;
-    }
