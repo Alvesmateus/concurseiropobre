@@ -51,7 +51,7 @@ body.dark-mode .lm-link {
 }
 
 .simu-q {
-        border-bottom: none !important;
+        /* border-bottom: none !important; */
         padding-bottom: 10px !important;
     }
 
@@ -61,7 +61,7 @@ body.dark-mode .lm-link {
     [data-materia], 
     [data-assunto] {
         border-bottom: none !important;
-        border: none !important;
+       /* border: none !important; */
         box-shadow: none !important;
     }
 
