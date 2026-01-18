@@ -1,4 +1,3 @@
-<script>
 (function() {
     function initResponderLogic() {
         // 1. Injetar Estilos (Garante que o visual funcione sem CSS externo)
@@ -100,4 +99,3 @@
         window.addEventListener('load', initResponderLogic);
     }
 })();
-</script>
