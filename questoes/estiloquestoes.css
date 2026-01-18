@@ -131,7 +131,24 @@
     line-height: 1.5;
   }
 
+/* Estilo para quando clicar na alternativa (antes de responder) */
 .simu-opt.selected {
-    border: 2px solid #2196F3 !important;
-    background-color: #f0f7ff !important;
+    background-color: #e0e0e0;
+    border: 2px solid #2196F3;
+}
+
+/* Estilo do botão responder */
+.btn-responder {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-responder:hover {
+    background-color: #1976D2;
 }
