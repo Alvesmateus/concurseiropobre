@@ -108,45 +108,46 @@
         }
       ]
     },
-{
-  "menu": [
     {
+      "title": "Específicos",
+      "items": [
+{
       "titulo": "Provas",
       "icone": "clipboard-list",
       "submenus": [
-        { "nome": "PMRJ", "slug": "pmrj" },
-        { "nome": "PMSP", "slug": "pmsp" },
-        { "nome": "PMMG", "slug": "pmmg" },
-        { "nome": "ESA", "slug": "esa" },
-        { "nome": "ENEM", "slug": "enem" },
-        { "nome": "Outras Provas", "slug": "outras" }
+        { "nome": "PMRJ", "href": "/provas/pmrj" },
+        { "nome": "PMSP", "href": "/provas/pmsp" },
+        { "nome": "PMMG", "href": "/provas/pmmg" },
+        { "nome": "ESA", "href": "/provas/esa" },
+        { "nome": "ENEM", "href": "/provas/enem" },
+        { "nome": "Outras Provas", "href": "/provas/outras" }
       ]
     },
     {
       "titulo": "Simulados",
       "icone": "edit-3",
       "submenus": [
-        { "nome": "Português", "slug": "portugues" },
-        { "nome": "Matemática", "slug": "matematica" },
-        { "nome": "História", "slug": "historia" },
-        { "nome": "Geografia", "slug": "geografia" },
-        { "nome": "Direito Constitucional", "slug": "direito-constitucional" },
-        { "nome": "Direito Penal", "slug": "direito-penal" },
-        { "nome": "Direito Processual", "slug": "direito-processual" },
-        { "nome": "Direitos Humanos", "slug": "direitos-humanos" }
+        { "nome": "Português", "href": "/simulados/portugues" },
+        { "nome": "Matemática", "href": "/simulados/matematica" },
+        { "nome": "História", "href": "/simulados/historia" },
+        { "nome": "Geografia", "href": "/simulados/geografia" },
+        { "nome": "Direito Constitucional", "href": "/simulados/direito-constitucional" },
+        { "nome": "Direito Penal", "href": "/simulados/direito-penal" },
+        { "nome": "Direito Processual", "href": "/simulados/direito-processual" },
+        { "nome": "Direitos Humanos", "href": "/simulados/direitos-humanos" }
       ]
     },
     {
       "titulo": "Teoria",
       "icone": "book-open",
       "submenus": [
-        { "nome": "Teoria Completa", "slug": "teoria-completa" },
-        { "nome": "Teoria Resumida", "slug": "teoria-resumida" },
-        { "nome": "Flashcards", "slug": "flashcards" },
-        { "nome": "Mapas Mentais", "slug": "mapas-mentais" }
+        { "nome": "Teoria Completa", "href": "/teoria/completa" },
+        { "nome": "Teoria Resumida", "href": "/teoria/resumida" },
+        { "nome": "Flashcards", "href": "/teoria/flashcards" },
+        { "nome": "Mapas Mentais", "href": "/teoria/mapas-mentais" }
       ]
     }
-  ]
-}
+      ]
+    }
   ]
 }
