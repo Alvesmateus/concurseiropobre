@@ -107,6 +107,46 @@
           ]
         }
       ]
+    },
+{
+  "menu": [
+    {
+      "titulo": "Provas",
+      "icone": "clipboard-list",
+      "submenus": [
+        { "nome": "PMRJ", "slug": "pmrj" },
+        { "nome": "PMSP", "slug": "pmsp" },
+        { "nome": "PMMG", "slug": "pmmg" },
+        { "nome": "ESA", "slug": "esa" },
+        { "nome": "ENEM", "slug": "enem" },
+        { "nome": "Outras Provas", "slug": "outras" }
+      ]
+    },
+    {
+      "titulo": "Simulados",
+      "icone": "edit-3",
+      "submenus": [
+        { "nome": "Português", "slug": "portugues" },
+        { "nome": "Matemática", "slug": "matematica" },
+        { "nome": "História", "slug": "historia" },
+        { "nome": "Geografia", "slug": "geografia" },
+        { "nome": "Direito Constitucional", "slug": "direito-constitucional" },
+        { "nome": "Direito Penal", "slug": "direito-penal" },
+        { "nome": "Direito Processual", "slug": "direito-processual" },
+        { "nome": "Direitos Humanos", "slug": "direitos-humanos" }
+      ]
+    },
+    {
+      "titulo": "Teoria",
+      "icone": "book-open",
+      "submenus": [
+        { "nome": "Teoria Completa", "slug": "teoria-completa" },
+        { "nome": "Teoria Resumida", "slug": "teoria-resumida" },
+        { "nome": "Flashcards", "slug": "flashcards" },
+        { "nome": "Mapas Mentais", "slug": "mapas-mentais" }
+      ]
     }
+  ]
+}
   ]
 }
