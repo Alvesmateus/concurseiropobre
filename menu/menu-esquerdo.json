@@ -1,152 +1,37 @@
 {
-  "menuSections": [
+  "menuItems": [
     {
-      "title": "Matérias",
-      "items": [
-        {
-          "title": "Português",
-          "icon": "languages",
-          "color": "#1a73e8",
-          "submenu": [
-            { "label": "Interpretação de Textos", "href": "/search/label/colocação%20pronominal" },         
-            { "label": "Colocação Pronominal", "href": "/search/label/colocação%20pronominal" },
-            { "label": "Análise Sintática", "href": "/search/label/análise%20sintática" },
-            { "label": "Sinônimos e Antônimos", "href": "/portugues/semantica" },
-            { "label": "Sentido Próprio e Figurado", "href": "/portugues/estilistica" },
-            { "label": "Classes de Palavras", "href": "/portugues/morfologia" },
-            { "label": "Pontuação", "href": "/portugues/pontuacao" },
-            { "label": "Concordância Nominal", "href": "/portugues/concordancia" },
-            { "label": "Concordância Verbal", "href": "/search/label/concordância%20verbal" },
-            { "label": "Regência Nominal", "href": "/portugues/regencia" },  
-            { "label": "Regência Verbal", "href": "/search/label/regência%20verbal" },
-            { "label": "Crase", "href": "/portugues/sintaxe" }
-          ]
-        },
-        {
-          "title": "Matemática",
-          "icon": "calculator",
-          "color": "#1e8e3e",
-          "submenu": [
-            { "label": "Inteiros e Racionais", "href": "/matematica/numeros" },
-            { "label": "MMC e MDC", "href": "/matematica/mmc" },
-            { "label": "Razão e Proporção", "href": "/matematica/proporcao" },
-            { "label": "Porcentagem e Regra de 3", "href": "/matematica/aritmetica" },
-            { "label": "Equações e Sistemas", "href": "/matematica/algebra" },
-            { "label": "Medidas e Grandezas", "href": "/matematica/medidas" },
-            { "label": "Geometria Plana", "href": "/matematica/geometria" },
-            { "label": "Geometria Espacial", "href": "/matematica/geometria" },
-            { "label": "Raciocínio Lógico", "href": "/matematica/logica" }
-          ]
-        },
-        {
-          "title": "História",
-          "icon": "landmark",
-          "color": "#f9ab00",
-          "submenu": [
-            { "label": "Guerras e Nazifascismo", "href": "/historia/conflitos" },
-            { "label": "Guerra Fria e Globalização", "href": "/historia/moderna" },
-            { "label": "Era Vargas e Revolução 30", "href": "/historia/vargas" },
-            { "label": "Militares e Redemocratização", "href": "/historia/brasil" }
-          ]
-        },
-        {
-          "title": "Geografia",
-          "icon": "globe-2",
-          "color": "#2563eb",
-          "submenu": [
-            { "label": "Globalização e Geopolítica", "href": "/geografia/geopolitica" },
-            { "label": "Natureza e Relevo Brasil", "href": "/geografia/natureza" },
-            { "label": "População e Movimentos", "href": "/geografia/populacao" },
-            { "label": "Economia e Urbanização", "href": "/geografia/economia" },
-            { "label": "Impactos Ambientais", "href": "/geografia/ambiental" }
-          ]
-        },
-        {
-          "title": "Direito Constitucional",
-          "icon": "gavel",
-          "color": "#7c3aed",
-          "submenu": [
-            { "label": "Direitos e Deveres Individuais e Coletivoss", "href": "/direito/principios" },
-            { "label": "Direitos Políticos", "href": "/direito/fundamentais" },
-            { "label": "Direitos e Garantias Fundamentais", "href": "/search/label/direitos%20e%20garantias%20fundamentais" },   
-            { "label": "Direitos Sociais", "href": "/search/label/direitos%20sociais" },
-            { "label": "Administração Pública", "href": "/direito/estado" },
-            { "label": "Disposições Gerais", "href": "/direito/adm" },
-            { "label": "Militares", "href": "/direito/poderes" },
-            { "label": "Nacionalidade", "href": "/direito/poderes" },
-            { "label": "Organização do Estado", "href": "/search/label/organização%20do%20estado" },
-            { "label": "Entes Federativos", "href": "/search/label/entes%20federativos" },
-            { "label": "Poder Legislativo", "href": "/search/label/poder%20legislativo" },
-            { "label": "Segurança Pública", "href": "/search/label/segurança%20pública" }
-          ]
-        },
-
-        {
-          "title": "Informática",
-          "icon": "monitor",
-          "color": "#4b5563",
-          "submenu": [
-            { "label": "Windows 10", "href": "/info/windows" },
-            { "label": "Word", "href": "/info/word" },
-            { "label": "Excel", "href": "/info/excel" },
-            { "label": "PowerPoint", "href": "/info/powerpoint" },
-            { "label": "Correio Eletrônico", "href": "/info/web" },            
-            { "label": "Internet", "href": "/info/web" },
-            { "label": "MS Teams", "href": "/info/web" },
-            { "label": "Google Workspace", "href": "/info/colaboracao" }
-          ]
-        },
-        
-        {
-          "title": "Atualidades",
-          "icon": "newspaper",
-          "color": "#dc2626",
-          "submenu": [
-            { "label": "Notícias Nacionais", "href": "/atualidades/brasil" },
-            { "label": "Cenário Internacional", "href": "/atualidades/mundo" }
-          ]
-        }
+      "title": "Português",
+      "icon": "languages",
+      "color": "blue",
+      "submenu": [
+        { "label": "Interpretação de Textos", "href": "/search/label/interpretação%20de%20textos" },
+        { "label": "Pontuação", "href": "/search/label/pontuação" }
       ]
     },
     {
-      "title": "Específicos",
-      "items": [
-{
-      "titulo": "Provas",
-      "icone": "clipboard-list",
-      "submenus": [
-        { "nome": "PMRJ", "href": "/provas/pmrj" },
-        { "nome": "PMSP", "href": "/provas/pmsp" },
-        { "nome": "PMMG", "href": "/provas/pmmg" },
-        { "nome": "ESA", "href": "/provas/esa" },
-        { "nome": "ENEM", "href": "/provas/enem" },
-        { "nome": "Outras Provas", "href": "/provas/outras" }
+      "title": "Matemática",
+      "icon": "square-sigma",
+      "color": "green",
+      "submenu": [
+        { "label": "Números Inteiros", "href": "/search/label/números%20inteiros" },
+        { "label": "Porcentagem", "href": "/search/label/porcentagem" }
       ]
     },
     {
-      "titulo": "Simulados",
-      "icone": "edit-3",
-      "submenus": [
-        { "nome": "Português", "href": "/simulados/portugues" },
-        { "nome": "Matemática", "href": "/simulados/matematica" },
-        { "nome": "História", "href": "/simulados/historia" },
-        { "nome": "Geografia", "href": "/simulados/geografia" },
-        { "nome": "Direito Constitucional", "href": "/simulados/direito-constitucional" },
-        { "nome": "Direito Penal", "href": "/simulados/direito-penal" },
-        { "nome": "Direito Processual", "href": "/simulados/direito-processual" },
-        { "nome": "Direitos Humanos", "href": "/simulados/direitos-humanos" }
+      "title": "História",
+      "icon": "landmark",
+      "color": "purple",
+      "submenu": [
+        { "label": "História do Brasil", "href": "/search/label/história%20do%20brasil" }
       ]
     },
     {
-      "titulo": "Teoria",
-      "icone": "book-open",
-      "submenus": [
-        { "nome": "Teoria Completa", "href": "/teoria/completa" },
-        { "nome": "Teoria Resumida", "href": "/teoria/resumida" },
-        { "nome": "Flashcards", "href": "/teoria/flashcards" },
-        { "nome": "Mapas Mentais", "href": "/teoria/mapas-mentais" }
-      ]
-    }
+      "title": "Geografia",
+      "icon": "map",
+      "color": "orange",
+      "submenu": [
+        { "label": "Geografia do Brasil", "href": "/search/label/geografia%20do%20brasil" }
       ]
     }
   ]
