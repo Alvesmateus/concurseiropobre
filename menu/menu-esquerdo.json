@@ -105,7 +105,19 @@
             { "label": "Notícias Nacionais", "href": "/atualidades/brasil" },
             { "label": "Cenário Internacional", "href": "/atualidades/mundo" }
           ]
-        }
+        },
+        {
+          "title": "Aprender",
+          "icon": "newspaper",
+          "color": "#dc2626",
+          "submenu": [
+            { "label": "Teoria", "href": "/atualidades/brasil" },
+            { "label": "Resumo", "href": "/atualidades/brasil" },
+            { "label": "Mapa Mental", "href": "/atualidades/brasil" },
+            { "label": "Flashcards", "href": "/atualidades/mundo" }
+          ]
+        },
+        
       ]
     }
   ]
