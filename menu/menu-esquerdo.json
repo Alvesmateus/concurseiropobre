@@ -68,15 +68,16 @@
           "submenu": [
             { "label": "Direitos e Deveres Individuais e Coletivoss", "href": "/direito/principios" },
             { "label": "Direitos Políticos", "href": "/direito/fundamentais" },
-            { "label": "Direitos e Garantias Fundamentais", "href": "/direito/fundamentais" },   
+            { "label": "Direitos e Garantias Fundamentais", "href": "/search/label/direitos%20e%20garantias%20fundamentais" },   
             { "label": "Direitos Sociais", "href": "/search/label/direitos%20sociais" },
             { "label": "Administração Pública", "href": "/direito/estado" },
             { "label": "Disposições Gerais", "href": "/direito/adm" },
             { "label": "Militares", "href": "/direito/poderes" },
-            { "label": "Nacionalidades", "href": "/direito/poderes" },
-            { "label": "Entes Federativos", "href": "/direito/poderes" },
-            { "label": "Poderes Executivo", "href": "/direito/poderes" },
-            { "label": "Segurança Pública", "href": "/direito/seguranca" }
+            { "label": "Nacionalidade", "href": "/direito/poderes" },
+            { "label": "Organização do Estado", "href": "/search/label/organização%20do%20estado" },
+            { "label": "Entes Federativos", "href": "/search/label/entes%20federativos" },
+            { "label": "Poder Legislativo", "href": "/search/label/poder%20legislativo" },
+            { "label": "Segurança Pública", "href": "/search/label/segurança%20pública" }
           ]
         },
 
