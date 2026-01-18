@@ -1,78 +1,103 @@
 <script>
 (function() {
-    // 1. Injetar Estilos necessários via JS
-    const style = document.createElement('style');
-    style.innerHTML = `
-        .simu-opt.selected-pending { 
-            outline: 3px solid #2196F3 !important; 
-            background-color: #e3f2fd !important; 
+    function initResponderLogic() {
+        // 1. Injetar Estilos (Garante que o visual funcione sem CSS externo)
+        if (!document.getElementById('style-responder-injetado')) {
+            const style = document.createElement('style');
+            style.id = 'style-responder-injetado';
+            style.innerHTML = `
+                .simu-opt.selected-pending { 
+                    outline: 3px solid #2196F3 !important; 
+                    background-color: rgba(33, 150, 243, 0.1) !important; 
+                }
+                .btn-responder-main {
+                    margin: 20px 0;
+                    width: 100%;
+                    padding: 12px;
+                    background-color: #2196F3;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    font-size: 16px;
+                    display: block;
+                }
+                .btn-responder-main:hover { background-color: #1976D2; }
+            `;
+            document.head.appendChild(style);
         }
-        .btn-responder-main {
-            margin: 20px auto;
-            display: block;
-            padding: 12px 30px;
-            background-color: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        .btn-responder-main:hover { background-color: #1976D2; }
-    `;
-    document.head.appendChild(style);
 
-    // 2. Lógica de Interceptação
-    document.querySelectorAll('.simu-q').forEach(article => {
-        const options = article.querySelectorAll('.simu-opt');
+        // 2. Localiza todas as questões
+        const articles = document.querySelectorAll('.simu-q');
         
-        // Criar o botão Responder para esta questão
-        const btnResponder = document.createElement('button');
-        btnResponder.className = 'btn-responder-main';
-        btnResponder.innerText = 'Responder!';
-        article.appendChild(btnResponder);
+        articles.forEach(article => {
+            // Evita duplicar o botão se o script rodar duas vezes
+            if (article.querySelector('.btn-responder-main')) return;
 
-        options.forEach(opt => {
-            // Salvar o clique original e remover o atributo onclick para neutralizar o modelo antigo
-            const originalOnClick = opt.getAttribute('onclick');
-            opt.removeAttribute('onclick');
+            const options = article.querySelectorAll('.simu-opt');
+            
+            // Criar o botão Responder
+            const btnResponder = document.createElement('button');
+            btnResponder.className = 'btn-responder-main';
+            btnResponder.innerText = 'Responder!';
+            
+            // Insere o botão após a lista de alternativas
+            const optList = article.querySelector('.simu-opt-list');
+            if (optList) {
+                optList.parentNode.insertBefore(btnResponder, optList.nextSibling);
+            }
 
-            opt.addEventListener('click', function(e) {
-                if (article.getAttribute('data-done') === 'true') return;
+            options.forEach(opt => {
+                // Intercepta o onclick original
+                const originalOnClick = opt.getAttribute('onclick');
+                if (originalOnClick && originalOnClick.includes('check')) {
+                    opt.removeAttribute('onclick'); // Desativa o clique imediato
+                    
+                    opt.addEventListener('click', function() {
+                        if (article.getAttribute('data-done') === 'true') return;
 
-                // Visual de seleção
-                options.forEach(o => o.classList.remove('selected-pending'));
-                this.classList.add('selected-pending');
-                
-                // Armazena temporariamente qual foi a selecionada
-                article.dataset.currentSelection = originalOnClick;
+                        // Marca visualmente a seleção
+                        options.forEach(o => o.classList.remove('selected-pending'));
+                        this.classList.add('selected-pending');
+                        
+                        // Guarda a lógica original para disparar depois
+                        article.dataset.pendingLogic = originalOnClick;
+                    });
+                }
             });
-        });
 
-        // Evento do botão Responder
-        btnResponder.addEventListener('click', function() {
-            if (article.dataset.currentSelection) {
-                // Executa a função check original do seu script externo
-                // Ela recebe (elemento, booleano) extraído da string onclick
-                const call = article.dataset.currentSelection; // Ex: "check(this, true)"
-                const isTrue = call.includes('true');
+            // Lógica do clique no botão Responder
+            btnResponder.addEventListener('click', function() {
+                const pendingCall = article.dataset.pendingLogic;
                 const selectedElement = article.querySelector('.simu-opt.selected-pending');
 
-                // Chama a sua função check original
-                if (typeof check === "function") {
-                    check(selectedElement, isTrue);
+                if (!selectedElement) {
+                    alert("Por favor, selecione uma alternativa!");
+                    return;
                 }
-                
-                // Remove o visual de pendente e oculta o botão
-                selectedElement.classList.remove('selected-pending');
+
+                // Extrai o booleano (true/false) do texto "check(this, true)"
+                const isCorrect = pendingCall.toLowerCase().includes('true');
+
+                // Dispara a função check original que está no seu script externo
+                if (typeof check === "function") {
+                    check(selectedElement, isCorrect);
+                }
+
+                // Finaliza o estado da questão
                 this.style.display = 'none';
+                selectedElement.classList.remove('selected-pending');
                 article.setAttribute('data-done', 'true');
-            } else {
-                alert("Selecione uma alternativa primeiro!");
-            }
+            });
         });
-    });
+    }
+
+    // Executa ao carregar e também garante execução se o DOM já estiver pronto
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        setTimeout(initResponderLogic, 500);
+    } else {
+        window.addEventListener('load', initResponderLogic);
+    }
 })();
 </script>
