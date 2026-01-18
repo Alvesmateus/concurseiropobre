@@ -1,40 +1,45 @@
-function check(btn, ok) {
-    const p = btn.closest('.simu-q');
-    
-    // Evita que o usuário clique em mais de uma opção
-    if(p.dataset.done === "true") return;
-    p.dataset.done = "true";
-    
-    const allContainers = p.querySelectorAll('.simu-opt-container');
-    
-    allContainers.forEach(container => {
-        const opt = container.querySelector('.simu-opt');
-        const obs = container.querySelector('.simu-opt-obs');
-        
-        // Verifica se esta opção específica é a correta baseada no argumento 'ok' original
-        // ou buscando no atributo onclick original do botão
-        const isCorrectOpt = opt.getAttribute('onclick').includes('true');
+function selectOption(btn) {
+    // Se a questão já foi respondida, não faz nada
+    const article = btn.closest('article');
+    if (article.getAttribute('data-done') === 'true') return;
 
-        if(isCorrectOpt) {
-            opt.classList.add('is-correct');
-        } else {
-            if(opt === btn) {
-                opt.classList.add('is-wrong');
-            } else {
-                opt.classList.add('other-wrong');
-            }
-        }
+    // Remove a seleção de todos os botões daquela questão
+    const options = article.querySelectorAll('.simu-opt');
+    options.forEach(opt => opt.classList.remove('selected'));
 
-        // Exibe a observação/comentário se houver conteúdo
-        if(obs && obs.innerHTML.trim() !== "") {
-            obs.style.display = "block";
-            if(isCorrectOpt) {
-                obs.style.borderColor = "#16a34a";
-                obs.style.background = "#dcfce7";
-                if(!obs.querySelector('.correct-info')) {
-                    obs.insertAdjacentHTML('afterbegin', '<strong class="correct-info">Resposta Correta! ✔️ </strong>');
-                }
-            }
+    // Adiciona a seleção ao botão clicado
+    btn.classList.add('selected');
+}
+
+function validateAnswer(btnResponder) {
+    const article = btnResponder.closest('article');
+    const selectedOpt = article.querySelector('.simu-opt.selected');
+
+    if (!selectedOpt) {
+        alert("Por favor, selecione uma alternativa primeiro!");
+        return;
+    }
+
+    // Marca a questão como concluída para evitar novas trocas
+    article.setAttribute('data-done', 'true');
+
+    // Verifica se a selecionada é a correta
+    const isCorrect = selectedOpt.getAttribute('data-correct') === 'true';
+
+    // Aqui você chama a sua função original 'check' ou aplica a lógica de cores
+    // Exemplo de aplicação visual simples:
+    const allOptions = article.querySelectorAll('.simu-opt');
+    allOptions.forEach(opt => {
+        if (opt.getAttribute('data-correct') === 'true') {
+            opt.style.backgroundColor = "#c8e6c9"; // Verde para a correta
+            opt.style.borderColor = "#4caf50";
+        } else if (opt === selectedOpt && !isCorrect) {
+            opt.style.backgroundColor = "#ffcdd2"; // Vermelho se errou
+            opt.style.borderColor = "#f44336";
         }
+        opt.disabled = true; // Desabilita cliques após responder
     });
+
+    // Esconde o botão responder após o uso
+    btnResponder.style.display = 'none';
 }
