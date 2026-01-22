@@ -59,7 +59,7 @@ a:hover {
     color: $(body.link.color);
     cursor: pointer;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: ;
     outline: none;
     text-decoration: none;
     text-transform: uppercase;
@@ -409,7 +409,7 @@ iframe.b-hbp-video {
 #comments .comment .comment-header .user, #comments .comment .comment-header .user a {
     color: $(posts.title.color);
     font-style: normal;
-    font-weight: 700;
+    font-weight: ;
 }
 #comments .comment .comment-actions {
     bottom: 0;
@@ -644,7 +644,7 @@ html[dir=rtl] .rtl-reversible-icon {
     display: none;
 }
 .flat-button {
-    font-weight: 700;
+    font-weight: ;
     text-transform: uppercase;
     border-radius: 2px;
     padding: 8px;
@@ -1130,7 +1130,7 @@ body.sidebar-visible {
 }
 .tabs li a {
     cursor: pointer;
-    font-weight: 700;
+    font-weight: ;
     text-transform: uppercase;
     padding: 12px 8px;
 }
@@ -1754,7 +1754,7 @@ a.timestamp-link, a:active.timestamp-link, a:visited.timestamp-link {
 	display: none;
 }
 .post-filter-message .search-label, .post-filter-message .search-query {
-    font-weight: 700;
+    font-weight: ;
     color: black;
 }
 #blog-pager {
@@ -1806,7 +1806,7 @@ a.timestamp-link, a:active.timestamp-link, a:visited.timestamp-link {
     display: inline-block;
     margin-bottom: 8px;
     font: $(body.text.font);
-    font-weight: 400;
+    font-weight: ;
     line-height: 24px;
 }
 .ReportAbuse a.report_abuse, .ReportAbuse a.report_abuse:hover {
@@ -1841,7 +1841,7 @@ a.timestamp-link, a:active.timestamp-link, a:visited.timestamp-link {
 .PopularPosts .post-title, .PopularPosts .post-title a, .PopularPosts .post-title a:hover, .PopularPosts .post-title a:visited {
     color: $(popularposts.title.color);
     font-size: 18px;
-    font-weight: 700;
+    font-weight: ;
     line-height: 24px;
 }
 .PopularPosts, .PopularPosts h3.title a {
@@ -1918,7 +1918,7 @@ a.timestamp-link, a:active.timestamp-link, a:visited.timestamp-link {
     margin-top: 290px;
     display: block;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: ;
     color: $(posts.title.color);
 }
 .vertical-ad-placeholder {
@@ -2018,7 +2018,7 @@ a.timestamp-link, a:active.timestamp-link, a:visited.timestamp-link {
     border-radius: 12px;
     cursor: pointer;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: ;
     padding: 5px 20px;
     display: inline-block;
     line-height: normal;
@@ -2307,7 +2307,7 @@ body.sidebar-visible .bg-photo-container, body.sidebar-visible .page_body {
 .post-title, .entry-title {
     font-family: 'Google Sans', Roboto, sans-serif !important;
     font-size: 15px !important;
-    font-weight: 500 !important;
+    font-weight: ;
     color: #1f1f1f !important;
     margin: 0 0 2px 0 !important;
     line-height: 1.2 !important;
@@ -2351,7 +2351,7 @@ body, .fauxcolumn-outer, .content-outer, .main-inner {
 
 .view-index .post-title {
     font-size: 15px !important;
-    font-weight: 500 !important;
+    font-weight:;
     margin-bottom: 4px !important;
 }
 
@@ -2380,7 +2380,7 @@ body, .fauxcolumn-outer, .content-outer, .main-inner {
 
 .view-item .post-title {
     font-size: 26px !important;
-    font-weight: 500 !important;
+    font-weight: ;
     margin-bottom: 24px !important;
     line-height: 1.3 !important;
 }
@@ -2549,7 +2549,7 @@ img, .post-image, .post-thumbnail {
 .post-title {
     margin: 0 0 12px 0;
     font-family: 'Google Sans', Roboto, Arial, sans-serif;
-    font-weight: 500;
+    font-weight: ;
 }
 
 .post-title a {
@@ -2580,7 +2580,7 @@ img, .post-image, .post-thumbnail {
     padding: 8px 20px;
     border-radius: 20px; /* Botão pílula */
     font-size: 14px;
-    font-weight: 500;
+    font-weight: ;
     text-transform: none; /* Mantém naturalidade */
     transition: background 0.2s ease;
 }
