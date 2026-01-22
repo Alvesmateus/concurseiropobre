@@ -7,7 +7,7 @@
 
 .simu-q { background: #fff; border-bottom: 2px solid #e2e8f0; border-radius: 12px; padding: 10px 0px; margin-bottom: 25px; }
 
-.simu-txt { font-size: 16px !important; font-weight: bold !important; margin: 0 0 20px 0 !important; line-height: 1.6 !important; padding: 0 !important; display: block !important; border: none !important; }
+.simu-txt { font-size: 16px !important; font-weight: ; margin: 0 0 20px 0 !important; line-height: 1.6 !important; padding: 0 !important; display: block !important; border: none !important; }
 
 .simu-opt-list { list-style: none !important; padding: 0 !important; margin: 0 !important; }
 
@@ -70,7 +70,7 @@
     background: #e2e8f0;
     padding: 3px 8px;
     border-radius: 999px;
-    font-weight: 600;
+    font-weight: ;
     color: #334155;
   }
 
@@ -94,7 +94,7 @@
     background: #e2e8f0;
     padding: 3px 8px;
     border-radius: 999px;
-    font-weight: 600;
+    font-weight: ;
     color: #334155;
   }
 
