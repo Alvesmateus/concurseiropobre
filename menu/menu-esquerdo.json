@@ -112,6 +112,7 @@
           "color": "#dc2626",
           "submenu": [
             { "label": "Teoria", "href": "/atualidades/brasil" },
+            { "label": "Simulados", "href": "/p/simulados.html" },
             { "label": "Resumo", "href": "/atualidades/brasil" },
             { "label": "Mapa Mental", "href": "/atualidades/brasil" },
             { "label": "Flashcards", "href": "/atualidades/mundo" }
