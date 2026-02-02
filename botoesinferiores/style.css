@@ -1,1 +1,34 @@
+html { scroll-behavior: smooth; }
+.scroll-offset { scroll-margin-top: 80px; }
+.container-educacional { display: flex; flex-direction: column; gap: 30px; padding: 20px 0; font-family: system-ui, -apple-system, sans-serif; }
+.titulo-secao { font-size: 20px; color: #1a73e8; border-bottom: 2px solid #f1f3f4; padding-bottom: 8px; margin-top: 10px; }
+.video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
+.carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; margin: 10px 0; }
+.container-notebooklm { 
+  display: flex; flex-wrap: nowrap; gap: 10px; padding: 10px 5px; 
+  overflow-x: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; 
+  scrollbar-width: none; width: 100%; 
+}
+.container-notebooklm::-webkit-scrollbar { display: none; }
+
+.nav-arrow { 
+  background: #fff; border: 1px solid #dadce0; border-radius: 50%; 
+  width: 32px; height: 32px; cursor: pointer; display: flex; 
+  align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+  z-index: 5; transition: all 0.2s; color: #5f6368; flex-shrink: 0; 
+}
+@media (max-width: 600px) { .nav-arrow { display: none; } }
+
+.nlm-button { 
+  flex: 0 0 auto; display: inline-flex; align-items: center; 
+  padding: 8px 18px; border-radius: 20px; text-decoration: none !important; 
+  font-size: 13px; font-weight: 500; border: 1px solid #dadce0; 
+  color: #3c4043 !important; white-space: nowrap; transition: 0.2s; background: #fff;
+}
+.btn-link:hover { border-color: #1a73e8; background: #f1f7fe; }
+.btn-comments:hover { border-color: #34a853; background: #e6f4ea; }
+.btn-text:hover { border-color: #f9ab00; background: #fef7e0; }
+.btn-video:hover { border-color: #ea4335; background: #fce8e6; }
+.btn-theory:hover { border-color: #a142f4; background: #f3e8fd; }
