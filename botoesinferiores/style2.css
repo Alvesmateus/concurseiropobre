@@ -11,3 +11,16 @@ html { scroll-behavior: smooth; font-family: sans-serif; }
 .btn-video:hover { border-color: #ea4335; background-color: #fce8e6; }
 .container-apenas-snippet { width: 100%; display: flex; justify-content: center; }
 @media (max-width: 480px) { .nlm-button { flex: 1 1 calc(50% - 10px); text-align: center; } }
+
+/* No seu arquivo style2.css, localize ou adicione esta regra: */
+.texto-conteudo {
+    color: #000000 !important; /* Força a cor preta */
+    line-height: 1.6;
+    font-size: 16px;
+    /* Caso o fundo da seção esteja escuro, certifique-se que o background aqui seja claro */
+}
+
+/* Garante que títulos e textos dentro da seção de explicação também fiquem escuros */
+#secao-explicacao, #secao-explicacao * {
+    color: #000000 !important;
+}
