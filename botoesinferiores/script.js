@@ -1,38 +1,29 @@
-document.addEventListener("DOMContentLoaded", function() {
+(function() {
   const urlAtual = window.location.href;
-  const ehPostagem = urlAtual.includes('.html');
+  // Verifica se o padrão da URL é de uma postagem (ex: 2024/05/titulo.html)
+  const ehPostagem = /\d{4}\/\d{2}\/.*\.html/.test(urlAtual);
   
   if (ehPostagem) {
     const contPost = document.getElementById('container-exclusivo-post');
     if (contPost) contPost.style.display = 'block';
-    document.querySelectorAll('.container-apenas-snippet').forEach(s => s.remove());
+    // Esconde o snippet (botões) dentro da postagem, se necessário
+    document.querySelectorAll('.container-apenas-snippet').forEach(s => s.style.display = 'none');
   } else {
+    // Lógica para a Home/Listagem: ajusta links dos botões para a URL do post
     document.querySelectorAll('.container-apenas-snippet').forEach(snippet => {
-      const postRoot = snippet.closest('.post, .post-outer, .article, .hentry, .date-outer');
-      const linkElemento = postRoot?.querySelector('h3 a, h2 a, .post-title a');
+      const postRoot = snippet.closest('.post, .post-outer, .article, .hentry');
+      const linkElemento = postRoot?.querySelector('h3 a, .post-title a, .entry-title a');
       
       if (linkElemento) {
         const urlBase = linkElemento.href.split('?')[0].split('#')[0];
-        snippet.querySelector('.btn-snippet-link').href = urlBase;
-        snippet.querySelector('.btn-snippet-comments').href = urlBase + "#comments";
-        snippet.querySelector('.btn-snippet-text').href = urlBase + "#secao-explicacao";
-        snippet.querySelector('.btn-snippet-video').href = urlBase + "#secao-video";
-        snippet.querySelector('.btn-snippet-theory').href = urlBase + "#secao-teoria";
-      }
-
-      const container = snippet.querySelector('.container-notebooklm');
-      const btnNext = snippet.querySelector('.next');
-      const btnPrev = snippet.querySelector('.prev');
-
-      if (container && btnNext && btnPrev) {
-        btnNext.onclick = () => container.scrollLeft += 180;
-        btnPrev.onclick = () => container.scrollLeft -= 180;
-
-        container.onscroll = () => {
-          btnPrev.style.visibility = container.scrollLeft <= 5 ? 'hidden' : 'visible';
-          btnNext.style.visibility = (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) ? 'hidden' : 'visible';
-        };
+        const btnComments = snippet.querySelector('.btn-snippet-comments');
+        const btnText = snippet.querySelector('.btn-snippet-text');
+        const btnVid = snippet.querySelector('.btn-snippet-video');
+        
+        if(btnComments) btnComments.href = urlBase + "#comments";
+        if(btnText) btnText.href = urlBase + "#secao-explicacao";
+        if(btnVid) btnVid.href = urlBase + "#secao-video";
       }
     });
   }
-});
+})();
