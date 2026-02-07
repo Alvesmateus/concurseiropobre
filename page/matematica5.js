@@ -134,8 +134,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Trigonometria",
-        slugSecao: "trigonometria",
         nome: "TRIGONOMETRIA BÁSICA",
         subtopicos: [
             { nome: "Razões Trigonométricas", slug: "razoes-trigonometricas", aviso: "Teoria" },
@@ -146,8 +144,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Trigonometria",
-        slugSecao: "trigonometria",
         nome: "TRIGONOMETRIA AVANÇADA",
         subtopicos: [
             { nome: "Lei dos Senos e Cossenos", slug: "lei-senos-cossenos", aviso: "Exercícios" },
@@ -170,8 +166,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Análise Matemática",
-        slugSecao: "analise",
         nome: "CÁLCULO INTEGRAL",
         subtopicos: [
             { nome: "Integrais Indefinidas", slug: "integrais-indefinidas", aviso: "Teoria" },
@@ -182,8 +176,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Matemática Aplicada",
-        slugSecao: "aplicada",
         nome: "ANÁLISE COMBINATÓRIA",
         subtopicos: [
             { nome: "Princípio Fundamental da Contagem", slug: "principio-contagem", aviso: "Teoria" },
@@ -194,8 +186,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Matemática Aplicada",
-        slugSecao: "aplicada",
         nome: "MATEMÁTICA FINANCEIRA",
         subtopicos: [
             { nome: "Juros Simples e Compostos", slug: "juros", aviso: "Teoria" },
@@ -206,8 +196,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Matemática Aplicada",
-        slugSecao: "aplicada",
         nome: "ESTATÍSTICA",
         subtopicos: [
             { nome: "Análise de Dados", slug: "analise-dados", aviso: "Teoria" },
@@ -230,8 +218,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Matemática Avançada",
-        slugSecao: "avancada",
         nome: "VETORES E GEOMETRIA ANALÍTICA",
         subtopicos: [
             { nome: "Operações com Vetores", slug: "operacoes-vetores", aviso: "Teoria" },
@@ -242,8 +228,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Matemática Avançada",
-        slugSecao: "avancada",
         nome: "SEQUÊNCIAS E SÉRIES",
         subtopicos: [
             { nome: "Progressões Aritméticas", slug: "progressoes-aritmeticas", aviso: "Teoria" },
