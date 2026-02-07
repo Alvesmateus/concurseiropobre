@@ -1,0 +1,123 @@
+.nb-sidebar-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Aumentado para separar os cards */
+    padding: 12px;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: #f4f7f9; /* Um fundo leve ajuda o card branco a saltar */
+}
+
+.nb-sidebar-wrapper *, .nb-sidebar-wrapper *::before { box-sizing: border-box; }
+
+/* Cabeçalho da Seção */
+.nb-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 4px;
+}
+
+.nb-section-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #64748b;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Estilo do Card Principal */
+.nb-acc-item {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04); /* Sombra suave de card */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nb-acc-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Gatilho/Header do Card */
+.nb-btn-trigger {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background: #fff;
+    color: #1e293b;
+    transition: background 0.2s;
+}
+
+.nb-acc-item.nb-active .nb-btn-trigger {
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.nb-label-group { display: flex; align-items: center; gap: 12px; }
+.nb-cat-name { font-weight: 600; font-size: 14px; }
+
+/* Itens dentro do Card */
+.nb-menu-list {
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 1fr; /* Pode mudar para 1fr 1fr se quiser cards lado a lado */
+    gap: 8px;
+}
+
+.nb-menu-item {
+    padding: 12px;
+    text-decoration: none !important;
+    color: #475569 !important;
+    font-size: 13px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc; /* Fundo leve para os itens internos */
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nb-menu-item:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #2563eb !important;
+    transform: translateX(4px); /* Feedback visual de movimento */
+}
+
+/* Elementos de Apoio */
+.nb-chevron {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+    color: #94a3b8;
+}
+
+.nb-acc-item.nb-active .nb-chevron { transform: rotate(180deg); color: #3b82f6; }
+
+.nb-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px; /* Badge mais arredondada */
+    background: #e2e8f0;
+    color: #475569;
+    font-weight: 600;
+}
+
+.nb-sidebar-wrapper .lucide { width: 18px; height: 18px; stroke-width: 2px; }
+
+/* Acordeão Smooth */
+.nb-drop-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nb-acc-item.nb-active .nb-drop-wrapper { grid-template-rows: 1fr; }
+.nb-drop-inner { overflow: hidden; }
