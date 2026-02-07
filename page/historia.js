@@ -43,8 +43,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Brasil Colônia (1500-1822)",
-        slugSecao: "brasil-colonia",
         nome: "ECONOMIA COLONIAL",
         subtopicos: [
             { nome: "Ciclo do Pau-Brasil", slug: "ciclo-pau-brasil", aviso: "Teoria" },
@@ -56,8 +54,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Brasil Colônia (1500-1822)",
-        slugSecao: "brasil-colonia",
         nome: "SOCIEDADE E CULTURA COLONIAL",
         subtopicos: [
             { nome: "Escravidão Indígena", slug: "escravidao-indigena", aviso: "Teoria" },
@@ -69,8 +65,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Brasil Colônia (1500-1822)",
-        slugSecao: "brasil-colonia",
         nome: "CRISES E REVOLTAS",
         subtopicos: [
             { nome: "Guerra dos Mascates", slug: "guerra-mascates", aviso: "Teoria" },
@@ -94,8 +88,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Brasil Império (1822-1889)",
-        slugSecao: "brasil-imperio",
         nome: "PERÍODO REGENCIAL",
         subtopicos: [
             { nome: "Regências Trina e Una", slug: "regencias", aviso: "Teoria" },
@@ -106,8 +98,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Brasil Império (1822-1889)",
-        slugSecao: "brasil-imperio",
         nome: "SEGUNDO REINADO",
         subtopicos: [
             { nome: "Golpe da Maioridade", slug: "golpe-maioridade", aviso: "Teoria" },
@@ -118,8 +108,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Brasil Império (1822-1889)",
-        slugSecao: "brasil-imperio",
         nome: "ABOLIÇÃO E CRISE DO IMPÉRIO",
         subtopicos: [
             { nome: "Leis Abolicionistas", slug: "leis-abolicionistas", aviso: "Teoria" },
@@ -174,8 +162,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Era Vargas (1930-1945)",
-        slugSecao: "era-vargas",
         nome: "SEGUNDA GUERRA E FIM DO ESTADO NOVO",
         subtopicos: [
             { nome: "Brasil na Segunda Guerra", slug: "brasil-segunda-guerra", aviso: "Exercícios" },
@@ -186,8 +172,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "República Populista (1946-1964)",
-        slugSecao: "republica-populista",
         nome: "REDEMOCRATIZAÇÃO E DESENVOLVIMENTISMO",
         subtopicos: [
             { nome: "Constituição de 1946", slug: "constituicao-1946", aviso: "Teoria" },
@@ -198,8 +182,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "República Populista (1946-1964)",
-        slugSecao: "republica-populista",
         nome: "CRISE POLÍTICA E GOLPE",
         subtopicos: [
             { nome: "Governo Jânio Quadros", slug: "governo-janio", aviso: "Teoria" },
@@ -222,8 +204,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Ditadura Militar (1964-1985)",
-        slugSecao: "ditadura-militar",
         nome: "ABERTURA E REDEMOCRATIZAÇÃO",
         subtopicos: [
             { nome: "Governo Geisel: Distensão", slug: "governo-geisel", aviso: "Teoria" },
@@ -246,8 +226,6 @@ const dadosPt = [
         ]
     },
     {
-        tituloSecao: "Nova República (1985-Atual)",
-        slugSecao: "nova-republica",
         nome: "SÉCULO XXI",
         subtopicos: [
             { nome: "Governo FHC", slug: "governo-fhc", aviso: "Teoria" },
