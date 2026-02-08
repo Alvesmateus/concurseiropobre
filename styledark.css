@@ -1,0 +1,132 @@
+/* Variáveis de Cores para facilitar customização */
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-color: #00adb5;
+    --secondary-color: #393e46;
+    --text-main: #eeeeee;
+    --text-dim: #b2bec3;
+    --accent: #ff2e63;
+    --border-color: #333333;
+    --success: #2ecc71;
+}
+
+/* Reset e Estilo Base */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Header / Navbar */
+header, nav {
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+/* Containers e Cards */
+.container, .card, .box {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+/* Tabelas (Comuns em cronogramas de estudo) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--surface-color);
+    color: var(--text-main);
+}
+
+th {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tr:hover {
+    background-color: #252525;
+}
+
+/* Inputs e Botões */
+input, select, textarea {
+    background-color: #2d2d2d;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--primary-color);
+}
+
+button, .btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+button:hover {
+    filter: brightness(1.2);
+}
+
+/* Labels e Títulos */
+h1, h2, h3 {
+    color: var(--primary-color);
+}
+
+small, .muted {
+    color: var(--text-dim);
+}
+
+/* Estilo para Itens Concluídos (Checklist) */
+.completed {
+    color: var(--success);
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Scrollbar Dark (Chrome/Edge/Safari) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
