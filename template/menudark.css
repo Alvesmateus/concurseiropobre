@@ -1,0 +1,129 @@
+/* navbar-base.css - Estilos base para o navbar - DARKMODE */
+:root {
+    --nb-bg: #1e1e1e;
+    --nb-search-bg: #2d2d2d;
+    --google-gray: #e0e0e0;
+    --google-blue: #8ab4f8;
+    --google-blue-light: #1a3c6e;
+    --google-blue-lighter: #1e2b40;
+    --nb-section-color: #b0b0b0;
+    --nb-border-radius: 24px;
+    --nb-margin-right: 8px;
+    --nb-border-color: #3a3a3a;
+}
+
+/* Suporte para preferência do sistema */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --nb-bg: #1e1e1e;
+        --nb-search-bg: #2d2d2d;
+        --google-gray: #e0e0e0;
+        --google-blue: #8ab4f8;
+        --google-blue-light: #1a3c6e;
+        --google-blue-lighter: #1e2b40;
+        --nb-section-color: #b0b0b0;
+        --nb-border-color: #3a3a3a;
+    }
+}
+
+/* Dark mode class (para controle via JavaScript) */
+.dark-mode {
+    --nb-bg: #1e1e1e;
+    --nb-search-bg: #2d2d2d;
+    --google-gray: #e0e0e0;
+    --google-blue: #8ab4f8;
+    --google-blue-light: #1a3c6e;
+    --google-blue-lighter: #1e2b40;
+    --nb-section-color: #b0b0b0;
+    --nb-border-color: #3a3a3a;
+}
+
+/* Navbar Container */
+.nb-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+    background-color: var(--nb-bg);
+    font-family: 'Google Sans', Roboto, sans-serif;
+    border-bottom: 1px solid var(--nb-border-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 9999;
+    color: var(--google-gray);
+}
+
+/* Layout das colunas */
+.nb-nav-left, .nb-nav-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nb-nav-right {
+    justify-content: flex-end;
+}
+
+.nb-nav-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botões gerais */
+.nb-icon-btn {
+    background: transparent;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    color: var(--google-gray);
+}
+
+.nb-icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nb-icon-btn:active {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Compensação para menu fixo */
+body {
+    margin-top: 60px !important;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Para quando o dark mode estiver ativo */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .nb-navbar {
+        padding: 8px 10px;
+    }
+    
+    .nb-nav-center {
+        flex: 1;
+    }
+}
+
+/* Transições suaves para mudança de tema */
+.nb-navbar,
+.nb-icon-btn,
+body {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease;
+}
