@@ -2337,7 +2337,6 @@ body.sidebar-visible .bg-photo-container, body.sidebar-visible .page_body {
     border-radius: 24px !important;
     padding: 12px 20px !important;
     transition: all 0.2s ease-in-out;
-    box-shadow: var(--card-shadow) !important;
     overflow: hidden;
     display: flex !important;
     width: auto;
