@@ -2343,7 +2343,7 @@ body.sidebar-visible .bg-photo-container, body.sidebar-visible .page_body {
     width: auto;
 	flex-direction: column;
     margin-bottom: 12px !important;
-    border: 1px solid var(--border-color) !important;
+    
 }
 
 /* Título menor e sem negrito exagerado */
