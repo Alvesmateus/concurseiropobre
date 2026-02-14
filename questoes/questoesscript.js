@@ -29,8 +29,8 @@ function check(btn, ok) {
         if(obs && obs.innerHTML.trim() !== "") {
             obs.style.display = "block";
             if(isCorrectOpt) {
-                obs.style.borderColor = "#16a34a";
-                obs.style.background = "#dcfce7";
+                obs.style.borderColor = "";
+                obs.style.background = "";
                 if(!obs.querySelector('.correct-info')) {
                     obs.insertAdjacentHTML('afterbegin', '<strong class="correct-info">Resposta Correta! ✔️ </strong>');
                 }
