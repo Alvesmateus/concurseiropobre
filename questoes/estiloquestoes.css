@@ -283,26 +283,4 @@
 }
 
 /* Texto que aparece acima da opção correta */
-.correct-info {
-    color: #34d399; /* Verde esmeralda claro */
-    font-weight: 800;
-    margin-bottom: 5px;
-    display: block;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
 
-/* Explicação/Observação que aparece após responder */
-.simu-opt-obs {
-    display: none;
-    margin-top: 8px;
-    padding: 15px;
-    background: #1e293b;
-    border-radius: 8px;
-    font-size: 14px;
-    color: #cbd5e1;
-    border-left: 4px solid #3b82f6; /* Destaque azul lateral */
-    font-family: inherit;
-    line-height: 1.5;
-}
