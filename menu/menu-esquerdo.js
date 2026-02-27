@@ -43,7 +43,7 @@
         
         navLeft.innerHTML = `
             <button class='nb-icon-btn' id='nb-left-menu-btn' title='Menu'><i data-lucide="menu"></i></button>
-            <a href='https://vousermilico.blogspot.com'>
+            <a href='/'>
                 <button class='nb-icon-btn' title='Início'><i data-lucide="home"></i></button>
             </a>
         `;
