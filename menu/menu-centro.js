@@ -17,7 +17,7 @@
         const customTitle = navCenter.getAttribute('data-title') || 'Concurseiro Pobre';
         
         // Adicionar título
-        navCenter.innerHTML = `<h1 class='titulo-custom'>Concurseiro Pobre</h1>`;
+        navCenter.innerHTML = `<h1 class='titulo-custom'>só papiro cast</h1>`;
         
         addTitleStyles();
     }
