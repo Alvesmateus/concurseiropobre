@@ -17,7 +17,7 @@
         const customTitle = navCenter.getAttribute('data-title') || 'Concurseiro Pobre';
         
         // Adicionar título
-        navCenter.innerHTML = `<h1 class='titulo-custom'>só papiro cast</h1>`;
+        navCenter.innerHTML = `<img class="center-img" src="https://blogger.googleusercontent.com/img/a/AVvXsEjRnCNVLEP3yNYD_a5SFsisSbxm-XTDiYRs6tGkHk8Uv6TnKhxgsZR2K7Z9pw2-BGsZ9jnAvbfFAHgUIHOlsPkjChZoH9VwghtTDj7WqkLJ5C0jiqWhvoZs20rirD7w1UcX6FWVwDXkPsK3KFskdkrAsiisUlWJEY61ramab9TWPVamyvz4oLu8Pp5QUELm" />`;
         
         addTitleStyles();
     }
